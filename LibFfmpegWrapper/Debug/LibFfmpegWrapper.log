@@ -1,0 +1,18 @@
+﻿  H264Decode.cpp
+d:\ahmonitor\ffmpeg\ffmpeg4\include\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\ahmonitor\ffmpeg\ffmpeg4\include\libavutil\frame.h(295): warning C4099: “AVFrame”: 类型名称以前使用“class”现在使用的是“struct”
+  d:\ahmonitor\ffmpeg\ffmpeg4\include\libavutil\frame.h(295): note: 参见“AVFrame”的声明
+d:\ahmonitor\ffmpeg\ffmpeg4\include\libavcodec\avcodec.h(1565): warning C4099: “AVCodecContext”: 类型名称以前使用“class”现在使用的是“struct”
+  d:\ahmonitor\ffmpeg\ffmpeg4\include\libavcodec\avcodec.h(1565): note: 参见“AVCodecContext”的声明
+d:\ahmonitor\ffmpeg\ffmpeg4\include\libavcodec\avcodec.h(1574): warning C4099: “AVCodec”: 类型名称以前使用“class”现在使用的是“struct”
+  d:\ahmonitor\libffmpegwrapper\h264decode.h(4): note: 参见“AVCodec”的声明
+d:\ahmonitor\ffmpeg\ffmpeg4\include\libavcodec\avcodec.h(3481): warning C4099: “AVCodec”: 类型名称以前使用“class”现在使用的是“struct”
+  d:\ahmonitor\ffmpeg\ffmpeg4\include\libavcodec\avcodec.h(3481): note: 参见“AVCodec”的声明
+d:\ahmonitor\libffmpegwrapper\h264decode.cpp(61): warning C4996: 'av_register_all': 被声明为已否决
+  d:\ahmonitor\ffmpeg\ffmpeg4\include\libavformat\avformat.h(2050): note: 参见“av_register_all”的声明
+d:\ahmonitor\libffmpegwrapper\h264decode.cpp(170): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+d:\ahmonitor\libffmpegwrapper\h264decode.cpp(323): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+d:\ahmonitor\libffmpegwrapper\h264decode.cpp(334): warning C4996: 'AVFrame::qscale_table': 被声明为已否决
+  d:\ahmonitor\ffmpeg\ffmpeg4\include\libavutil\frame.h(617): note: 参见“AVFrame::qscale_table”的声明
+  LibFfmpegWrapper.vcxproj -> D:\AHMonitor\AHMonitor\Win32\Debug\LibFfmpegWrapper.dll
+  LibFfmpegWrapper.vcxproj -> D:\AHMonitor\AHMonitor\Win32\Debug\LibFfmpegWrapper.pdb (Full PDB)

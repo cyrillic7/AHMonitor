@@ -1,0 +1,9 @@
+201102142116 skt=984 snd_buf_size=3145728 rcv=5242880
+201102142119 Connect::SendCmd::cmdUser failed with error -9.
+201102142119 Connect error with ret code -1.
+201102142138 skt=956 snd_buf_size=3145728 rcv=5242880
+201102142141 Connect::SendCmd::cmdUser failed with error -9.
+201102142141 Connect error with ret code -1.
+201102160849 skt=984 snd_buf_size=3145728 rcv=5242880
+201102160852 Connect::SendCmd::cmdUser failed with error -9.
+201102160852 Connect error with ret code -1.

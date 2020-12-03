@@ -1,0 +1,684 @@
+201111090808 skt=1772 snd_buf_size=3145728 rcv=5242880
+201111090929 skt=1916 snd_buf_size=3145728 rcv=5242880
+201111090929 VideoTcpTask: EAGAIN
+201111091049 skt=1748 snd_buf_size=3145728 rcv=5242880
+201111091116 skt=1816 snd_buf_size=3145728 rcv=5242880
+201111091116 VideoTcpTask: EAGAIN
+201111091116 VideoTcpTask: EAGAIN
+201111091546 skt=1516 snd_buf_size=3145728 rcv=5242880
+201111091549 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111091549 VideoTcpTask: EAGAIN
+201111091920 skt=1788 snd_buf_size=3145728 rcv=5242880
+201111092024 skt=1404 snd_buf_size=3145728 rcv=5242880
+201111092142 skt=1624 snd_buf_size=3145728 rcv=5242880
+201111092349 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111093125 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111093718 skt=1480 snd_buf_size=3145728 rcv=5242880
+201111093925 skt=1768 snd_buf_size=3145728 rcv=5242880
+201111094021 skt=1772 snd_buf_size=3145728 rcv=5242880
+201111094058 skt=1340 snd_buf_size=3145728 rcv=5242880
+201111094624 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111095049 skt=1800 snd_buf_size=3145728 rcv=5242880
+201111095613 skt=1624 snd_buf_size=3145728 rcv=5242880
+201111095756 skt=1880 snd_buf_size=3145728 rcv=5242880
+201111095756 VideoTcpTask: EAGAIN
+201111095756 VideoTcpTask: EAGAIN
+201111095901 skt=1880 snd_buf_size=3145728 rcv=5242880
+201111095901 VideoTcpTask: EAGAIN
+201111095927 2187 ms in VideoTcpTask::Run
+201111095942 625 ms in VideoTcpTask::Run
+201111095943 1766 ms in VideoTcpTask::Run
+201111095954 1328 ms in VideoTcpTask::Run
+201111100052 7000 ms in VideoTcpTask::Run
+201111100132 1328 ms in VideoTcpTask::Run
+201111100441 skt=1584 snd_buf_size=3145728 rcv=5242880
+201111100450 skt=1836 snd_buf_size=3145728 rcv=5242880
+201111100450 VideoTcpTask: EAGAIN
+201111100450 VideoTcpTask: EAGAIN
+201111100527 32 ms in VideoTcpTask::Run
+201111100528 32 ms in VideoTcpTask::Run
+201111100529 968 ms in VideoTcpTask::Run
+201111100530 875 ms in VideoTcpTask::Run
+201111101338 skt=1608 snd_buf_size=3145728 rcv=5242880
+201111101347 Connect error, ServerIp is 2103315824, tPort is 0. Err code is 10049.
+201111101347 Fail to get Server Info, pls. check network, or open the port 0.
+201111101347 Connect error with ret code -1.
+201111101350 skt=2288 snd_buf_size=3145728 rcv=5242880
+201111101355 AUTHFAIL with code -11.
+201111101355 Connect error with ret code -11.
+201111101405 skt=1780 snd_buf_size=3145728 rcv=5242880
+201111101414 Connect error, ServerIp is 2103315824, tPort is 0. Err code is 10049.
+201111101414 Fail to get Server Info, pls. check network, or open the port 0.
+201111101414 Connect error with ret code -1.
+201111101441 skt=2180 snd_buf_size=3145728 rcv=5242880
+201111101446 AUTHFAIL with code -11.
+201111101446 Connect error with ret code -11.
+201111101501 skt=2200 snd_buf_size=3145728 rcv=5242880
+201111101506 AUTHFAIL with code -11.
+201111101506 Connect error with ret code -11.
+201111101537 skt=2068 snd_buf_size=3145728 rcv=5242880
+201111101543 skt=2244 snd_buf_size=3145728 rcv=5242880
+201111101543 VideoTcpTask: EAGAIN
+201111102817 skt=1612 snd_buf_size=3145728 rcv=5242880
+201111102819 skt=1812 snd_buf_size=3145728 rcv=5242880
+201111102819 VideoTcpTask: EAGAIN
+201111102819 VideoTcpTask: EAGAIN
+201111102924 skt=1952 snd_buf_size=3145728 rcv=5242880
+201111102924 VideoTcpTask: EAGAIN
+201111103029 skt=808 snd_buf_size=3145728 rcv=5242880
+201111103029 VideoTcpTask: EAGAIN
+201111103135 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111103137 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111103137 VideoTcpTask: EAGAIN
+201111103137 VideoTcpTask: EAGAIN
+201111103652 skt=1608 snd_buf_size=3145728 rcv=5242880
+201111103654 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111103654 VideoTcpTask: EAGAIN
+201111103654 VideoTcpTask: EAGAIN
+201111103940 skt=1764 snd_buf_size=3145728 rcv=5242880
+201111103941 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111103941 VideoTcpTask: EAGAIN
+201111110454 skt=1764 snd_buf_size=3145728 rcv=5242880
+201111110456 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111110456 VideoTcpTask: EAGAIN
+201111110456 VideoTcpTask: EAGAIN
+201111110613 skt=1572 snd_buf_size=3145728 rcv=5242880
+201111110615 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111110615 VideoTcpTask: EAGAIN
+201111110615 VideoTcpTask: EAGAIN
+201111110718 skt=1736 snd_buf_size=3145728 rcv=5242880
+201111110719 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111110719 VideoTcpTask: EAGAIN
+201111110719 VideoTcpTask: EAGAIN
+201111110820 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111110822 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111110822 VideoTcpTask: EAGAIN
+201111110907 skt=1844 snd_buf_size=3145728 rcv=5242880
+201111110909 skt=1908 snd_buf_size=3145728 rcv=5242880
+201111110909 VideoTcpTask: EAGAIN
+201111111017 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111111019 skt=1816 snd_buf_size=3145728 rcv=5242880
+201111111019 VideoTcpTask: EAGAIN
+201111111019 VideoTcpTask: EAGAIN
+201111111911 skt=1496 snd_buf_size=3145728 rcv=5242880
+201111111916 skt=1840 snd_buf_size=3145728 rcv=5242880
+201111111916 VideoTcpTask: EAGAIN
+201111111928 4687 ms in VideoTcpTask::Run
+201111112152 skt=1720 snd_buf_size=3145728 rcv=5242880
+201111112156 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111112156 VideoTcpTask: EAGAIN
+201111112217 2266 ms in VideoTcpTask::Run
+201111112438 skt=1768 snd_buf_size=3145728 rcv=5242880
+201111112533 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111112533 VideoTcpTask: EAGAIN
+201111112738 skt=1764 snd_buf_size=3145728 rcv=5242880
+201111112740 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111112740 VideoTcpTask: EAGAIN
+201111113154 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111113156 skt=1836 snd_buf_size=3145728 rcv=5242880
+201111113156 VideoTcpTask: EAGAIN
+201111113825 skt=1784 snd_buf_size=3145728 rcv=5242880
+201111113828 skt=1856 snd_buf_size=3145728 rcv=5242880
+201111113828 VideoTcpTask: EAGAIN
+201111113828 VideoTcpTask: EAGAIN
+201111113958 skt=1608 snd_buf_size=3145728 rcv=5242880
+201111114004 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111114004 VideoTcpTask: EAGAIN
+201111114004 VideoTcpTask: EAGAIN
+201111123416 skt=1764 snd_buf_size=3145728 rcv=5242880
+201111123528 Only set UDP recv buf to 6144.
+201111123604 skt=1876 snd_buf_size=3145728 rcv=5242880
+201111123604 VideoTcpTask: EAGAIN
+201111124012 skt=1888 snd_buf_size=3145728 rcv=5242880
+201111124012 VideoTcpTask: EAGAIN
+201111124117 skt=2000 snd_buf_size=3145728 rcv=5242880
+201111124117 VideoTcpTask: EAGAIN
+201111124117 VideoTcpTask: EAGAIN
+201111124222 skt=2028 snd_buf_size=3145728 rcv=5242880
+201111124222 VideoTcpTask: EAGAIN
+201111124327 skt=852 snd_buf_size=3145728 rcv=5242880
+201111124327 VideoTcpTask: EAGAIN
+201111124327 VideoTcpTask: EAGAIN
+201111124432 skt=1988 snd_buf_size=3145728 rcv=5242880
+201111124432 VideoTcpTask: EAGAIN
+201111124537 skt=2016 snd_buf_size=3145728 rcv=5242880
+201111124537 VideoTcpTask: EAGAIN
+201111124537 VideoTcpTask: EAGAIN
+201111124647 Only set UDP recv buf to 6144.
+201111125130 skt=2040 snd_buf_size=3145728 rcv=5242880
+201111125130 VideoTcpTask: EAGAIN
+201111125340 skt=1768 snd_buf_size=3145728 rcv=5242880
+201111133005 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111134521 skt=1912 snd_buf_size=3145728 rcv=5242880
+201111134521 VideoTcpTask: EAGAIN
+201111134626 skt=1936 snd_buf_size=3145728 rcv=5242880
+201111134626 VideoTcpTask: EAGAIN
+201111134731 skt=1964 snd_buf_size=3145728 rcv=5242880
+201111134731 VideoTcpTask: EAGAIN
+201111135701 skt=1776 snd_buf_size=3145728 rcv=5242880
+201111140618 skt=1868 snd_buf_size=3145728 rcv=5242880
+201111140618 VideoTcpTask: EAGAIN
+201111140723 skt=884 snd_buf_size=3145728 rcv=5242880
+201111140723 VideoTcpTask: EAGAIN
+201111140844 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111140845 skt=1872 snd_buf_size=3145728 rcv=5242880
+201111140845 VideoTcpTask: EAGAIN
+201111140845 VideoTcpTask: EAGAIN
+201111141014 skt=1784 snd_buf_size=3145728 rcv=5242880
+201111141016 skt=1856 snd_buf_size=3145728 rcv=5242880
+201111141016 VideoTcpTask: EAGAIN
+201111141016 VideoTcpTask: EAGAIN
+201111141323 skt=1892 snd_buf_size=3145728 rcv=5242880
+201111141323 VideoTcpTask: EAGAIN
+201111141428 skt=1524 snd_buf_size=3145728 rcv=5242880
+201111141428 VideoTcpTask: EAGAIN
+201111141533 skt=812 snd_buf_size=3145728 rcv=5242880
+201111141533 VideoTcpTask: EAGAIN
+201111141533 VideoTcpTask: EAGAIN
+201111141740 skt=1636 snd_buf_size=3145728 rcv=5242880
+201111143230 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111143501 Only set UDP recv buf to 6144.
+201111143541 skt=1892 snd_buf_size=3145728 rcv=5242880
+201111143541 VideoTcpTask: EAGAIN
+201111143541 VideoTcpTask: EAGAIN
+201111143619 skt=1632 snd_buf_size=3145728 rcv=5242880
+201111143621 skt=1844 snd_buf_size=3145728 rcv=5242880
+201111143621 VideoTcpTask: EAGAIN
+201111143958 skt=1792 snd_buf_size=3145728 rcv=5242880
+201111144003 skt=1840 snd_buf_size=3145728 rcv=5242880
+201111144003 VideoTcpTask: EAGAIN
+201111144118 skt=1788 snd_buf_size=3145728 rcv=5242880
+201111144120 skt=1852 snd_buf_size=3145728 rcv=5242880
+201111144120 VideoTcpTask: EAGAIN
+201111144251 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111144253 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111144253 VideoTcpTask: EAGAIN
+201111144253 VideoTcpTask: EAGAIN
+201111144458 skt=1768 snd_buf_size=3145728 rcv=5242880
+201111144503 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111144503 VideoTcpTask: EAGAIN
+201111144605 skt=1760 snd_buf_size=3145728 rcv=5242880
+201111144617 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111144617 VideoTcpTask: EAGAIN
+201111144722 skt=1768 snd_buf_size=3145728 rcv=5242880
+201111144727 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111144727 VideoTcpTask: EAGAIN
+201111144727 VideoTcpTask: EAGAIN
+201111144830 skt=1564 snd_buf_size=3145728 rcv=5242880
+201111144834 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111144834 VideoTcpTask: EAGAIN
+201111144834 VideoTcpTask: EAGAIN
+201111144846 859 ms in VideoTcpTask::Run
+201111145015 skt=1620 snd_buf_size=3145728 rcv=5242880
+201111145017 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111145017 VideoTcpTask: EAGAIN
+201111145017 VideoTcpTask: EAGAIN
+201111145050 skt=1640 snd_buf_size=3145728 rcv=5242880
+201111145051 skt=1912 snd_buf_size=3145728 rcv=5242880
+201111145051 VideoTcpTask: EAGAIN
+201111145107 4172 ms in VideoTcpTask::Run
+201111145155 45109 ms in VideoTcpTask::Run
+201111145158 1719 ms in VideoTcpTask::Run
+201111145424 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111145427 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111145427 VideoTcpTask: EAGAIN
+201111145438 360 ms in VideoTcpTask::Run
+201111145443 3860 ms in VideoTcpTask::Run
+201111145505 skt=1608 snd_buf_size=3145728 rcv=5242880
+201111145507 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111145507 VideoTcpTask: EAGAIN
+201111145517 1828 ms in VideoTcpTask::Run
+201111145600 skt=1620 snd_buf_size=3145728 rcv=5242880
+201111145601 skt=1888 snd_buf_size=3145728 rcv=5242880
+201111145601 VideoTcpTask: EAGAIN
+201111145601 VideoTcpTask: EAGAIN
+201111145630 6235 ms in VideoTcpTask::Run
+201111150004 skt=1628 snd_buf_size=3145728 rcv=5242880
+201111150006 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111150006 VideoTcpTask: EAGAIN
+201111150031 328 ms in VideoTcpTask::Run
+201111150106 skt=1668 snd_buf_size=3145728 rcv=5242880
+201111150108 skt=1836 snd_buf_size=3145728 rcv=5242880
+201111150108 VideoTcpTask: EAGAIN
+201111150108 VideoTcpTask: EAGAIN
+201111150121 2422 ms in VideoTcpTask::Run
+201111150125 1266 ms in VideoTcpTask::Run
+201111150747 skt=1488 snd_buf_size=3145728 rcv=5242880
+201111150748 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111150748 VideoTcpTask: EAGAIN
+201111150758 3750 ms in VideoTcpTask::Run
+201111150852 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111150854 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111150854 VideoTcpTask: EAGAIN
+201111150913 4390 ms in VideoTcpTask::Run
+201111151431 skt=1664 snd_buf_size=3145728 rcv=5242880
+201111151433 skt=1872 snd_buf_size=3145728 rcv=5242880
+201111151433 VideoTcpTask: EAGAIN
+201111151433 VideoTcpTask: EAGAIN
+201111151549 1922 ms in VideoTcpTask::Run
+201111151551 828 ms in VideoTcpTask::Run
+201111151805 skt=1780 snd_buf_size=3145728 rcv=5242880
+201111151806 skt=1840 snd_buf_size=3145728 rcv=5242880
+201111151806 VideoTcpTask: EAGAIN
+201111151820 3047 ms in VideoTcpTask::Run
+201111151849 skt=1496 snd_buf_size=3145728 rcv=5242880
+201111151851 skt=1820 snd_buf_size=3145728 rcv=5242880
+201111151851 VideoTcpTask: EAGAIN
+201111151851 VideoTcpTask: EAGAIN
+201111152517 skt=1668 snd_buf_size=3145728 rcv=5242880
+201111152520 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111152520 VideoTcpTask: EAGAIN
+201111153250 skt=1812 snd_buf_size=3145728 rcv=5242880
+201111153258 skt=1848 snd_buf_size=3145728 rcv=5242880
+201111153258 VideoTcpTask: EAGAIN
+201111153325 12000 ms in VideoTcpTask::Run
+201111153441 skt=1792 snd_buf_size=3145728 rcv=5242880
+201111153444 skt=1840 snd_buf_size=3145728 rcv=5242880
+201111153444 VideoTcpTask: EAGAIN
+201111153444 VideoTcpTask: EAGAIN
+201111153648 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111153712 skt=1656 snd_buf_size=3145728 rcv=5242880
+201111153712 Connect::SendCmd::cmdUser failed with error -9.
+201111153712 Connect error with ret code -1.
+201111153724 skt=1640 snd_buf_size=3145728 rcv=5242880
+201111153724 Connect::SendCmd::cmdUser failed with error -9.
+201111153724 Connect error with ret code -1.
+201111153900 skt=1584 snd_buf_size=3145728 rcv=5242880
+201111153902 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111153902 VideoTcpTask: EAGAIN
+201111154125 skt=1660 snd_buf_size=3145728 rcv=5242880
+201111154126 skt=1692 snd_buf_size=3145728 rcv=5242880
+201111154126 VideoTcpTask: EAGAIN
+201111154151 2453 ms in VideoTcpTask::Run
+201111154155 3953 ms in VideoTcpTask::Run
+201111154159 406 ms in VideoTcpTask::Run
+201111154244 44484 ms in VideoTcpTask::Run
+201111154852 skt=1512 snd_buf_size=3145728 rcv=5242880
+201111154857 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111154857 VideoTcpTask: EAGAIN
+201111154913 2281 ms in VideoTcpTask::Run
+201111155337 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111155339 skt=1840 snd_buf_size=3145728 rcv=5242880
+201111155339 VideoTcpTask: EAGAIN
+201111155339 VideoTcpTask: EAGAIN
+201111155433 skt=1376 snd_buf_size=3145728 rcv=5242880
+201111155434 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111155434 VideoTcpTask: EAGAIN
+201111155441 3125 ms in VideoTcpTask::Run
+201111155447 3000 ms in VideoTcpTask::Run
+201111155556 skt=1652 snd_buf_size=3145728 rcv=5242880
+201111155558 skt=1856 snd_buf_size=3145728 rcv=5242880
+201111155558 VideoTcpTask: EAGAIN
+201111155602 1953 ms in VideoTcpTask::Run
+201111155604 2110 ms in VideoTcpTask::Run
+201111155614 1593 ms in VideoTcpTask::Run
+201111155930 skt=1620 snd_buf_size=3145728 rcv=5242880
+201111160103 skt=1660 snd_buf_size=3145728 rcv=5242880
+201111160106 skt=1864 snd_buf_size=3145728 rcv=5242880
+201111160106 VideoTcpTask: EAGAIN
+201111160106 VideoTcpTask: EAGAIN
+201111160250 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111160522 skt=1624 snd_buf_size=3145728 rcv=5242880
+201111160524 skt=1676 snd_buf_size=3145728 rcv=5242880
+201111160524 VideoTcpTask: EAGAIN
+201111161608 skt=1644 snd_buf_size=3145728 rcv=5242880
+201111161608 Connect::SendCmd::cmdUser failed with error -9.
+201111161608 Connect error with ret code -1.
+201111161620 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111161620 Connect::SendCmd::cmdUser failed with error -9.
+201111161620 Connect error with ret code -1.
+201111161702 skt=1636 snd_buf_size=3145728 rcv=5242880
+201111161702 Connect::SendCmd::cmdUser failed with error -9.
+201111161702 Connect error with ret code -1.
+201111161736 skt=1644 snd_buf_size=3145728 rcv=5242880
+201111161736 Connect::SendCmd::cmdUser failed with error -9.
+201111161736 Connect error with ret code -1.
+201111161804 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111161806 skt=1632 snd_buf_size=3145728 rcv=5242880
+201111161806 VideoTcpTask: EAGAIN
+201111161813 2515 ms in VideoTcpTask::Run
+201111161817 1813 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161902 31 ms in VideoTcpTask::Run
+201111161903 625 ms in VideoTcpTask::Run
+201111161904 969 ms in VideoTcpTask::Run
+201111161904 31 ms in VideoTcpTask::Run
+201111161904 31 ms in VideoTcpTask::Run
+201111161914 31 ms in VideoTcpTask::Run
+201111161914 47 ms in VideoTcpTask::Run
+201111161914 32 ms in VideoTcpTask::Run
+201111161914 47 ms in VideoTcpTask::Run
+201111161915 31 ms in VideoTcpTask::Run
+201111161915 32 ms in VideoTcpTask::Run
+201111161940 31 ms in VideoTcpTask::Run
+201111161942 31 ms in VideoTcpTask::Run
+201111161950 skt=1624 snd_buf_size=3145728 rcv=5242880
+201111161952 skt=1676 snd_buf_size=3145728 rcv=5242880
+201111161952 VideoTcpTask: EAGAIN
+201111161958 31 ms in VideoTcpTask::Run
+201111162002 31 ms in VideoTcpTask::Run
+201111162002 32 ms in VideoTcpTask::Run
+201111162002 32 ms in VideoTcpTask::Run
+201111162002 31 ms in VideoTcpTask::Run
+201111162003 32 ms in VideoTcpTask::Run
+201111162003 32 ms in VideoTcpTask::Run
+201111162008 31 ms in VideoTcpTask::Run
+201111162008 31 ms in VideoTcpTask::Run
+201111162008 32 ms in VideoTcpTask::Run
+201111162008 31 ms in VideoTcpTask::Run
+201111162012 32 ms in VideoTcpTask::Run
+201111162012 47 ms in VideoTcpTask::Run
+201111162012 31 ms in VideoTcpTask::Run
+201111162012 31 ms in VideoTcpTask::Run
+201111162012 31 ms in VideoTcpTask::Run
+201111162012 31 ms in VideoTcpTask::Run
+201111162012 47 ms in VideoTcpTask::Run
+201111162013 31 ms in VideoTcpTask::Run
+201111162013 31 ms in VideoTcpTask::Run
+201111162013 32 ms in VideoTcpTask::Run
+201111162013 31 ms in VideoTcpTask::Run
+201111162013 31 ms in VideoTcpTask::Run
+201111162016 47 ms in VideoTcpTask::Run
+201111162016 31 ms in VideoTcpTask::Run
+201111162016 31 ms in VideoTcpTask::Run
+201111162017 32 ms in VideoTcpTask::Run
+201111162017 32 ms in VideoTcpTask::Run
+201111162017 47 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 31 ms in VideoTcpTask::Run
+201111162017 32 ms in VideoTcpTask::Run
+201111162017 32 ms in VideoTcpTask::Run
+201111162017 47 ms in VideoTcpTask::Run
+201111162022 32 ms in VideoTcpTask::Run
+201111162022 31 ms in VideoTcpTask::Run
+201111162022 32 ms in VideoTcpTask::Run
+201111162022 31 ms in VideoTcpTask::Run
+201111162022 32 ms in VideoTcpTask::Run
+201111162022 32 ms in VideoTcpTask::Run
+201111162023 31 ms in VideoTcpTask::Run
+201111162023 31 ms in VideoTcpTask::Run
+201111162023 31 ms in VideoTcpTask::Run
+201111162617 skt=1524 snd_buf_size=3145728 rcv=5242880
+201111162621 skt=1848 snd_buf_size=3145728 rcv=5242880
+201111162621 VideoTcpTask: EAGAIN
+201111162629 31 ms in VideoTcpTask::Run
+201111162629 32 ms in VideoTcpTask::Run
+201111162630 31 ms in VideoTcpTask::Run
+201111162630 32 ms in VideoTcpTask::Run
+201111162631 31 ms in VideoTcpTask::Run
+201111162631 32 ms in VideoTcpTask::Run
+201111162631 32 ms in VideoTcpTask::Run
+201111162638 31 ms in VideoTcpTask::Run
+201111162639 32 ms in VideoTcpTask::Run
+201111162639 31 ms in VideoTcpTask::Run
+201111162639 31 ms in VideoTcpTask::Run
+201111162639 31 ms in VideoTcpTask::Run
+201111162639 32 ms in VideoTcpTask::Run
+201111162639 32 ms in VideoTcpTask::Run
+201111162639 31 ms in VideoTcpTask::Run
+201111162645 31 ms in VideoTcpTask::Run
+201111162645 31 ms in VideoTcpTask::Run
+201111162645 31 ms in VideoTcpTask::Run
+201111162645 31 ms in VideoTcpTask::Run
+201111162646 31 ms in VideoTcpTask::Run
+201111162646 31 ms in VideoTcpTask::Run
+201111162646 31 ms in VideoTcpTask::Run
+201111162646 31 ms in VideoTcpTask::Run
+201111162650 31 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162651 32 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162651 32 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162651 31 ms in VideoTcpTask::Run
+201111162737 32 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 47 ms in VideoTcpTask::Run
+201111162737 31 ms in VideoTcpTask::Run
+201111162737 32 ms in VideoTcpTask::Run
+201111162737 32 ms in VideoTcpTask::Run
+201111162738 31 ms in VideoTcpTask::Run
+201111162738 31 ms in VideoTcpTask::Run
+201111162738 47 ms in VideoTcpTask::Run
+201111162741 31 ms in VideoTcpTask::Run
+201111162741 31 ms in VideoTcpTask::Run
+201111162742 32 ms in VideoTcpTask::Run
+201111162742 32 ms in VideoTcpTask::Run
+201111162742 31 ms in VideoTcpTask::Run
+201111162748 31 ms in VideoTcpTask::Run
+201111162749 32 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 31 ms in VideoTcpTask::Run
+201111162749 32 ms in VideoTcpTask::Run
+201111162853 skt=1468 snd_buf_size=3145728 rcv=5242880
+201111162855 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111162855 VideoTcpTask: EAGAIN
+201111162945 skt=1612 snd_buf_size=3145728 rcv=5242880
+201111162946 skt=1812 snd_buf_size=3145728 rcv=5242880
+201111162946 VideoTcpTask: EAGAIN
+201111163614 skt=1616 snd_buf_size=3145728 rcv=5242880
+201111163853 skt=1836 snd_buf_size=3145728 rcv=5242880
+201111163853 VideoTcpTask: EAGAIN
+201111163853 VideoTcpTask: EAGAIN
+201111163917 skt=1488 snd_buf_size=3145728 rcv=5242880
+201111163919 skt=1848 snd_buf_size=3145728 rcv=5242880
+201111163919 VideoTcpTask: EAGAIN
+201111164326 skt=1636 snd_buf_size=3145728 rcv=5242880
+201111164524 skt=1688 snd_buf_size=3145728 rcv=5242880
+201111164524 VideoTcpTask: EAGAIN
+201111164524 VideoTcpTask: EAGAIN
+201111164937 skt=1620 snd_buf_size=3145728 rcv=5242880
+201111165205 skt=1848 snd_buf_size=3145728 rcv=5242880
+201111165205 VideoTcpTask: EAGAIN
+201111165518 skt=1608 snd_buf_size=3145728 rcv=5242880
+201111165520 skt=1816 snd_buf_size=3145728 rcv=5242880
+201111165520 VideoTcpTask: EAGAIN
+201111165818 31 ms in VideoTcpTask::Run
+201111165818 31 ms in VideoTcpTask::Run
+201111165818 31 ms in VideoTcpTask::Run
+201111165818 32 ms in VideoTcpTask::Run
+201111165819 32 ms in VideoTcpTask::Run
+201111165819 46 ms in VideoTcpTask::Run
+201111165826 31 ms in VideoTcpTask::Run
+201111165827 31 ms in VideoTcpTask::Run
+201111165827 32 ms in VideoTcpTask::Run
+201111165827 31 ms in VideoTcpTask::Run
+201111165827 31 ms in VideoTcpTask::Run
+201111165827 32 ms in VideoTcpTask::Run
+201111165827 31 ms in VideoTcpTask::Run
+201111165827 31 ms in VideoTcpTask::Run
+201111165828 32 ms in VideoTcpTask::Run
+201111165828 32 ms in VideoTcpTask::Run
+201111165828 31 ms in VideoTcpTask::Run
+201111165828 31 ms in VideoTcpTask::Run
+201111165828 31 ms in VideoTcpTask::Run
+201111165903 31 ms in VideoTcpTask::Run
+201111165903 31 ms in VideoTcpTask::Run
+201111165903 32 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 31 ms in VideoTcpTask::Run
+201111165904 32 ms in VideoTcpTask::Run
+201111165917 32 ms in VideoTcpTask::Run
+201111165917 31 ms in VideoTcpTask::Run
+201111165917 32 ms in VideoTcpTask::Run
+201111165917 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111165918 31 ms in VideoTcpTask::Run
+201111170402 skt=1456 snd_buf_size=3145728 rcv=5242880
+201111170405 skt=1912 snd_buf_size=3145728 rcv=5242880
+201111170405 VideoTcpTask: EAGAIN
+201111170445 31 ms in VideoTcpTask::Run
+201111170445 46 ms in VideoTcpTask::Run
+201111170445 32 ms in VideoTcpTask::Run
+201111170445 31 ms in VideoTcpTask::Run
+201111170445 32 ms in VideoTcpTask::Run
+201111170445 31 ms in VideoTcpTask::Run
+201111170445 31 ms in VideoTcpTask::Run
+201111170445 31 ms in VideoTcpTask::Run
+201111170445 32 ms in VideoTcpTask::Run
+201111170445 31 ms in VideoTcpTask::Run
+201111170446 32 ms in VideoTcpTask::Run
+201111170508 31 ms in VideoTcpTask::Run
+201111170508 31 ms in VideoTcpTask::Run
+201111170508 47 ms in VideoTcpTask::Run
+201111170508 32 ms in VideoTcpTask::Run
+201111170508 31 ms in VideoTcpTask::Run
+201111170508 31 ms in VideoTcpTask::Run
+201111170508 31 ms in VideoTcpTask::Run
+201111170508 32 ms in VideoTcpTask::Run
+201111170509 31 ms in VideoTcpTask::Run
+201111170509 31 ms in VideoTcpTask::Run
+201111170528 31 ms in VideoTcpTask::Run
+201111170528 32 ms in VideoTcpTask::Run
+201111170528 47 ms in VideoTcpTask::Run
+201111170528 31 ms in VideoTcpTask::Run
+201111170529 31 ms in VideoTcpTask::Run
+201111170529 31 ms in VideoTcpTask::Run
+201111170529 31 ms in VideoTcpTask::Run
+201111170529 32 ms in VideoTcpTask::Run
+201111170529 31 ms in VideoTcpTask::Run
+201111170556 skt=1764 snd_buf_size=3145728 rcv=5242880
+201111170558 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111170558 VideoTcpTask: EAGAIN
+201111170558 VideoTcpTask: EAGAIN
+201111170609 32 ms in VideoTcpTask::Run
+201111170609 32 ms in VideoTcpTask::Run
+201111170609 32 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170609 31 ms in VideoTcpTask::Run
+201111170610 31 ms in VideoTcpTask::Run
+201111170610 46 ms in VideoTcpTask::Run
+201111170610 31 ms in VideoTcpTask::Run
+201111170610 31 ms in VideoTcpTask::Run
+201111170918 skt=1648 snd_buf_size=3145728 rcv=5242880
+201111170922 skt=1856 snd_buf_size=3145728 rcv=5242880
+201111170922 VideoTcpTask: EAGAIN
+201111171312 skt=1784 snd_buf_size=3145728 rcv=5242880
+201111171314 skt=1844 snd_buf_size=3145728 rcv=5242880
+201111171314 VideoTcpTask: EAGAIN
+201111171348 31 ms in VideoTcpTask::Run
+201111171349 31 ms in VideoTcpTask::Run
+201111171350 32 ms in VideoTcpTask::Run
+201111171445 skt=1716 snd_buf_size=3145728 rcv=5242880
+201111171447 skt=1884 snd_buf_size=3145728 rcv=5242880
+201111171447 VideoTcpTask: EAGAIN
+201111171524 31 ms in VideoTcpTask::Run
+201111171524 32 ms in VideoTcpTask::Run
+201111171526 32 ms in VideoTcpTask::Run
+201111171527 31 ms in VideoTcpTask::Run
+201111171527 31 ms in VideoTcpTask::Run
+201111171527 31 ms in VideoTcpTask::Run
+201111171528 47 ms in VideoTcpTask::Run
+201111171528 31 ms in VideoTcpTask::Run
+201111171625 31 ms in VideoTcpTask::Run
+201111171625 31 ms in VideoTcpTask::Run
+201111171626 31 ms in VideoTcpTask::Run
+201111171626 32 ms in VideoTcpTask::Run
+201111171627 31 ms in VideoTcpTask::Run
+201111171627 32 ms in VideoTcpTask::Run
+201111171628 31 ms in VideoTcpTask::Run
+201111171805 47 ms in VideoTcpTask::Run
+201111171805 31 ms in VideoTcpTask::Run
+201111171806 31 ms in VideoTcpTask::Run
+201111171806 31 ms in VideoTcpTask::Run
+201111171807 47 ms in VideoTcpTask::Run
+201111171807 32 ms in VideoTcpTask::Run
+201111171807 31 ms in VideoTcpTask::Run
+201111171808 32 ms in VideoTcpTask::Run
+201111171809 32 ms in VideoTcpTask::Run
+201111171934 32 ms in VideoTcpTask::Run
+201111171934 31 ms in VideoTcpTask::Run
+201111171934 31 ms in VideoTcpTask::Run
+201111171936 47 ms in VideoTcpTask::Run
+201111171936 32 ms in VideoTcpTask::Run
+201111171936 31 ms in VideoTcpTask::Run
+201111171936 47 ms in VideoTcpTask::Run
+201111172100 31 ms in VideoTcpTask::Run
+201111172101 31 ms in VideoTcpTask::Run
+201111172102 31 ms in VideoTcpTask::Run
+201111172102 47 ms in VideoTcpTask::Run
+201111172103 31 ms in VideoTcpTask::Run
+201111172104 32 ms in VideoTcpTask::Run
+201111172104 31 ms in VideoTcpTask::Run
+201111172228 31 ms in VideoTcpTask::Run
+201111172229 32 ms in VideoTcpTask::Run
+201111172230 31 ms in VideoTcpTask::Run
+201111172231 32 ms in VideoTcpTask::Run
+201111172231 32 ms in VideoTcpTask::Run
+201111172356 47 ms in VideoTcpTask::Run
+201111172358 31 ms in VideoTcpTask::Run
+201111172359 47 ms in VideoTcpTask::Run
+201111172400 47 ms in VideoTcpTask::Run
+201111172524 31 ms in VideoTcpTask::Run
+201111172524 31 ms in VideoTcpTask::Run
+201111172525 31 ms in VideoTcpTask::Run
+201111172526 31 ms in VideoTcpTask::Run
+201111172526 47 ms in VideoTcpTask::Run
+201111172527 31 ms in VideoTcpTask::Run
+201111172528 31 ms in VideoTcpTask::Run
+201111172650 31 ms in VideoTcpTask::Run
+201111172650 31 ms in VideoTcpTask::Run
+201111172652 47 ms in VideoTcpTask::Run
+201111172652 62 ms in VideoTcpTask::Run
+201111172652 63 ms in VideoTcpTask::Run
+201111172652 47 ms in VideoTcpTask::Run
+201111172652 31 ms in VideoTcpTask::Run
+201111172654 32 ms in VideoTcpTask::Run
+201111172737 skt=1632 snd_buf_size=3145728 rcv=5242880
+201111172739 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111172739 VideoTcpTask: EAGAIN
+201111173349 skt=1912 snd_buf_size=3145728 rcv=5242880
+201111173349 VideoTcpTask: EAGAIN
+201111173349 VideoTcpTask: EAGAIN
+201111173454 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111173454 VideoTcpTask: EAGAIN
+201111173454 VideoTcpTask: EAGAIN
+201111173559 skt=1832 snd_buf_size=3145728 rcv=5242880
+201111173559 VideoTcpTask: EAGAIN
+201111173559 VideoTcpTask: EAGAIN
+201111173704 skt=1828 snd_buf_size=3145728 rcv=5242880
+201111173704 VideoTcpTask: EAGAIN
+201111173704 VideoTcpTask: EAGAIN
+201111173809 skt=1972 snd_buf_size=3145728 rcv=5242880
+201111173809 VideoTcpTask: EAGAIN
+201111173914 skt=1824 snd_buf_size=3145728 rcv=5242880
+201111173914 VideoTcpTask: EAGAIN
+201111180110 skt=1760 snd_buf_size=3145728 rcv=5242880
