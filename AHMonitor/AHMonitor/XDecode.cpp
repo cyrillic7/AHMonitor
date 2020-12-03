@@ -169,12 +169,18 @@ bool XDecode::init(AVCodecID codeID)
 //发送到解码线程，不管成功与否都释放pkt空间（对象和媒体内容）
 bool XDecode::Send(AVPacket *pkt)
 {
+	
 	//容错处理
-	if (!pkt || pkt->size <= 0 || !pkt->data)return false;
+	if (!pkt || pkt->size <= 0 || !pkt->data)
+	{
+		av_packet_free(&pkt);
+		return false;
+	}
 	mux.lock();
 	if (!codec)
 	{
 		mux.unlock();
+		av_packet_free(&pkt);
 		return false;
 	}
 	int re = avcodec_send_packet(codec, pkt);

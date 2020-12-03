@@ -35,7 +35,7 @@ bool XVideoThread::Open(AVCodecParameters *para, IVideoCall *call,int width,int 
 	cout << "XAudioThread::Open :" << re << endl;
 	return re;
 }
-bool XVideoThread::init(AVCodecID codeID, void *call, int width, int height)
+bool XVideoThread::init(AVCodecID codeID, IVideoCall *call, int width, int height)
 {
 	vmux.lock();
 	synpts = 0;
@@ -145,12 +145,12 @@ void XVideoThread::run()
 			continue;
 		}
 		AVPacket *pkt = Pop();
-		AVPacket *Recordpkt = av_packet_alloc();
-		av_init_packet(Recordpkt);
-		if (pkt)
-		{
-			av_copy_packet(Recordpkt, pkt);
-		}
+		/*	AVPacket *Recordpkt = av_packet_alloc();
+			av_init_packet(Recordpkt);
+			if (pkt)
+			{
+				av_copy_packet(Recordpkt, pkt);
+			}*/
 		
 		bool re = decode->Send(pkt);
 		
@@ -168,6 +168,7 @@ void XVideoThread::run()
 			//ÏÔÊ¾ÊÓÆµ
 			if (call)
 			{
+				//emit RepatintImage(frame);
 				this->call->Repaint(frame);
 				//cout << "XVideoThread::Repaint :" << isExit << endl;
 			}

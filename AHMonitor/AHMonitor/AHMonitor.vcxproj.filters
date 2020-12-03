@@ -73,9 +73,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_videopanel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_videowidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_videowidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -121,15 +118,6 @@
     <ClCompile Include="FrameStreamManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FFmpegDecode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_FFmpegDecode.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_FFmpegDecode.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="FDecodeThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -137,12 +125,6 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_FDecodeThread.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_XVideoWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_XVideoWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="XAudioThread.cpp">
@@ -165,6 +147,15 @@
     </ClCompile>
     <ClCompile Include="XResample.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_videowidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_XVideoWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_XVideoWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,13 +189,13 @@
     <CustomBuild Include="QToolsSplit.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="FFmpegDecode.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="FDecodeThread.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="XVideoWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="XVideoThread.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -240,9 +231,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XDecodeThread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="XVideoThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IVideoCall.h">

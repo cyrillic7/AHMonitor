@@ -121,7 +121,7 @@ void VideoPanel::initForm()
     this->setStyleSheet(qss.join(""));
 
     videoMax = false;
-    videoCount = 1;
+    videoCount = 64;
     videoType = "1";
 
     for (int i = 0; i < videoCount; i++) {

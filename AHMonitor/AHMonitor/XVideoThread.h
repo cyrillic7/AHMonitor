@@ -17,13 +17,14 @@ extern "C" {
 }
 class XVideoThread:public XDecodeThread
 {
+	//Q_OBJECT
 public:
 
 	//解码pts，如果接收到的解码数据pts >= seekpts return true 并且显示画面
 	virtual bool RepaintPts(AVPacket *pkt, long long seekpts);
 	//打开，不管成功与否都清理
 	virtual bool Open(AVCodecParameters *para,IVideoCall *call,int width,int height);
-	virtual bool init(AVCodecID codeID, void *call, int width, int height);
+	virtual bool init(AVCodecID codeID, IVideoCall *call, int width, int height);
 	void run();
 	XVideoThread();
 	virtual ~XVideoThread();
@@ -45,6 +46,10 @@ protected:
 	AVFormatContext *o_fmt_ctx = NULL;
 	AVStream *o_video_stream = NULL;
 
+
+// signals:
+// 	//收到图片信号
+// 	void RepatintImage(AVFrame *frame);
 };
 
 #endif

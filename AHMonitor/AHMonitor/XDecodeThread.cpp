@@ -50,15 +50,15 @@ void XDecodeThread::Push(AVPacket *pkt)
 {
 	if (!pkt)return;
 	//×èÈû
-	//while (!isExit)
+	while (!isExit)
 	{
 		cout << "packs.size:" << packs.size() << endl;
 		mux.lock();
-		//if (packs.size() < maxList)
+		if (packs.size() < maxList)
 		{
 			packs.push_back(pkt);
-			//mux.unlock();
-			//break;
+			mux.unlock();
+			break;
 		}
 		mux.unlock();
 		msleep(1);

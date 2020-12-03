@@ -29,7 +29,6 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 
 void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData);
 
-#include "FfmpegWrapper.h"
 #include <QString>
 class GlobalFun
 {
