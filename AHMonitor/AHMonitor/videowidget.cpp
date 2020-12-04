@@ -1472,10 +1472,13 @@ bool VideoWidget::vtInit(AVCodecID codeID, IVideoCall * call, int width, int hei
 bool VideoWidget::initPacket(void * pParam)
 {
 	mutex.lock();
-	//MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
-	//if (pData->type == MP_DATA_H264)   //视频数据，也可能是h265，
 	{
 		MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pParam;
+		if (!pMPData)
+		{
+			mutex.unlock();
+			return false;
+		}
 		if (pMPData->type == MP_DATA_H264)   //视频数据，也可能是h265，
 		{
 			int videoWidth;                 //视频宽度

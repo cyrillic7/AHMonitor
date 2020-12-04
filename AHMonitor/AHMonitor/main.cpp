@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 	{
 		w.showMaximized();
 		w.updateTreeWidget();
+		w.updateDisConWidget();
 	}
 	else
 	{
