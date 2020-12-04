@@ -3,7 +3,10 @@
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QApplication>
-
+extern "C"
+{
+#include "libavformat/avformat.h"
+};
 #pragma execution_character_set("utf-8")
 
 //INT64 _h264Handle = 0;

@@ -14,6 +14,10 @@
 #include "qdebug.h"
 #include <QDateTime>
 #include "XDecode.h"
+extern "C"
+{
+#include "libswscale/swscale.h"
+};
 
 void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData)
 {

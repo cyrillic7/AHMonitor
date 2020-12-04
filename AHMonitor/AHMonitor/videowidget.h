@@ -18,14 +18,13 @@
 #include "HeadFile.h"
 #include <QWidget>
 #include <QDateTime>
-#include "ffmpeg.h"
 #include <QList>
-#include "FDecodeThread.h"
 #include <iostream>
 #include <QThread>
 #include "GLYuvWidget.h"
 #include "XAudioThread.h"
 #include "XVideoThread.h"
+#include "QMutex"
 extern "C" {
 #include <libavcodec/avcodec.h>
 }
@@ -136,7 +135,7 @@ public:
     QTimer *timerCheck;             //定时器检查设备是否在线
     QImage image;                   //要显示的图片
     QWidget *flowPanel;             //悬浮条面板
-	QLabel* pImageLable_;
+//	QLabel* pImageLable_;
 	GLYuvWidget* pXvideoWidget_;	//
 
     bool copyImage;                 //是否拷贝图片
