@@ -14,7 +14,7 @@
 #include "qdebug.h"
 #include <QDateTime>
 #include "XDecode.h"
-//INT64 _h264Handle=0;
+
 void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData)
 {
 	switch (event)
@@ -171,240 +171,10 @@ void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, 
 	}
 }
 
-//FFmpegsThread::FFmpegsThread(QObject *parent) : QThread(parent)
-//{
-//	_h264Handle = 0;
-//	//pMPData = NULL;
-//	stopped = false;
-//	isPlay = false;
-//
-//	nResolution_ = 0;
-//
-//	pWidget_ = NULL;
-//	//this->init();
-//}
-//
-//void FFmpegsThread::run()
-//{
-//	while (!stopped)
-//	{
-//		mutex.lock();
-//		pWidget_->getHStreamCount();
-//		if (pWidget_->getHStreamCount() <= 0)
-//		{
-//			mutex.unlock();
-//			msleep(5);
-//			continue;
-//		}
-//		
-//		MP_DATA_INFO * pMData = pWidget_->getHStreamInfo();
-//		
-//		if (pMData->type == MP_DATA_H264)
-//		{
-//			int videoWidth;                 //视频宽度
-//			int videoHeight;                //视频高度
-//			int nResolution = ((pMData->nTimestamp & 0xe000) >> 13);
-//			getVideoResolution(nResolution, &videoWidth, &videoHeight);
-//
-//			if (_h264Handle == 0)
-//			{
-//				_h264Handle = H264_CreateHandle();
-//			}
-//
-//			/*int picWidth = videoWidth;
-//			int picHeight = videoHeight;
-//			INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, picWidth, picHeight);
-//			if (frameSize == 0)
-//			return;
-//
-//			char* buffer = new char[frameSize];
-//			memset(buffer, 0, sizeof(buffer));*/
-//			/*while (true)
-//			{
-//			if
-//			}*/
-//			int pRet = H264_PutVideoStream(_h264Handle, (char*)pMData->pData, pMData->nLen/*, buffer, frameSize,picWidth, picHeight*/);
-//			if (pRet != 0)
-//			{
-//				//delete[] buffer;
-//				//pWidget_->removeHStreamInfo();
-//				mutex.unlock();
-//				msleep(5);
-//				continue;
-//			}
-//
-//			INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, videoWidth, videoHeight);
-//			if (frameSize == 0)
-//			{
-//				mutex.unlock();
-//				msleep(5);
-//				continue;
-//			}
-//
-//			char* buffer = new char[frameSize];
-//			//memset(buffer, 0, sizeof(buffer));
-//
-//			bool bReceive = true;
-//			while (true)
-//			{
-//				memset(buffer, 0, sizeof(buffer));
-//				INT32 ret = H264_GetNextVideoFrame_Rgb2(_h264Handle, buffer, frameSize, videoWidth, videoHeight);
-//				if (ret == 0)
-//				{
-//					QImage image((uchar*)buffer, videoWidth, videoHeight, QImage::Format_RGB888);
-//					QImage imgs = image.rgbSwapped();
-//
-//					//setFillImage(false);
-//					//this->updateImage(imgs);
-//					emit receiveImage(imgs);
-//					msleep(1);
-//					qDebug() << "receiveError:" << QString::number(ret);
-//					break;
-//					//stopped = true;
-//				}
-//			}
-//
-//			//pWidget_->removeHStreamInfo();
-//			delete[] buffer;
-//		}
-//		mutex.unlock();
-//		msleep(1);
-//		/*pWidget_->removeHStreamInfo();*/
-//		//int picWidth;                 //视频宽度
-//		//int picHeight;                //视频高度
-//
-//		//getVideoResolution(nResolution_, &picWidth, &picHeight);
-//		//INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, picWidth, picHeight);
-//		//if (frameSize == 0)
-//		//	return;
-//
-//		//char* buffer = new char[frameSize];
-//		////memset(buffer, 0, sizeof(buffer));
-//
-//		////bool bReceive = true;
-//		////while (bReceive)
-//		//{
-//		//	memset(buffer, 0, sizeof(buffer));
-//		//	INT32 ret = H264_GetNextVideoFrame_Rgb2(_h264Handle, buffer, frameSize, picWidth, picHeight);
-//		//	if (ret == 0)
-//		//	{
-//		//		QImage image((uchar*)buffer, picWidth, picHeight, QImage::Format_RGB888);
-//		//		QImage imgs = image.rgbSwapped();
-//
-//		//		//setFillImage(false);
-//		//		//this->updateImage(imgs);
-//		//		emit receiveImage(imgs);
-//		//		msleep(1);
-//		//		qDebug() << "receiveError:" << QString::number(ret);
-//		//		//bReceive = false;
-//		//	}
-//		//}
-//
-//		//delete[] buffer;
-//		//msleep(1);
-//	}
-//}
-//
-//void FFmpegsThread::getVideoResolution(int nResolution, int * width, int * height)
-//{
-//	if (nResolution == 0)
-//	{
-//		//should retieve from video streaming
-//		*width = 0;
-//		*height = 0;
-//	}
-//	else if (nResolution == 1)
-//	{
-//		*width = 176;
-//		*height = 144;
-//	}
-//	else if (nResolution == 2)
-//	{
-//		*width = 320;
-//		*height = 240;
-//	}
-//	else if (nResolution == 3)
-//	{
-//		*width = 352;
-//		*height = 288;
-//	}
-//	else if (nResolution == 4)
-//	{
-//		*width = 704;
-//		*height = 288;
-//	}
-//	else if (nResolution == 5)
-//	{
-//		*width = 704;
-//		*height = 576;
-//	}
-//	else if (nResolution == 6)
-//	{
-//		*width = 1280;
-//		*height = 720;
-//	}
-//	else if (nResolution == 7)
-//	{
-//		*width = 1920;
-//		*height = 1080;
-//	}
-//}
-//
-//bool FFmpegsThread::init(INT64 handle, int Resolution, VideoWidget* pWidget)
-//{
-//	/*if (_h264Handle == 0)
-//	{
-//	_h264Handle = handle;
-//	}*/
-//	nResolution_ = Resolution;
-//
-//	pWidget_ = pWidget;
-//
-//	return true;
-//}
-//
-//void FFmpegsThread::free()
-//{
-//
-//}
-//
-//void FFmpegsThread::play()
-//{
-//	//通过标志位让线程执行初始化
-//	isPlay = true;
-//}
-//
-//void FFmpegsThread::pause()
-//{
-//
-//}
-//
-//void FFmpegsThread::next()
-//{
-//
-//}
-//
-//void FFmpegsThread::stop()
-//{
-//	//通过标志位让线程停止
-//	stopped = true;
-//
-//	H264_CloseHandle(_h264Handle);
-//	_h264Handle = 0;
-//}
-
 VideoWidget::VideoWidget(QWidget *parent) : QWidget(parent)
 {
 	pXvideoWidget_ = new GLYuvWidget(this);
 	IsthreadRun_ = false;
-	//thread_ = new FFmpegsThread(this);
-//	connect(thread_, SIGNAL(receiveImage(QImage)), this, SLOT(updateImage(QImage)));
-	//connect(this, SIGNAL(pushVideoh264Data(MP_DATA_INFO)), thread_, SLOT(pushVideoData(MP_DATA_INFO)));
-//	_h264Handle = 0;
-	//if (_h264Handle == 0)
-	//{
-	//	_h264Handle = H264_CreateHandle();
-	//}
 	_nSession = -1;
 	//设置强焦点
 	setFocusPolicy(Qt::StrongFocus);
@@ -570,52 +340,6 @@ VideoWidget::~VideoWidget()
 
 	close();
 }
-
-//void VideoWidget::Init(int width, int height)
-//{
-//}
-//
-//void VideoWidget::Repaint(AVFrame * frame)
-//{
-//	if (!frame)return;
-//	mutex.lock();
-//	//qDebug() << "frame->width:" << frame->width << "frame->height:" << frame->height;
-//	//容错，保证尺寸正确
-//	//if (!datas[0] || width*height == 0/* || frame->width != this->width || frame->height != this->height*/)
-//	//{
-//	//	av_frame_free(&frame);
-//	//	mux.unlock();
-//	//	return;
-//	//}
-//	//if (width == frame->linesize[0]) //无需对齐
-//	//{
-//	//	memcpy(datas[0], frame->data[0], width*height);
-//	//	memcpy(datas[1], frame->data[1], width*height / 4);
-//	//	memcpy(datas[2], frame->data[2], width*height / 4);
-//	//}
-//	//else//行对齐问题
-//	//{
-//	unsigned char *datas[3] = { 0 };
-//	int videowidth = frame->width;
-//	int videoheight = frame->height;
-//	for (int i = 0; i < videoheight; i++) //Y 
-//		memcpy(datas[0] + videowidth*i, frame->data[0] + frame->linesize[0] * i, videowidth);
-//	for (int i = 0; i < videoheight / 2; i++) //U
-//		memcpy(datas[1] + videowidth / 2 * i, frame->data[1] + frame->linesize[1] * i, videowidth / 2);
-//	for (int i = 0; i < videoheight / 2; i++) //V
-//		memcpy(datas[2] + videowidth / 2 * i, frame->data[2] + frame->linesize[2] * i, videowidth / 2);
-//
-//	//}
-//	char* rgb = new char[videowidth*videoheight * 3];
-//	YUV420_2_RGB(datas[0], datas[1], datas[2], (unsigned char*)rgb, videowidth, videoheight);
-//	QImage* pimage = new QImage(videowidth, videoheight, QImage::Format_RGB888);
-//
-//	this->updateImage(*pimage);
-//
-//	mutex.unlock();
-//	av_frame_free(&frame);
-//	//qDebug() << "刷新显示" << endl;
-//}
 
 void VideoWidget::resizeEvent(QResizeEvent *)
 {
@@ -1245,16 +969,6 @@ void VideoWidget::setOSD2Position(const VideoWidget::OSDPosition &osdPosition)
 	this->osd2Position = osdPosition;
 }
 
-void VideoWidget::startVideoThread()
-{
-// 	if (thread_->isRunning() == false)
-// 	{
-// 		IsthreadRun_ = true;
-// 		thread_->play();
-// 		thread_->start();
-// 	}
-}
-
 bool VideoWidget::ish265IFrame(void *pParam)
 {
 	MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
@@ -1429,30 +1143,6 @@ void VideoWidget::setVideoh264Data(void * pData)
 	//	//delete pimage;
 	//	delete[] buffer;
 	//}
-}
-
-void VideoWidget::RGB2Image(char *srcBuf, int w, int h, QImage *pDistImage)
-{
-	int i;
-	int r, g, b;
-	QRgb *point;
-	uchar *bit;
-	i = 0;
-	bit = (uchar *)(srcBuf);
-	for (int y = 0; y < h; y++) {
-		for (int x = 0; x < w; x++) {
-			/* Please attion the Littile-Edian and Big-Edian,
-			* The Order maybe R-G-B.
-			*/
-			b = (int)bit[i];
-			g = (int)bit[i + 1];
-			r = (int)bit[i + 2];
-			point = (QRgb *)pDistImage->scanLine(y) + x;
-			*point = qRgb(r, g, b);
-			i += 3;
-		}
-	}
-	return;
 }
 
 bool VideoWidget::isIFrame(void *pParam)
@@ -1810,6 +1500,7 @@ bool VideoWidget::initPacket(void * pParam)
 			{
 			case 1:
 			{
+
 			}
 			break;
 			case 2:

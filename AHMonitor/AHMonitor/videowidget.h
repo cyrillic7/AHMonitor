@@ -23,7 +23,7 @@
 #include "FDecodeThread.h"
 #include <iostream>
 #include <QThread>
-#include "XVideoWidget.h"
+#include "GLYuvWidget.h"
 #include "XAudioThread.h"
 #include "XVideoThread.h"
 extern "C" {
@@ -32,78 +32,6 @@ extern "C" {
 using namespace std;
 class QTimer;
 class VideoWidget;
-//class FFmpegsThread : public QThread
-//{
-//	Q_OBJECT
-//public:
-//	explicit FFmpegsThread(QObject *parent = 0);
-//	//static void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void * pParam, void * pAppData);
-//protected:
-//	
-//	void run();
-//
-//	/*bool ish265IFrame(void * pParam);
-//
-//	bool isIFrame(void * pParam);*/
-//
-//public:
-//	MP_DATA_INFO pktdata;
-//	QList<MP_DATA_INFO *> HStreamList;
-//	QMutex mutex;
-//	VideoWidget* pWidget_;
-//	INT64 _h264Handle;				
-//	volatile bool stopped;          //线程停止标志位
-//	volatile bool isPlay;           //播放视频标志位
-//
-//	int nResolution_;
-//
-//	//void pushVideoData(MP_DATA_INFO * pData);
-//
-//	int getHStreamCount() { return HStreamList.size(); }
-//
-//	void pushHStreamInfo(MP_DATA_INFO* pData) {
-//		QMutex mutex;
-//		HStreamList.push_back(pData);
-//	}
-//	MP_DATA_INFO * getHStreamInfo() {
-//		QMutexLocker locker(&mutex);
-//		if (HStreamList.isEmpty())
-//		{
-//			return NULL;
-//		}
-//		return HStreamList.front();
-//	}
-//
-//	void removeHStreamInfo() {
-//		QMutexLocker locker(&mutex);
-//		//HStreamList.removeFirst(); 
-//		if (getHStreamCount() > 0)
-//		{
-//			HStreamList.pop_front();
-//		}
-//	}
-//signals:
-//	//收到图片信号
-//	void receiveImage(const QImage &image);
-//
-//public slots:
-//	//设置码流数据
-//	//void pushVideoData(const MP_DATA_INFO &pData);
-//	//
-//	void getVideoResolution(int nResolution, int* width, int* height);
-//	//初始化视频对象
-//	bool init(INT64 handle, int Resolution, VideoWidget* pWidget);
-//	//释放对象
-//	void free();
-//	//播放视频对象
-//	void play();
-//	//暂停播放
-//	void pause();
-//	//继续播放
-//	void next();
-//	//停止采集线程
-//	void stop();
-//};
 
 #ifdef quc
 #if (QT_VERSION < QT_VERSION_CHECK(5,7,0))
@@ -202,13 +130,9 @@ public:
 	XVideoThread* vt = 0;
 	bool isInit_ = false;
 	QMutex mutex;
-	//FDecodeThread* pDecodeThread_;
 	QList<MP_DATA_INFO *> HStreamList;
 	bool IsthreadRun_;
-	//FFmpegsThread *thread_;
-	//INT64 _h264Handle;
 	int _nSession;				//视频标识
-	//FFmpegWidget* pffmpegWidget;	//ffmpeg控件
     QTimer *timerCheck;             //定时器检查设备是否在线
     QImage image;                   //要显示的图片
     QWidget *flowPanel;             //悬浮条面板
@@ -424,47 +348,9 @@ public slots:
     //设置标签2位置
     void setOSD2Position(const OSDPosition &osdPosition);
 
-	int getHStreamCount() { return HStreamList.size(); }
-
-	void pushHStreamInfo(MP_DATA_INFO* pData) {
-		mutex.lock();
-		HStreamList.push_back(pData);
-		mutex.unlock();
-		//msleep(1);
-	}
-	MP_DATA_INFO * getHStreamInfo() {
-		mutex.lock();
-		if (HStreamList.isEmpty())
-		{
-			mutex.unlock();
-			return NULL;
-		}
-		MP_DATA_INFO * hstream = HStreamList.front();
-		HStreamList.pop_front();
-		mutex.unlock();
-		return hstream;
-	}
-
-	//void removeHStreamInfo() {
-	//	QMutexLocker locker(&mutex);
-	//	//HStreamList.removeFirst(); 
-	//	if (getHStreamCount()>0)
-	//	{
-	//		HStreamList.pop_front();
-	//	}
-	//}
-
-	//void pushFrame(MP_DATA_INFO * pData);
-
-	//int popFrame(MP_DATA_INFO** pData);
-
-	void startVideoThread();
-
 	bool ish265IFrame(void * pParam);
 
 	void setVideoh264Data(void * pData);
-
-	void RGB2Image(char * srcBuf, int w, int h, QImage * pDistImage);
 
 	bool isIFrame(void * pParam);
 

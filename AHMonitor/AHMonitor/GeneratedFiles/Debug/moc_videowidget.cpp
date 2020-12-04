@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VideoWidget_t {
-    QByteArrayData data[166];
-    char stringdata0[1879];
+    QByteArrayData data[154];
+    char stringdata0[1755];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -125,78 +125,66 @@ QT_MOC_LITERAL(90, 1022, 12), // "setOSD2Color"
 QT_MOC_LITERAL(91, 1035, 12), // "setOSD2Image"
 QT_MOC_LITERAL(92, 1048, 13), // "setOSD2Format"
 QT_MOC_LITERAL(93, 1062, 15), // "setOSD2Position"
-QT_MOC_LITERAL(94, 1078, 15), // "getHStreamCount"
-QT_MOC_LITERAL(95, 1094, 15), // "pushHStreamInfo"
-QT_MOC_LITERAL(96, 1110, 13), // "MP_DATA_INFO*"
-QT_MOC_LITERAL(97, 1124, 14), // "getHStreamInfo"
-QT_MOC_LITERAL(98, 1139, 16), // "startVideoThread"
-QT_MOC_LITERAL(99, 1156, 12), // "ish265IFrame"
-QT_MOC_LITERAL(100, 1169, 6), // "pParam"
-QT_MOC_LITERAL(101, 1176, 16), // "setVideoh264Data"
-QT_MOC_LITERAL(102, 1193, 9), // "RGB2Image"
-QT_MOC_LITERAL(103, 1203, 5), // "char*"
-QT_MOC_LITERAL(104, 1209, 6), // "srcBuf"
-QT_MOC_LITERAL(105, 1216, 1), // "w"
-QT_MOC_LITERAL(106, 1218, 1), // "h"
-QT_MOC_LITERAL(107, 1220, 7), // "QImage*"
-QT_MOC_LITERAL(108, 1228, 10), // "pDistImage"
-QT_MOC_LITERAL(109, 1239, 8), // "isIFrame"
-QT_MOC_LITERAL(110, 1248, 15), // "setVideoYUVData"
-QT_MOC_LITERAL(111, 1264, 18), // "YV12ToBGR24_FFmpeg"
-QT_MOC_LITERAL(112, 1283, 14), // "unsigned char*"
-QT_MOC_LITERAL(113, 1298, 4), // "pYUV"
-QT_MOC_LITERAL(114, 1303, 6), // "pBGR24"
-QT_MOC_LITERAL(115, 1310, 5), // "width"
-QT_MOC_LITERAL(116, 1316, 6), // "height"
-QT_MOC_LITERAL(117, 1323, 13), // "Yuv420p2Rgb32"
-QT_MOC_LITERAL(118, 1337, 5), // "pBufy"
-QT_MOC_LITERAL(119, 1343, 5), // "pBufu"
-QT_MOC_LITERAL(120, 1349, 5), // "pBufv"
-QT_MOC_LITERAL(121, 1355, 11), // "const BYTE*"
-QT_MOC_LITERAL(122, 1367, 13), // "rgbBuffer_out"
-QT_MOC_LITERAL(123, 1381, 12), // "YUV420_2_RGB"
-QT_MOC_LITERAL(124, 1394, 4), // "pRGB"
-QT_MOC_LITERAL(125, 1399, 18), // "getVideoResolution"
-QT_MOC_LITERAL(126, 1418, 11), // "nResolution"
-QT_MOC_LITERAL(127, 1430, 4), // "int*"
-QT_MOC_LITERAL(128, 1435, 4), // "open"
-QT_MOC_LITERAL(129, 1440, 5), // "pause"
-QT_MOC_LITERAL(130, 1446, 4), // "next"
-QT_MOC_LITERAL(131, 1451, 5), // "close"
-QT_MOC_LITERAL(132, 1457, 7), // "restart"
-QT_MOC_LITERAL(133, 1465, 5), // "clear"
-QT_MOC_LITERAL(134, 1471, 6), // "vtInit"
-QT_MOC_LITERAL(135, 1478, 9), // "AVCodecID"
-QT_MOC_LITERAL(136, 1488, 6), // "codeID"
-QT_MOC_LITERAL(137, 1495, 11), // "IVideoCall*"
-QT_MOC_LITERAL(138, 1507, 4), // "call"
-QT_MOC_LITERAL(139, 1512, 10), // "initPacket"
-QT_MOC_LITERAL(140, 1523, 12), // "patientFrame"
-QT_MOC_LITERAL(141, 1536, 8), // "AVFrame*"
-QT_MOC_LITERAL(142, 1545, 5), // "frame"
-QT_MOC_LITERAL(143, 1551, 11), // "osd1Visible"
-QT_MOC_LITERAL(144, 1563, 12), // "osd1FontSize"
-QT_MOC_LITERAL(145, 1576, 8), // "osd1Text"
-QT_MOC_LITERAL(146, 1585, 9), // "osd1Color"
-QT_MOC_LITERAL(147, 1595, 9), // "osd1Image"
-QT_MOC_LITERAL(148, 1605, 10), // "osd1Format"
-QT_MOC_LITERAL(149, 1616, 12), // "osd1Position"
-QT_MOC_LITERAL(150, 1629, 11), // "osd2Visible"
-QT_MOC_LITERAL(151, 1641, 12), // "osd2FontSize"
-QT_MOC_LITERAL(152, 1654, 8), // "osd2Text"
-QT_MOC_LITERAL(153, 1663, 9), // "osd2Color"
-QT_MOC_LITERAL(154, 1673, 9), // "osd2Image"
-QT_MOC_LITERAL(155, 1683, 10), // "osd2Format"
-QT_MOC_LITERAL(156, 1694, 12), // "osd2Position"
-QT_MOC_LITERAL(157, 1707, 14), // "OSDFormat_Text"
-QT_MOC_LITERAL(158, 1722, 14), // "OSDFormat_Date"
-QT_MOC_LITERAL(159, 1737, 14), // "OSDFormat_Time"
-QT_MOC_LITERAL(160, 1752, 18), // "OSDFormat_DateTime"
-QT_MOC_LITERAL(161, 1771, 15), // "OSDFormat_Image"
-QT_MOC_LITERAL(162, 1787, 20), // "OSDPosition_Left_Top"
-QT_MOC_LITERAL(163, 1808, 23), // "OSDPosition_Left_Bottom"
-QT_MOC_LITERAL(164, 1832, 21), // "OSDPosition_Right_Top"
-QT_MOC_LITERAL(165, 1854, 24) // "OSDPosition_Right_Bottom"
+QT_MOC_LITERAL(94, 1078, 12), // "ish265IFrame"
+QT_MOC_LITERAL(95, 1091, 6), // "pParam"
+QT_MOC_LITERAL(96, 1098, 16), // "setVideoh264Data"
+QT_MOC_LITERAL(97, 1115, 8), // "isIFrame"
+QT_MOC_LITERAL(98, 1124, 15), // "setVideoYUVData"
+QT_MOC_LITERAL(99, 1140, 18), // "YV12ToBGR24_FFmpeg"
+QT_MOC_LITERAL(100, 1159, 14), // "unsigned char*"
+QT_MOC_LITERAL(101, 1174, 4), // "pYUV"
+QT_MOC_LITERAL(102, 1179, 6), // "pBGR24"
+QT_MOC_LITERAL(103, 1186, 5), // "width"
+QT_MOC_LITERAL(104, 1192, 6), // "height"
+QT_MOC_LITERAL(105, 1199, 13), // "Yuv420p2Rgb32"
+QT_MOC_LITERAL(106, 1213, 5), // "pBufy"
+QT_MOC_LITERAL(107, 1219, 5), // "pBufu"
+QT_MOC_LITERAL(108, 1225, 5), // "pBufv"
+QT_MOC_LITERAL(109, 1231, 11), // "const BYTE*"
+QT_MOC_LITERAL(110, 1243, 13), // "rgbBuffer_out"
+QT_MOC_LITERAL(111, 1257, 12), // "YUV420_2_RGB"
+QT_MOC_LITERAL(112, 1270, 4), // "pRGB"
+QT_MOC_LITERAL(113, 1275, 18), // "getVideoResolution"
+QT_MOC_LITERAL(114, 1294, 11), // "nResolution"
+QT_MOC_LITERAL(115, 1306, 4), // "int*"
+QT_MOC_LITERAL(116, 1311, 4), // "open"
+QT_MOC_LITERAL(117, 1316, 5), // "pause"
+QT_MOC_LITERAL(118, 1322, 4), // "next"
+QT_MOC_LITERAL(119, 1327, 5), // "close"
+QT_MOC_LITERAL(120, 1333, 7), // "restart"
+QT_MOC_LITERAL(121, 1341, 5), // "clear"
+QT_MOC_LITERAL(122, 1347, 6), // "vtInit"
+QT_MOC_LITERAL(123, 1354, 9), // "AVCodecID"
+QT_MOC_LITERAL(124, 1364, 6), // "codeID"
+QT_MOC_LITERAL(125, 1371, 11), // "IVideoCall*"
+QT_MOC_LITERAL(126, 1383, 4), // "call"
+QT_MOC_LITERAL(127, 1388, 10), // "initPacket"
+QT_MOC_LITERAL(128, 1399, 12), // "patientFrame"
+QT_MOC_LITERAL(129, 1412, 8), // "AVFrame*"
+QT_MOC_LITERAL(130, 1421, 5), // "frame"
+QT_MOC_LITERAL(131, 1427, 11), // "osd1Visible"
+QT_MOC_LITERAL(132, 1439, 12), // "osd1FontSize"
+QT_MOC_LITERAL(133, 1452, 8), // "osd1Text"
+QT_MOC_LITERAL(134, 1461, 9), // "osd1Color"
+QT_MOC_LITERAL(135, 1471, 9), // "osd1Image"
+QT_MOC_LITERAL(136, 1481, 10), // "osd1Format"
+QT_MOC_LITERAL(137, 1492, 12), // "osd1Position"
+QT_MOC_LITERAL(138, 1505, 11), // "osd2Visible"
+QT_MOC_LITERAL(139, 1517, 12), // "osd2FontSize"
+QT_MOC_LITERAL(140, 1530, 8), // "osd2Text"
+QT_MOC_LITERAL(141, 1539, 9), // "osd2Color"
+QT_MOC_LITERAL(142, 1549, 9), // "osd2Image"
+QT_MOC_LITERAL(143, 1559, 10), // "osd2Format"
+QT_MOC_LITERAL(144, 1570, 12), // "osd2Position"
+QT_MOC_LITERAL(145, 1583, 14), // "OSDFormat_Text"
+QT_MOC_LITERAL(146, 1598, 14), // "OSDFormat_Date"
+QT_MOC_LITERAL(147, 1613, 14), // "OSDFormat_Time"
+QT_MOC_LITERAL(148, 1628, 18), // "OSDFormat_DateTime"
+QT_MOC_LITERAL(149, 1647, 15), // "OSDFormat_Image"
+QT_MOC_LITERAL(150, 1663, 20), // "OSDPosition_Left_Top"
+QT_MOC_LITERAL(151, 1684, 23), // "OSDPosition_Left_Bottom"
+QT_MOC_LITERAL(152, 1708, 21), // "OSDPosition_Right_Top"
+QT_MOC_LITERAL(153, 1730, 24) // "OSDPosition_Right_Bottom"
 
     },
     "VideoWidget\0receivePlayStart\0\0"
@@ -230,12 +218,8 @@ QT_MOC_LITERAL(165, 1854, 24) // "OSDPosition_Right_Bottom"
     "setOSD2Visible\0setOSD2FontSize\0"
     "setOSD2Text\0setOSD2Color\0setOSD2Image\0"
     "setOSD2Format\0setOSD2Position\0"
-    "getHStreamCount\0pushHStreamInfo\0"
-    "MP_DATA_INFO*\0getHStreamInfo\0"
-    "startVideoThread\0ish265IFrame\0pParam\0"
-    "setVideoh264Data\0RGB2Image\0char*\0"
-    "srcBuf\0w\0h\0QImage*\0pDistImage\0isIFrame\0"
-    "setVideoYUVData\0YV12ToBGR24_FFmpeg\0"
+    "ish265IFrame\0pParam\0setVideoh264Data\0"
+    "isIFrame\0setVideoYUVData\0YV12ToBGR24_FFmpeg\0"
     "unsigned char*\0pYUV\0pBGR24\0width\0"
     "height\0Yuv420p2Rgb32\0pBufy\0pBufu\0pBufv\0"
     "const BYTE*\0rgbBuffer_out\0YUV420_2_RGB\0"
@@ -261,92 +245,87 @@ static const uint qt_meta_data_VideoWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      76,   14, // methods
-      27,  628, // properties
-       2,  709, // enums/sets
+      71,   14, // methods
+      27,  588, // properties
+       2,  669, // enums/sets
        0,    0, // constructors
        0,       // flags
        7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  394,    2, 0x06 /* Public */,
-       3,    0,  395,    2, 0x06 /* Public */,
-       4,    0,  396,    2, 0x06 /* Public */,
-       5,    1,  397,    2, 0x06 /* Public */,
-       7,    1,  400,    2, 0x06 /* Public */,
-       9,    1,  403,    2, 0x06 /* Public */,
-      11,    1,  406,    2, 0x06 /* Public */,
+       1,    0,  369,    2, 0x06 /* Public */,
+       3,    0,  370,    2, 0x06 /* Public */,
+       4,    0,  371,    2, 0x06 /* Public */,
+       5,    1,  372,    2, 0x06 /* Public */,
+       7,    1,  375,    2, 0x06 /* Public */,
+       9,    1,  378,    2, 0x06 /* Public */,
+      11,    1,  381,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      14,    1,  409,    2, 0x0a /* Public */,
-      15,    0,  412,    2, 0x0a /* Public */,
-       9,    0,  413,    2, 0x0a /* Public */,
-      16,    0,  414,    2, 0x0a /* Public */,
-      17,    0,  415,    2, 0x0a /* Public */,
-      18,    1,  416,    2, 0x0a /* Public */,
-      20,    0,  419,    2, 0x0a /* Public */,
-      21,    1,  420,    2, 0x0a /* Public */,
-      23,    0,  423,    2, 0x0a /* Public */,
-      24,    1,  424,    2, 0x0a /* Public */,
-      26,    1,  427,    2, 0x0a /* Public */,
-      28,    1,  430,    2, 0x0a /* Public */,
-      30,    1,  433,    2, 0x0a /* Public */,
-      32,    1,  436,    2, 0x0a /* Public */,
-      34,    1,  439,    2, 0x0a /* Public */,
-      35,    1,  442,    2, 0x0a /* Public */,
-      37,    1,  445,    2, 0x0a /* Public */,
-      39,    1,  448,    2, 0x0a /* Public */,
-      41,    1,  451,    2, 0x0a /* Public */,
-      43,    1,  454,    2, 0x0a /* Public */,
-      45,    1,  457,    2, 0x0a /* Public */,
-      47,    1,  460,    2, 0x0a /* Public */,
-      49,    1,  463,    2, 0x0a /* Public */,
-      51,    1,  466,    2, 0x0a /* Public */,
-      53,    1,  469,    2, 0x0a /* Public */,
-      55,    1,  472,    2, 0x0a /* Public */,
-      57,    1,  475,    2, 0x0a /* Public */,
-      59,    1,  478,    2, 0x0a /* Public */,
-      61,    1,  481,    2, 0x0a /* Public */,
-      63,    1,  484,    2, 0x0a /* Public */,
-      65,    1,  487,    2, 0x0a /* Public */,
-      67,    1,  490,    2, 0x0a /* Public */,
-      69,    1,  493,    2, 0x0a /* Public */,
-      71,    1,  496,    2, 0x0a /* Public */,
-      73,    1,  499,    2, 0x0a /* Public */,
-      75,    1,  502,    2, 0x0a /* Public */,
-      77,    1,  505,    2, 0x0a /* Public */,
-      79,    1,  508,    2, 0x0a /* Public */,
-      81,    1,  511,    2, 0x0a /* Public */,
-      84,    1,  514,    2, 0x0a /* Public */,
-      87,    1,  517,    2, 0x0a /* Public */,
-      88,    1,  520,    2, 0x0a /* Public */,
-      89,    1,  523,    2, 0x0a /* Public */,
-      90,    1,  526,    2, 0x0a /* Public */,
-      91,    1,  529,    2, 0x0a /* Public */,
-      92,    1,  532,    2, 0x0a /* Public */,
-      93,    1,  535,    2, 0x0a /* Public */,
-      94,    0,  538,    2, 0x0a /* Public */,
-      95,    1,  539,    2, 0x0a /* Public */,
-      97,    0,  542,    2, 0x0a /* Public */,
-      98,    0,  543,    2, 0x0a /* Public */,
-      99,    1,  544,    2, 0x0a /* Public */,
-     101,    1,  547,    2, 0x0a /* Public */,
-     102,    4,  550,    2, 0x0a /* Public */,
-     109,    1,  559,    2, 0x0a /* Public */,
-     110,    1,  562,    2, 0x0a /* Public */,
-     111,    4,  565,    2, 0x0a /* Public */,
-     117,    6,  574,    2, 0x0a /* Public */,
-     123,    6,  587,    2, 0x0a /* Public */,
-     125,    3,  600,    2, 0x0a /* Public */,
-     128,    0,  607,    2, 0x0a /* Public */,
-     129,    0,  608,    2, 0x0a /* Public */,
-     130,    0,  609,    2, 0x0a /* Public */,
-     131,    0,  610,    2, 0x0a /* Public */,
-     132,    0,  611,    2, 0x0a /* Public */,
-     133,    0,  612,    2, 0x0a /* Public */,
-     134,    4,  613,    2, 0x0a /* Public */,
-     139,    1,  622,    2, 0x0a /* Public */,
-     140,    1,  625,    2, 0x0a /* Public */,
+      14,    1,  384,    2, 0x0a /* Public */,
+      15,    0,  387,    2, 0x0a /* Public */,
+       9,    0,  388,    2, 0x0a /* Public */,
+      16,    0,  389,    2, 0x0a /* Public */,
+      17,    0,  390,    2, 0x0a /* Public */,
+      18,    1,  391,    2, 0x0a /* Public */,
+      20,    0,  394,    2, 0x0a /* Public */,
+      21,    1,  395,    2, 0x0a /* Public */,
+      23,    0,  398,    2, 0x0a /* Public */,
+      24,    1,  399,    2, 0x0a /* Public */,
+      26,    1,  402,    2, 0x0a /* Public */,
+      28,    1,  405,    2, 0x0a /* Public */,
+      30,    1,  408,    2, 0x0a /* Public */,
+      32,    1,  411,    2, 0x0a /* Public */,
+      34,    1,  414,    2, 0x0a /* Public */,
+      35,    1,  417,    2, 0x0a /* Public */,
+      37,    1,  420,    2, 0x0a /* Public */,
+      39,    1,  423,    2, 0x0a /* Public */,
+      41,    1,  426,    2, 0x0a /* Public */,
+      43,    1,  429,    2, 0x0a /* Public */,
+      45,    1,  432,    2, 0x0a /* Public */,
+      47,    1,  435,    2, 0x0a /* Public */,
+      49,    1,  438,    2, 0x0a /* Public */,
+      51,    1,  441,    2, 0x0a /* Public */,
+      53,    1,  444,    2, 0x0a /* Public */,
+      55,    1,  447,    2, 0x0a /* Public */,
+      57,    1,  450,    2, 0x0a /* Public */,
+      59,    1,  453,    2, 0x0a /* Public */,
+      61,    1,  456,    2, 0x0a /* Public */,
+      63,    1,  459,    2, 0x0a /* Public */,
+      65,    1,  462,    2, 0x0a /* Public */,
+      67,    1,  465,    2, 0x0a /* Public */,
+      69,    1,  468,    2, 0x0a /* Public */,
+      71,    1,  471,    2, 0x0a /* Public */,
+      73,    1,  474,    2, 0x0a /* Public */,
+      75,    1,  477,    2, 0x0a /* Public */,
+      77,    1,  480,    2, 0x0a /* Public */,
+      79,    1,  483,    2, 0x0a /* Public */,
+      81,    1,  486,    2, 0x0a /* Public */,
+      84,    1,  489,    2, 0x0a /* Public */,
+      87,    1,  492,    2, 0x0a /* Public */,
+      88,    1,  495,    2, 0x0a /* Public */,
+      89,    1,  498,    2, 0x0a /* Public */,
+      90,    1,  501,    2, 0x0a /* Public */,
+      91,    1,  504,    2, 0x0a /* Public */,
+      92,    1,  507,    2, 0x0a /* Public */,
+      93,    1,  510,    2, 0x0a /* Public */,
+      94,    1,  513,    2, 0x0a /* Public */,
+      96,    1,  516,    2, 0x0a /* Public */,
+      97,    1,  519,    2, 0x0a /* Public */,
+      98,    1,  522,    2, 0x0a /* Public */,
+      99,    4,  525,    2, 0x0a /* Public */,
+     105,    6,  534,    2, 0x0a /* Public */,
+     111,    6,  547,    2, 0x0a /* Public */,
+     113,    3,  560,    2, 0x0a /* Public */,
+     116,    0,  567,    2, 0x0a /* Public */,
+     117,    0,  568,    2, 0x0a /* Public */,
+     118,    0,  569,    2, 0x0a /* Public */,
+     119,    0,  570,    2, 0x0a /* Public */,
+     120,    0,  571,    2, 0x0a /* Public */,
+     121,    0,  572,    2, 0x0a /* Public */,
+     122,    4,  573,    2, 0x0a /* Public */,
+     127,    1,  582,    2, 0x0a /* Public */,
+     128,    1,  585,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -405,28 +384,23 @@ static const uint qt_meta_data_VideoWidget[] = {
     QMetaType::Void, QMetaType::QImage,   80,
     QMetaType::Void, 0x80000000 | 82,   83,
     QMetaType::Void, 0x80000000 | 85,   86,
-    QMetaType::Int,
-    QMetaType::Void, 0x80000000 | 96,   13,
-    0x80000000 | 96,
-    QMetaType::Void,
-    QMetaType::Bool, QMetaType::VoidStar,  100,
+    QMetaType::Bool, QMetaType::VoidStar,   95,
     QMetaType::Void, QMetaType::VoidStar,   13,
-    QMetaType::Void, 0x80000000 | 103, QMetaType::Int, QMetaType::Int, 0x80000000 | 107,  104,  105,  106,  108,
-    QMetaType::Bool, QMetaType::VoidStar,  100,
+    QMetaType::Bool, QMetaType::VoidStar,   95,
     QMetaType::Void, QMetaType::VoidStar,   13,
-    QMetaType::Bool, 0x80000000 | 112, 0x80000000 | 112, QMetaType::Int, QMetaType::Int,  113,  114,  115,  116,
-    QMetaType::Void, 0x80000000 | 112, 0x80000000 | 112, 0x80000000 | 112, 0x80000000 | 121, QMetaType::Int, QMetaType::Int,  118,  119,  120,  122,  115,  116,
-    QMetaType::Void, 0x80000000 | 112, 0x80000000 | 112, 0x80000000 | 112, 0x80000000 | 112, QMetaType::Int, QMetaType::Int,  118,  119,  120,  124,  115,  116,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 127, 0x80000000 | 127,  126,  115,  116,
+    QMetaType::Bool, 0x80000000 | 100, 0x80000000 | 100, QMetaType::Int, QMetaType::Int,  101,  102,  103,  104,
+    QMetaType::Void, 0x80000000 | 100, 0x80000000 | 100, 0x80000000 | 100, 0x80000000 | 109, QMetaType::Int, QMetaType::Int,  106,  107,  108,  110,  103,  104,
+    QMetaType::Void, 0x80000000 | 100, 0x80000000 | 100, 0x80000000 | 100, 0x80000000 | 100, QMetaType::Int, QMetaType::Int,  106,  107,  108,  112,  103,  104,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 115, 0x80000000 | 115,  114,  103,  104,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Bool, 0x80000000 | 135, 0x80000000 | 137, QMetaType::Int, QMetaType::Int,  136,  138,  115,  116,
-    QMetaType::Bool, QMetaType::VoidStar,  100,
-    QMetaType::Void, 0x80000000 | 141,  142,
+    QMetaType::Bool, 0x80000000 | 123, 0x80000000 | 125, QMetaType::Int, QMetaType::Int,  124,  126,  103,  104,
+    QMetaType::Bool, QMetaType::VoidStar,   95,
+    QMetaType::Void, 0x80000000 | 129,  130,
 
  // properties: name, type, flags
       46, QMetaType::Bool, 0x00095103,
@@ -442,35 +416,35 @@ static const uint qt_meta_data_VideoWidget[] = {
       66, QMetaType::QColor, 0x00095103,
       68, QMetaType::QString, 0x00095103,
       70, QMetaType::QImage, 0x00095103,
-     143, QMetaType::Bool, 0x00095003,
-     144, QMetaType::Int, 0x00095003,
-     145, QMetaType::QString, 0x00095003,
-     146, QMetaType::QColor, 0x00095003,
-     147, QMetaType::QImage, 0x00095003,
-     148, 0x80000000 | 82, 0x0009500b,
-     149, 0x80000000 | 85, 0x0009500b,
-     150, QMetaType::Bool, 0x00095003,
-     151, QMetaType::Int, 0x00095003,
-     152, QMetaType::QString, 0x00095003,
-     153, QMetaType::QColor, 0x00095003,
-     154, QMetaType::QImage, 0x00095003,
-     155, 0x80000000 | 82, 0x0009500b,
-     156, 0x80000000 | 85, 0x0009500b,
+     131, QMetaType::Bool, 0x00095003,
+     132, QMetaType::Int, 0x00095003,
+     133, QMetaType::QString, 0x00095003,
+     134, QMetaType::QColor, 0x00095003,
+     135, QMetaType::QImage, 0x00095003,
+     136, 0x80000000 | 82, 0x0009500b,
+     137, 0x80000000 | 85, 0x0009500b,
+     138, QMetaType::Bool, 0x00095003,
+     139, QMetaType::Int, 0x00095003,
+     140, QMetaType::QString, 0x00095003,
+     141, QMetaType::QColor, 0x00095003,
+     142, QMetaType::QImage, 0x00095003,
+     143, 0x80000000 | 82, 0x0009500b,
+     144, 0x80000000 | 85, 0x0009500b,
 
  // enums: name, flags, count, data
-      82, 0x0,    5,  717,
-      85, 0x0,    4,  727,
+      82, 0x0,    5,  677,
+      85, 0x0,    4,  687,
 
  // enum data: key, value
-     157, uint(VideoWidget::OSDFormat_Text),
-     158, uint(VideoWidget::OSDFormat_Date),
-     159, uint(VideoWidget::OSDFormat_Time),
-     160, uint(VideoWidget::OSDFormat_DateTime),
-     161, uint(VideoWidget::OSDFormat_Image),
-     162, uint(VideoWidget::OSDPosition_Left_Top),
-     163, uint(VideoWidget::OSDPosition_Left_Bottom),
-     164, uint(VideoWidget::OSDPosition_Right_Top),
-     165, uint(VideoWidget::OSDPosition_Right_Bottom),
+     145, uint(VideoWidget::OSDFormat_Text),
+     146, uint(VideoWidget::OSDFormat_Date),
+     147, uint(VideoWidget::OSDFormat_Time),
+     148, uint(VideoWidget::OSDFormat_DateTime),
+     149, uint(VideoWidget::OSDFormat_Image),
+     150, uint(VideoWidget::OSDPosition_Left_Top),
+     151, uint(VideoWidget::OSDPosition_Left_Bottom),
+     152, uint(VideoWidget::OSDPosition_Right_Top),
+     153, uint(VideoWidget::OSDPosition_Right_Bottom),
 
        0        // eod
 };
@@ -539,35 +513,28 @@ void VideoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 51: _t->setOSD2Image((*reinterpret_cast< const QImage(*)>(_a[1]))); break;
         case 52: _t->setOSD2Format((*reinterpret_cast< const OSDFormat(*)>(_a[1]))); break;
         case 53: _t->setOSD2Position((*reinterpret_cast< const OSDPosition(*)>(_a[1]))); break;
-        case 54: { int _r = _t->getHStreamCount();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 55: _t->pushHStreamInfo((*reinterpret_cast< MP_DATA_INFO*(*)>(_a[1]))); break;
-        case 56: { MP_DATA_INFO* _r = _t->getHStreamInfo();
-            if (_a[0]) *reinterpret_cast< MP_DATA_INFO**>(_a[0]) = std::move(_r); }  break;
-        case 57: _t->startVideoThread(); break;
-        case 58: { bool _r = _t->ish265IFrame((*reinterpret_cast< void*(*)>(_a[1])));
+        case 54: { bool _r = _t->ish265IFrame((*reinterpret_cast< void*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 59: _t->setVideoh264Data((*reinterpret_cast< void*(*)>(_a[1]))); break;
-        case 60: _t->RGB2Image((*reinterpret_cast< char*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< QImage*(*)>(_a[4]))); break;
-        case 61: { bool _r = _t->isIFrame((*reinterpret_cast< void*(*)>(_a[1])));
+        case 55: _t->setVideoh264Data((*reinterpret_cast< void*(*)>(_a[1]))); break;
+        case 56: { bool _r = _t->isIFrame((*reinterpret_cast< void*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 62: _t->setVideoYUVData((*reinterpret_cast< void*(*)>(_a[1]))); break;
-        case 63: { bool _r = _t->YV12ToBGR24_FFmpeg((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])));
+        case 57: _t->setVideoYUVData((*reinterpret_cast< void*(*)>(_a[1]))); break;
+        case 58: { bool _r = _t->YV12ToBGR24_FFmpeg((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 64: _t->Yuv420p2Rgb32((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< unsigned char*(*)>(_a[3])),(*reinterpret_cast< const BYTE*(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
-        case 65: _t->YUV420_2_RGB((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< unsigned char*(*)>(_a[3])),(*reinterpret_cast< unsigned char*(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
-        case 66: _t->getVideoResolution((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3]))); break;
-        case 67: _t->open(); break;
-        case 68: _t->pause(); break;
-        case 69: _t->next(); break;
-        case 70: _t->close(); break;
-        case 71: _t->restart(); break;
-        case 72: _t->clear(); break;
-        case 73: { bool _r = _t->vtInit((*reinterpret_cast< AVCodecID(*)>(_a[1])),(*reinterpret_cast< IVideoCall*(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])));
+        case 59: _t->Yuv420p2Rgb32((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< unsigned char*(*)>(_a[3])),(*reinterpret_cast< const BYTE*(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
+        case 60: _t->YUV420_2_RGB((*reinterpret_cast< unsigned char*(*)>(_a[1])),(*reinterpret_cast< unsigned char*(*)>(_a[2])),(*reinterpret_cast< unsigned char*(*)>(_a[3])),(*reinterpret_cast< unsigned char*(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6]))); break;
+        case 61: _t->getVideoResolution((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int*(*)>(_a[2])),(*reinterpret_cast< int*(*)>(_a[3]))); break;
+        case 62: _t->open(); break;
+        case 63: _t->pause(); break;
+        case 64: _t->next(); break;
+        case 65: _t->close(); break;
+        case 66: _t->restart(); break;
+        case 67: _t->clear(); break;
+        case 68: { bool _r = _t->vtInit((*reinterpret_cast< AVCodecID(*)>(_a[1])),(*reinterpret_cast< IVideoCall*(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 74: { bool _r = _t->initPacket((*reinterpret_cast< void*(*)>(_a[1])));
+        case 69: { bool _r = _t->initPacket((*reinterpret_cast< void*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 75: _t->patientFrame((*reinterpret_cast< AVFrame*(*)>(_a[1]))); break;
+        case 70: _t->patientFrame((*reinterpret_cast< AVFrame*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -722,13 +689,13 @@ int VideoWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 76)
+        if (_id < 71)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 76;
+        _id -= 71;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 76)
+        if (_id < 71)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 76;
+        _id -= 71;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
