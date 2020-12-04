@@ -41,9 +41,6 @@
     <Filter Include="WBSDK">
       <UniqueIdentifier>{7ce11bf7-5bfd-44e1-b244-a4851d4f0754}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ffmpeg">
-      <UniqueIdentifier>{91c1f321-dbab-4492-a759-e5f1a1d24807}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,15 +88,6 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_QServerTreeWidget.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ffmpeg\ffmpeg.cpp">
-      <Filter>ffmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ffmpeg.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ffmpeg.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="QToolsSplit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -117,15 +105,6 @@
     </ClCompile>
     <ClCompile Include="FrameStreamManager.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FDecodeThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_FDecodeThread.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_FDecodeThread.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="XAudioThread.cpp">
       <Filter>Source Files</Filter>
@@ -166,6 +145,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_GLYuvWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QLogonDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QServerTreeWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AHMonitor.h">
@@ -189,16 +174,10 @@
     <CustomBuild Include="QServerTreeWidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\ffmpeg\ffmpeg.h">
-      <Filter>ffmpeg</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resource.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QToolsSplit.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="FDecodeThread.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="XVideoWidget.h">
@@ -226,9 +205,6 @@
     </ClInclude>
     <ClInclude Include="ServerManager.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ffmpeg\ffmpeghead.h">
-      <Filter>ffmpeg</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>Header Files</Filter>
