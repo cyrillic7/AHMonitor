@@ -52,7 +52,8 @@ void GLYuvWidget::Repaint(AVFrame * frame)
 
 	mux.unlock();
 	av_frame_free(&frame);
-	update();
+	//update();
+	QMetaObject::invokeMethod(this, "update", Qt::QueuedConnection);
 }
 
 void GLYuvWidget::slotShowYuv(uchar *ptr, uint width, uint height)

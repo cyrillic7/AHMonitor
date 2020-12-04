@@ -59,6 +59,8 @@ void XDecodeThread::Push(AVPacket *pkt)
 			packs.push_back(pkt);
 		//	mux.unlock();
 		//	break;
+			//mux.unlock();
+			//break;
 		}
 		mux.unlock();
 		msleep(1);

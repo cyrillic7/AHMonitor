@@ -12,7 +12,7 @@
 #include "QServerTreeWidget.h"
 #include "QLogonDialog.h"
 #include "QToolsSplit.h"
-
+#include "QSDisConWidget.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -25,6 +25,7 @@ public:
 	QLogonDialog* pLogonDialog_;
 	QServerTreeWidget* pTreeWidget_;
 	VideoPanel* pVidoePanel_Widget_;
+	QSDisConWidget* pSDisConWidget_;
 private:
 	Ui::AHMonitorClass ui;
 
@@ -55,6 +56,8 @@ private:
 public:
 	void updateTreeWidget();
 
+	void updateDisConWidget();
+
 	void updateCamOnLine(int nSession, bool bOnline);
 
 	void showh264toImage(unsigned char* pData, int iLen,int nResolution);
@@ -74,4 +77,5 @@ private:
 public slots:
 	void onServerConnect();
 	void onServerDisConnect();
+	void serverDisCon(const QString & servername);
 };

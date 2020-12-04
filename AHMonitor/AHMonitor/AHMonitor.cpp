@@ -169,10 +169,15 @@ AHMonitor::AHMonitor(QWidget *parent)
 	: QMainWindow(parent)
 {
 	//ui.setupUi(this);
+
+	pSDisConWidget_ = new QSDisConWidget(this);
+	pSDisConWidget_->hide();
+	connect(pSDisConWidget_, SIGNAL(serverConnect()), this, SLOT(onServerConnect()));
+	connect(pSDisConWidget_, SIGNAL(serverDisConnect(const QString&)), this, SLOT(serverDisCon(const QString&)));
+
 	pLogonDialog_ = new QLogonDialog(this);
 	pLogonDialog_->move((qApp->desktop()->availableGeometry().width() - width()) / 2 + qApp->desktop()->availableGeometry().x(),
 		(qApp->desktop()->availableGeometry().height() - height()) / 2 + qApp->desktop()->availableGeometry().y());
-
 
 	pVidoePanel_Widget_ = new VideoPanel(this);
 	pToolsSplit_ = new QToolsSplit(this);
@@ -228,6 +233,20 @@ void AHMonitor::updateTreeWidget()
 	pTreeWidget_->updateServerTreeItem();
 }
 
+void AHMonitor::updateDisConWidget()
+{
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		QString strServerName;
+		char *pTest = pServerNode->getCamServerInfo()->szCamServerName;
+		strServerName = QString::fromLocal8Bit(pTest);
+
+		pSDisConWidget_->additem(strServerName);
+	}
+}
+
 void AHMonitor::updateCamOnLine(int nSession, bool bOnline)
 {
 	pTreeWidget_->updateCamLine(nSession, bOnline);
@@ -271,25 +290,46 @@ void AHMonitor::onServerConnect()
 {
 	if (pLogonDialog_->exec() == QDialog::Accepted)
 	{
+		updateDisConWidget();
 		//updateTreeWidget();
+		/*ServerManager* pServerMng = ServerManager::getInstance();
+		for (int i = 0; i < pServerMng->getServerCount(); i++)
+		{
+			CServerNode* pServerNode = pServerMng->getServerNode(i);
+			QString strServerName(pServerNode->getCamServerInfo()->szCamServerName);
+			
+			pSDisConWidget_->additem(strServerName);
+		}*/
 	}
 }
 
+
 void AHMonitor::onServerDisConnect()
 {
-	ServerManager* pServerMng = ServerManager::getInstance();
-	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	//pSDisConWidget_->show();
+	if (pSDisConWidget_->exec() == QDialog::Accepted)
 	{
-		/*CServerNode* pServerNode = pServerMng->getServerNode(i);
-		int ret = pServerNode->m_pCameraMngr->AssignPlayer(0, 32992);
-
-		CPlaybackEngine* player1 = CPlaybackEngine::getInstance(0);
-		player1 = CPlaybackEngine::getInstance(0);
-		player1->SetMode(MP_MODE_SERV_PROXY);
-		player1->SetCallbackFunc(UIEventCallBackHandler, pVidoePanel_Widget_->getVideoWidget());
-		player1->Load();
-		player1->Start();*/
+		//updateTreeWidget();
 	}
+	//ServerManager* pServerMng = ServerManager::getInstance();
+	//for (int i = 0; i < pServerMng->getServerCount(); i++)
+	//{
+	//	/*CServerNode* pServerNode = pServerMng->getServerNode(i);
+	//	int ret = pServerNode->m_pCameraMngr->AssignPlayer(0, 32992);
+
+	//	CPlaybackEngine* player1 = CPlaybackEngine::getInstance(0);
+	//	player1 = CPlaybackEngine::getInstance(0);
+	//	player1->SetMode(MP_MODE_SERV_PROXY);
+	//	player1->SetCallbackFunc(UIEventCallBackHandler, pVidoePanel_Widget_->getVideoWidget());
+	//	player1->Load();
+	//	player1->Start();*/
+	//}
+}
+
+void AHMonitor::serverDisCon(const QString & servername)
+{
+	QMessageBox::information(NULL, "Error", servername,
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 }
 
 bool AHMonitor::GetVideoFrameResolution(void *pParam, int *width, int *height)
