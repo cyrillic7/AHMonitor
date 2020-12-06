@@ -126,30 +126,22 @@ bool XDecode::init(AVCodecID codeID)
 		codec->pix_fmt = AV_PIX_FMT_YUV420P;
 		codec->color_range = AVCOL_RANGE_MPEG;
 		codec->max_b_frames = 0;
-		codec->thread_count = 8;
-		//八线程解码
-		//codec->codec_id = AV_CODEC_ID_H265;
-		//codec->flags |= AV_CODEC_FLAG_LOW_DELAY;
-		//codec->time_base.num = 1;
-		//codec->frame_number = 1; //每包一个视频帧  
-		//codec->codec_type = AVMEDIA_TYPE_VIDEO;
-		//codec->bit_rate = 400000;
-		////_pCodecContext->bit_rate_tolerance = 4000000;
-		//codec->time_base.den = 25;//帧率  
-		//								   //_pCodecContext->time_base = {1,25};
-		//codec->width = 0;//视频宽  
-		//codec->height = 0;//视频高 
-		//codec->pix_fmt = AV_PIX_FMT_YUV420P;
-		//codec->color_range = AVCOL_RANGE_MPEG;
-		//codec->max_b_frames = 0;
+		codec->thread_count = 8;		//八线程解码
+		codec->lowres = vcodec->max_lowres;
+		codec->flags2 |= AV_CODEC_FLAG2_FAST;
+		codec->sample_aspect_ratio.num = 4;
+		codec->sample_aspect_ratio.den = 3;
 
-		//codec->thread_count = 8;
-		//codec->lowres = vcodec->max_lowres;
-		//codec->flags2 |= AV_CODEC_FLAG2_FAST;
-		/*codec->sample_aspect_ratio.num = 4;
-		codec->sample_aspect_ratio.den = 3;*/
+		AVDictionary *param = 0;
+		av_dict_set(&param, "fflags", "nobuffer", 0);
+		av_dict_set(&param, "preset", "ultrafast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
+		av_dict_set(&param, "tune", "zerolatency", 0);
+		av_dict_set(&param, "probesize", "4096", 0);
+		av_dict_set(&param, "buffer_size", "8192000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
+		av_dict_set(&param, "max_delay", "300", 0);
+														 //av_dict_set(&param, "max_delay", "5000000", 0);
 		///打开解码器上下文
-		int re = avcodec_open2(codec, vcodec, 0);
+		int re = avcodec_open2(codec, vcodec, &param);
 		if (re != 0)
 		{
 			avcodec_free_context(&codec);

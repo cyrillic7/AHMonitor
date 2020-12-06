@@ -17,9 +17,12 @@ GLYuvWidget::~GLYuvWidget()
 {
 	makeCurrent();
 	vbo.destroy();
-	textureY->destroy();
-	textureU->destroy();
-	textureV->destroy();
+	if (textureY != NULL)
+	{
+		textureY->destroy();
+		textureU->destroy();
+		textureV->destroy();
+	}
 	doneCurrent();
 }
 

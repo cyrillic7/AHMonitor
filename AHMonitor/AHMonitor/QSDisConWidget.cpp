@@ -27,7 +27,7 @@ QSDisConWidget::QSDisConWidget(QWidget *parent) :QDialog(parent)
 
 	pVLayout->addLayout(pHLayout);
 
-	this->resize(QSize(500,500));
+	this->resize(QSize(360,360));
 	this->setLayout(pVLayout);
 }
 
@@ -39,13 +39,28 @@ QSDisConWidget::~QSDisConWidget()
 void QSDisConWidget::serverDisConnect()
 {
 	QListWidgetItem* item = pListWidget_->currentItem();
-
+	currentRow_ = pListWidget_->currentRow();
 	emit serverDisConnect(item->text());
 }
 
 void QSDisConWidget::additem(QString strItem)
 {
 	pListWidget_->addItem(strItem);
+}
+
+void QSDisConWidget::removeItem(QString strItem)
+{
+	if (currentRow_ == -1)
+	{
+		return;
+	}
+
+	QListWidgetItem * pitem;
+
+	pitem = pListWidget_->takeItem(currentRow_);
+	pListWidget_->removeItemWidget(pitem);
+
+	delete pitem;
 }
 
 void QSDisConWidget::onCancel()

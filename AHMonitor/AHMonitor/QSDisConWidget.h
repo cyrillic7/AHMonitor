@@ -14,11 +14,13 @@ public:
 	virtual ~QSDisConWidget();
 
 	void additem(QString strItem);
+	void removeItem(QString strItem);
 private:
 	QListWidget* pListWidget_;
 	QPushButton* pBtDisCon_;
 	QPushButton* pBtCancel_;
 	QPushButton* pBtNewCon_;
+	int currentRow_ = -1;
 
 signals:
 	void serverConnect();

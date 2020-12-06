@@ -60,15 +60,6 @@ public:
 
 	void updateCamOnLine(int nSession, bool bOnline);
 
-	void showh264toImage(unsigned char* pData, int iLen,int nResolution);
-
-	bool GetVideoFrameResolution(void *pParam, int *width, int *height);
-
-	void Yuv420p2Rgb32(unsigned char * pBufy, unsigned char * pBufu, unsigned char * pBufv, const BYTE * rgbBuffer_out, int width, int height);
-	void YUV420_2_RGB(unsigned char * pBufy, unsigned char * pBufu, unsigned char * pBufv, unsigned char * pRGB, int width, int height);
-	bool yuv420ToRgb(unsigned char * pBufy, unsigned char * pBufu, unsigned char * pBufv, int w, int h, char * rgb);
-
-	void RGB2Image(char * srcBuf, int w, int h, QImage * pDistImage);
 private:
 	void createActions();
 	void createMenus();
