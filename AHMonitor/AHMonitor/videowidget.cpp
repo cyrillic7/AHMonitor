@@ -14,6 +14,7 @@
 #include "qdebug.h"
 #include <QDateTime>
 #include "XDecode.h"
+#include <QApplication>
 extern "C"
 {
 #include "libswscale/swscale.h"
@@ -266,7 +267,7 @@ void VideoWidget::initFlowPanel()
 
 	//有多种办法来设置图片,qt内置的图标+自定义的图标+图形字体
 	//既可以设置图标形式,也可以直接图形字体设置文本
-#if 0
+#if 1
 	QList<QIcon> icons;
 	icons << QApplication::style()->standardIcon(QStyle::SP_ComputerIcon);
 	icons << QApplication::style()->standardIcon(QStyle::SP_FileIcon);
@@ -311,7 +312,7 @@ void VideoWidget::initFlowPanel()
 		//设置焦点策略为无焦点,避免单击后焦点跑到按钮上
 		btn->setFocusPolicy(Qt::NoFocus);
 
-#if 0
+#if 1
 		//设置图标大小和图标
 		btn->setIconSize(QSize(16, 16));
 		btn->setIcon(icons.at(i));
