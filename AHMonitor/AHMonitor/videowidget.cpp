@@ -1498,7 +1498,7 @@ bool VideoWidget::initPacket(void * pParam)
 			//packet->pos = 0;
 			//packet->dts = 0;
 			//packet->pts = 0;
-
+			cout << "video Packet len: " << pMPData->nLen << endl;
 			vt->Push(packet);
 		}
 		else if (pMPData->type == MP_DATA_G723)   //音频数据，对于新设备事实上是AMR_NB格式

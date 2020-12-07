@@ -52,7 +52,7 @@ void XDecodeThread::Push(AVPacket *pkt)
 	//×èÈû
 	//while (!isExit)
 	{
-		cout << "packs.size:" << packs.size() << endl;
+		//cout << "packs.size:" << packs.size() << endl;
 		mux.lock();
 		//if (packs.size() < maxList)
 		{
