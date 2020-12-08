@@ -22,6 +22,29 @@ void ServerManager::addServerNode(int ServerId, CCameraMngr * pCameraMngr, CAM_S
 	m_CServerCount = m_pVServerNode.size();
 }
 
+void ServerManager::removeServerNode(int ServerId)
+{
+	//ServerManager* pServerMng = ServerManager::getInstance();
+	//for (int i = 0; i < pServerMng->getServerCount(); i++)
+	//{
+	//	CServerNode* pServerNode = pServerMng->getServerNode(i);
+	//	if (pServerMng == NULL)
+	//		continue;
+
+	//	
+	//}
+
+	std::vector<CServerNode*>::iterator iter = m_pVServerNode.begin();
+	for (iter;iter!= m_pVServerNode.end();iter++)
+	{
+		if ((*iter)->getCamerServerID() == ServerId)
+		{
+			m_pVServerNode.erase(iter);
+			return;
+		}
+	}
+}
+
 void ServerManager::addServerCamGroup(int ServerId, CAM_GROUP_INFO * pCamGroup)
 {
 	ServerManager* pServerMng = ServerManager::getInstance();
@@ -54,6 +77,24 @@ void ServerManager::addServerCamTerminal(int ServerId, CAM_INFO * pCamTerminal)
 	}
 }
 
+int ServerManager::getServerId(QString serverName)
+{
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerMng == NULL)
+			continue;
+
+		if (pServerNode->getServerName() == serverName)
+		{
+			return pServerNode->getCamerServerID();
+		}
+
+	}
+	return -1;
+}
+
 CServerNode * ServerManager::getServerNode(int index)
 {
 	return m_pVServerNode[index];
@@ -74,6 +115,16 @@ CServerNode::~CServerNode()
 	{
 		delete m_pCamServerInfo;
 	}
+}
+
+int CServerNode::DisConnectServer(int serverID)
+{
+	if (serverID != m_CamServerID)
+	{
+		return -1;
+	}
+
+	return m_pCameraMngr->DisconnectServer(serverID);
 }
 
 void CServerNode::setCameraServerInfo(CAM_SERVER_INFO * pServerInfo)
@@ -155,4 +206,11 @@ int CServerNode::getSessionID(const QString & szLocation)
 		}
 	}
 	return -1;
+}
+
+QString CServerNode::getServerName()
+{
+	char *pServer = m_pCamServerInfo->szCamServerName;
+	QString strServerName = QString::fromLocal8Bit(pServer);
+	return strServerName;
 }

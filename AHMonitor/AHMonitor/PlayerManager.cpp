@@ -5,7 +5,7 @@ CPlayerManager* CPlayerManager::m_Instance = NULL;
 CPlayerManager::CPlayerManager()
 {
 	m_Instance = this;
-	playerIndex_ = 0;
+	playerIndex_ = -1;
 	pVideoWidget_ = NULL;
 }
 
@@ -14,22 +14,26 @@ CPlayerManager::~CPlayerManager()
 {
 }
 
-int CPlayerManager::addPlayerEngine(int playerIndex, int nsession)
+int CPlayerManager::addPlayerEngine(/*int playerIndex, */int nsession)
 {
-	if (playerIndex_ > 0)
+	/*if (playerIndex_ > 0)
 	{
 		if (CPlaybackEngine::getInstance(playerIndex - 1)->GetCameraSession() == nsession)
 		{
 			return -1;
 		}
 	}
+	playerIndex_++;*/
 	playerIndex_++;
+	if (CPlaybackEngine::getInstance(playerIndex_)->GetCameraSession() == nsession)
+	{
+		return -1;
+	}
+	CPlaybackEngine* player = CPlaybackEngine::getInstance(playerIndex_);
 
-	CPlaybackEngine* player = CPlaybackEngine::getInstance(playerIndex);
+	insertPlayerEngine(playerIndex_, player);
 
-	insertPlayerEngine(playerIndex, player);
-
-	return 0;
+	return playerIndex_;
 }
 
 void CPlayerManager::insertPlayerEngine(int EngineIndex, CPlaybackEngine * playerEngine)

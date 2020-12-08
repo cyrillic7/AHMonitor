@@ -21,7 +21,7 @@ public:
 
 	//打开解码器,不管成功与否都释放para空间
 	virtual bool Open(AVCodecParameters *para);
-	virtual	bool init(AVCodecID codeID);
+	virtual	bool init(AVCodecID codeID,int sampleRate, int channels);
 
 	//发送到解码线程，不管成功与否都释放pkt空间（对象和媒体内容）
 	virtual bool Send(AVPacket *pkt);

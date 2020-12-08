@@ -23,6 +23,8 @@ protected:
 	int m_CamTerminalCount;
 	std::vector<CAM_INFO*> m_pVCamTerminal;
 public:
+	/*int ReConnectServer(int serverID);*/
+	int DisConnectServer(int serverID);
 	int getCamerServerID() { return m_CamServerID; }
 
 	void setCameraServerInfo(CAM_SERVER_INFO* pServerInfo);
@@ -39,6 +41,8 @@ public:
 	void insertCamTerminal(CAM_INFO* pCamTerminal);
 
 	int getSessionID(const QString& szLocation);
+
+	QString getServerName();
 };
 
 class ServerManager
@@ -54,12 +58,16 @@ public:
 public:
 	void addServerNode(int ServerId, CCameraMngr* pCameraMngr, CAM_SERVER_INFO* pCamServerInfo);
 
+	void removeServerNode(int ServerId);
+
 	void addServerCamGroup(int ServerId, CAM_GROUP_INFO* pCamGroup);
 
 	void addServerCamTerminal(int ServerId, CAM_INFO* pCamTerminal);
 
+	int getServerId(QString serverName);
 	int getServerCount() { return m_CServerCount; }
 	CServerNode* getServerNode(int index);
+	//CServerNode* getServerNode(int serverId);
 
 private:
 	static ServerManager *m_Instance;

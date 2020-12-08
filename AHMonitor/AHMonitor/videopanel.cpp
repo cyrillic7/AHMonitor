@@ -21,15 +21,21 @@ VideoPanel::VideoPanel(QWidget *parent) : QWidget(parent)
 bool VideoPanel::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
-        QLabel *widget = (QLabel *) watched;
+		VideoWidget *widget = (VideoWidget *) watched;
         if (!videoMax) {
             videoMax = true;
-            hide_video_all();
+           /* hide_video_all();
             gridLayout->addWidget(widget, 0, 0);
-            widget->setVisible(true);
+            widget->setVisible(true);*/
+			widget->setFullScreen(true);
+			/*this->setWindowFlags(Qt::Window);
+			this->showFullScreen();*/
         } else {
+			/*this->setWindowFlags(Qt::SubWindow);
+			this->showNormal();*/
+			widget->setFullScreen(false);
             videoMax = false;
-            show_video_all();
+            //show_video_all();
         }
 
         widget->setFocus();
@@ -78,12 +84,26 @@ VideoWidget * VideoPanel::getVideoWidget(int nSession)
 	{
 		if (widgets[i]->getSession() == nSession)
 		{
+
 			return widgets[i];
 		}
 	}
 
 	widgets[currentVideoIndex_]->setSession(nSession);
 	return widgets[currentVideoIndex_++];
+}
+
+void VideoPanel::CloseAllVideo()
+{
+	for (int i = 0; i < videoCount; i++)
+	{
+		if (widgets[i]->getSession() != -1)
+		{
+			widgets[i]->setSession(-1);
+			widgets[i]->clear();
+		}
+	}
+	currentVideoIndex_ = 0;
 }
 
 void VideoPanel::setVideoOffLine(int nSession)
@@ -121,7 +141,7 @@ void VideoPanel::initForm()
     this->setStyleSheet(qss.join(""));
 
     videoMax = false;
-    videoCount = 1;
+    videoCount = 64;
     videoType = "1";
 
     for (int i = 0; i < videoCount; i++) {

@@ -269,7 +269,7 @@ void VideoWidget::initFlowPanel()
 	//既可以设置图标形式,也可以直接图形字体设置文本
 #if 1
 	QList<QIcon> icons;
-	icons << QApplication::style()->standardIcon(QStyle::SP_ComputerIcon);
+	icons << QApplication::style()->standardIcon(QStyle::SP_MediaVolume);
 	icons << QApplication::style()->standardIcon(QStyle::SP_FileIcon);
 	icons << QApplication::style()->standardIcon(QStyle::SP_DirIcon);
 	icons << QApplication::style()->standardIcon(QStyle::SP_DialogOkButton);
@@ -556,6 +556,20 @@ void VideoWidget::drawOSD(QPainter *painter,
 	}
 
 	painter->restore();
+}
+
+void VideoWidget::setFullScreen(bool bScreen)
+{
+	if (bScreen == true)
+	{
+		this->setWindowFlags(Qt::Window);
+		this->showFullScreen();
+	}
+	else
+	{
+		this->setWindowFlags(Qt::SubWindow);
+		this->showNormal();
+	}
 }
 
 QImage VideoWidget::getImage() const
@@ -1470,16 +1484,64 @@ bool VideoWidget::vtInit(AVCodecID codeID, IVideoCall * call, int width, int hei
 	return true;
 }
 
+bool VideoWidget::atInit(AVCodecID codeID, int fomat, int sampleRate, int channels)
+{
+	if (isAInit_ == true)
+	{
+		return true;
+	}
+	if (at->init(codeID, fomat, sampleRate, channels) == false)
+	{
+		return false;
+	}
+
+	isAInit_ = true;
+	return true;
+}
+
 bool VideoWidget::initPacket(void * pParam)
 {
 	mutex.lock();
 	{
-		MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pParam;
-		if (!pMPData)
+		if (_nSession == -1)
 		{
 			mutex.unlock();
 			return false;
 		}
+		MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pParam;
+		//if (!pMPData)
+		//{
+		//	mutex.unlock();
+		//	return false;
+		//}
+		//int timeStamp = GetFrameDataTimestamp(pParam);
+		////音视频同步
+		//if (vt && at)
+		//{
+		//	//pts = at->pts;
+		//	vt->synpts = at->pts;
+		//}
+
+		AVPacket *packet = av_packet_alloc();
+		av_init_packet(packet);
+		av_new_packet(packet, pMPData->nLen);
+
+		memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
+		packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
+
+		if (pMPData->type == MP_DATA_G723)
+		{
+			int timeStamp = GetFrameDataTimestamp(pParam);
+			if (vt && at)
+			{
+				packet->dts = timeStamp;
+				packet->pts = timeStamp;
+				//pts = at->pts;
+				vt->synpts = at->pts;
+			}
+		}
+
+
 		if (pMPData->type == MP_DATA_H264)   //视频数据，也可能是h265，
 		{
 			int videoWidth;                 //视频宽度
@@ -1488,18 +1550,16 @@ bool VideoWidget::initPacket(void * pParam)
 			getVideoResolution(nResolution, &videoWidth, &videoHeight);
 			vtInit(AV_CODEC_ID_H265, pXvideoWidget_, videoWidth, videoHeight);
 
-			AVPacket *packet = av_packet_alloc();
-			//AVPacket packet = { 0 };
-			av_init_packet(packet);
-			av_new_packet(packet, pMPData->nLen);
+// 			AVPacket *packet = av_packet_alloc();
+// 			//AVPacket packet = { 0 };
+// 			av_init_packet(packet);
+// 			av_new_packet(packet, pMPData->nLen);
 			//packet->data = (uint8_t*)pMPData->pData;	//这里填入一个指向完整H264数据帧的指针 
-			memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
-			packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
-			packet->stream_index = AVMEDIA_TYPE_VIDEO;
-			//packet->pos = 0;
-			//packet->dts = 0;
-			//packet->pts = 0;
-			cout << "video Packet len: " << pMPData->nLen << endl;
+// 			memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
+// 			packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
+ 			packet->stream_index = AVMEDIA_TYPE_VIDEO;
+
+			//cout << "video Packet len: " << pMPData->nLen << endl;
 			vt->Push(packet);
 		}
 		else if (pMPData->type == MP_DATA_G723)   //音频数据，对于新设备事实上是AMR_NB格式
@@ -1508,12 +1568,29 @@ bool VideoWidget::initPacket(void * pParam)
 			{
 			case 1:
 			{
+				int timeStamp = GetFrameDataTimestamp(pParam);
+				cout << "timeStamp : " << timeStamp << endl;
 
 			}
 			break;
 			case 2:
 			{
+				int timeStamp = GetFrameDataTimestamp(pParam);
+				//cout << "audio size:" << pMPData->nLen << endl;
+				cout << "timeStamp : " << timeStamp << endl;
 
+				atInit(AV_CODEC_ID_AAC, AV_SAMPLE_FMT_FLT, 12200, 1);
+// 				AVPacket *packet = av_packet_alloc();
+// 				av_init_packet(packet);
+// 				av_new_packet(packet, pMPData->nLen);
+// 
+// 				memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
+// 				packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
+				packet->stream_index = AVMEDIA_TYPE_AUDIO;
+				//packet->dts = timeStamp;
+				//packet->pts = timeStamp;
+
+				at->Push(packet);
 			}
 			break;
 			}
@@ -1521,6 +1598,18 @@ bool VideoWidget::initPacket(void * pParam)
 	}
 	mutex.unlock();
 	return true;
+}
+
+int VideoWidget::GetFrameDataTimestamp(void *pParam)
+{
+	MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
+
+	int hour1 = (pData->nTimestamp2 & 0x3f);
+	int min1 = (pData->nTimestamp >> 24) & 0x3f;
+	int second1 = ((pData->nTimestamp & 0xff0000) >> 16) & 0x3f;
+	int millsec1 = (pData->nTimestamp & 0x3ff);
+
+	return hour1 * 60 * 60 * 1000 + min1 * 60 * 1000 + second1 * 1000 + millsec1;
 }
 
 void VideoWidget::patientFrame(AVFrame * frame)

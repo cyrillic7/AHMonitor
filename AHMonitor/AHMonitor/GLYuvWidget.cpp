@@ -59,6 +59,25 @@ void GLYuvWidget::Repaint(AVFrame * frame)
 	QMetaObject::invokeMethod(this, "update", Qt::QueuedConnection);
 }
 
+void GLYuvWidget::ResetGL()
+{
+	yuvPtr = NULL;
+	QMetaObject::invokeMethod(this, "update", Qt::QueuedConnection);
+}
+
+void GLYuvWidget::resizeGL(int width, int height)
+{
+	mux.lock();
+	qDebug() << "resizeGL " << width << ":" << height;
+	glViewport(0, 0, (GLint)width, (GLint)height);    // 重置当前的视口
+	glMatrixMode(GL_PROJECTION);                // 选择投影矩阵
+	glLoadIdentity();                            // 重置投影矩阵
+												 //gluPerspective(45.0,(GLfloat)width/(GLfloat)height,0.1,100.0); // 建立透视投影矩阵
+	glMatrixMode(GL_MODELVIEW); // 选择模型观察矩阵
+	glLoadIdentity();            // 重置模型观察矩阵
+	mux.unlock();
+}
+
 void GLYuvWidget::slotShowYuv(uchar *ptr, uint width, uint height)
 {
 	yuvPtr = ptr;
@@ -86,6 +105,7 @@ void GLYuvWidget::initializeGL()
 		1.0f,1.0f,
 	};
 
+	vbo.destroy();
 
 	vbo.create();
 	vbo.bind();
@@ -152,6 +172,10 @@ void GLYuvWidget::initializeGL()
 
 void GLYuvWidget::paintGL()
 {
+	if (!yuvPtr)
+	{
+		return;
+	}
 	mux.lock();
 	//    QMatrix4x4 m;
 	//    m.perspective(60.0f, 4.0f/3.0f, 0.1f, 100.0f );//透视矩阵随距离的变化，图形跟着变化。屏幕平面中心就是视点（摄像头）,需要将图形移向屏幕里面一定距离。

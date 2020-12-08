@@ -47,7 +47,7 @@ bool XVideoThread::init(AVCodecID codeID, IVideoCall *call, int width, int heigh
 	}
 	vmux.unlock();
 	int re = true;
-	if (!decode->init(codeID))
+	if (!decode->init(codeID,0,0))
 	{
 		cout << "video XDecode init failed!" << endl;
 		re = false;

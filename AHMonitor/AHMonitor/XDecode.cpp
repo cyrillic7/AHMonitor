@@ -93,7 +93,7 @@ bool XDecode::Open(AVCodecParameters *para)
 	cout << " avcodec_open2 success!" << endl;
 	return true;
 }
-bool XDecode::init(AVCodecID codeID)
+bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 {
 
 	switch (codeID)
@@ -140,6 +140,59 @@ bool XDecode::init(AVCodecID codeID)
 		av_dict_set(&param, "buffer_size", "8192000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
 		av_dict_set(&param, "max_delay", "300", 0);
 														 //av_dict_set(&param, "max_delay", "5000000", 0);
+		///打开解码器上下文
+		int re = avcodec_open2(codec, vcodec, &param);
+		if (re != 0)
+		{
+			avcodec_free_context(&codec);
+			mux.unlock();
+			char buf[1024] = { 0 };
+			av_strerror(re, buf, sizeof(buf) - 1);
+			cout << "avcodec_open2  failed! :" << buf << endl;
+			return false;
+		}
+		mux.unlock();
+		cout << " avcodec_open2 success!" << endl;
+	}
+	break;
+	case AV_CODEC_ID_AAC:
+	{
+		AVCodec *vcodec = avcodec_find_decoder(codeID);
+		if (!vcodec)
+		{
+			//avcodec_parameters_free(&para);
+			cout << "can't find the codec id " << codeID << endl;
+			return false;
+		}
+		cout << "find the AVCodec " << codeID << endl;
+
+		mux.lock();
+		codec = avcodec_alloc_context3(NULL);
+
+		codec->codec_id = AV_CODEC_ID_AAC;
+		codec->flags |= AV_CODEC_FLAG_LOW_DELAY;
+		codec->time_base.num = 1;
+		codec->time_base.den = 25;//帧率
+		codec->frame_number = 1; //每包一个视频帧  
+		codec->codec_type = AVMEDIA_TYPE_AUDIO;
+		codec->bit_rate = 400000;
+
+		codec->thread_count = 8;		//八线程解码
+		codec->lowres = vcodec->max_lowres;
+		codec->flags2 |= AV_CODEC_FLAG2_FAST;
+		codec->sample_aspect_ratio.num = 4;
+		codec->sample_aspect_ratio.den = 3;
+		codec->sample_rate = sampleRate;
+		codec->channels = channels;
+
+		AVDictionary *param = 0;
+		av_dict_set(&param, "fflags", "nobuffer", 0);
+		av_dict_set(&param, "preset", "ultrafast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
+		av_dict_set(&param, "tune", "zerolatency", 0);
+		av_dict_set(&param, "probesize", "4096", 0);
+		av_dict_set(&param, "buffer_size", "8192000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
+		av_dict_set(&param, "max_delay", "300", 0);
+		//av_dict_set(&param, "max_delay", "5000000", 0);
 		///打开解码器上下文
 		int re = avcodec_open2(codec, vcodec, &param);
 		if (re != 0)

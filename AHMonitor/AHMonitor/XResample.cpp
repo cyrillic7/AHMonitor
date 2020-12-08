@@ -50,6 +50,38 @@ bool XResample::Open(AVCodecParameters *para,bool isClearPara)
 	return true;
 }
 
+bool XResample::Open(int fomat, int sampleRate, int channels, bool isClearPara)
+{
+	mux.lock();
+	//音频重采样 上下文初始化
+	//if(!actx)
+	//	actx = swr_alloc();
+
+	//如果actx为NULL会分配空间
+	actx = swr_alloc_set_opts(actx,
+		av_get_default_channel_layout(2),	//输出格式
+		(AVSampleFormat)outFormat,			//输出样本格式 1 AV_SAMPLE_FMT_S16
+		sampleRate,					//输出采样率
+		av_get_default_channel_layout(channels),//输入格式
+		(AVSampleFormat)fomat,
+		sampleRate,
+		0, 0
+	);
+	/*if (isClearPara)
+		avcodec_parameters_free(&para);*/
+	int re = swr_init(actx);
+	mux.unlock();
+	if (re != 0)
+	{
+		char buf[1024] = { 0 };
+		av_strerror(re, buf, sizeof(buf) - 1);
+		cout << "swr_init  failed! :" << buf << endl;
+		return false;
+	}
+	//unsigned char *pcm = NULL;
+	return true;
+}
+
 //返回重采样后大小,不管成功与否都释放indata空间
 int XResample::Resample(AVFrame *indata, unsigned char *d)
 {

@@ -56,6 +56,8 @@ public:
 
 	VideoWidget* getVideoWidget(int nSession);
 
+	void CloseAllVideo();
+
 	void setVideoOffLine(int nSession);
 
 private slots:

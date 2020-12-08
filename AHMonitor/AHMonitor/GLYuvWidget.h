@@ -23,13 +23,16 @@ public:
 
 	//不管成功与否都释放frame空间
 	virtual void Repaint(AVFrame *frame);
-	public slots:
+
+	void ResetGL();
+public slots:
 	void slotShowYuv(uchar *ptr, uint width, uint height); //显示一帧Yuv图像
 
 protected:
 	void initializeGL() Q_DECL_OVERRIDE;
 	void paintGL() Q_DECL_OVERRIDE;
-
+	// 窗口尺寸变化
+	void resizeGL(int width, int height) Q_DECL_OVERRIDE;
 private:
 	std::mutex mux;
 	QOpenGLShaderProgram *program;

@@ -191,7 +191,8 @@ void AHMonitor::onServerConnect()
 	if (pLogonDialog_->exec() == QDialog::Accepted)
 	{
 		updateDisConWidget();
-		updateDisConWidget();
+		//updateDisConWidget();
+		pTreeWidget_->updateServerTreeItem();
 	}
 }
 
@@ -215,15 +216,19 @@ void AHMonitor::serverDisCon(const QString & servername)
 	{
 		CServerNode* pServerNode = pServerMng->getServerNode(i);
 		QString strServerName;
-		char *pTest = pServerNode->getCamServerInfo()->szCamServerName;
-		strServerName = QString::fromLocal8Bit(pTest);
+		char *pServer = pServerNode->getCamServerInfo()->szCamServerName;
+		strServerName = QString::fromLocal8Bit(pServer);
 		if (servername == strServerName)
 		{
 			//¶Ï¿ªÁ¬½Ó
-
-
+			int serverId = pServerNode->getCamerServerID();
+			pVidoePanel_Widget_->CloseAllVideo();
+			pTreeWidget_->deleteServerItem(servername);
+			pServerNode->DisConnectServer(serverId);
+			pServerMng->removeServerNode(serverId);
 
 			pSDisConWidget_->removeItem(strServerName);
+			CPlayerManager::getInstance()->setPlayerIndex(0);
 			return;
 		}
 

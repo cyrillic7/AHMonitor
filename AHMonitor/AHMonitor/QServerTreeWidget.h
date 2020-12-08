@@ -18,6 +18,8 @@ public:
 
 	void updateCamLine(int nSession,bool bOnline);
 
+	void deleteServerItem(QString server);
+
 public slots:
 	void TerminalItemDoubleClicked(QTreeWidgetItem* WidgetItem, int column);
 };

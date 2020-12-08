@@ -128,6 +128,7 @@ public:
 	XAudioThread* at = 0;
 	XVideoThread* vt = 0;
 	bool isInit_ = false;
+	bool isAInit_ = false;
 	QMutex mutex;
 	QList<MP_DATA_INFO *> HStreamList;
 	bool IsthreadRun_;
@@ -181,6 +182,8 @@ private:
 public:
 	int getSession() { return _nSession; }
 	void setSession(int nSession) { _nSession = nSession; }
+
+	void setFullScreen(bool bScreen);
 
     QImage getImage()               const;
     QDateTime getLastTime()         const;
@@ -376,9 +379,11 @@ public slots:
     void clear();
 
 	bool vtInit(AVCodecID codeID, IVideoCall *call, int width, int height);
-	//bool atInit(AVCodecID codeID, IVideoCall *call, int width, int height);
+	bool atInit(AVCodecID codeID, int fomat, int sampleRate, int channels);
 
 	bool initPacket(void * pParam);
+
+	int GetFrameDataTimestamp(void * pParam);
 
 	void patientFrame(AVFrame *frame);
 

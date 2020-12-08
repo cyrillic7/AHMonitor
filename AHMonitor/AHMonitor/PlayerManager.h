@@ -28,7 +28,7 @@ public:
 
 	int playerIndex_;
 public:
-	int addPlayerEngine(int playerIndex, int nsession);
+	int addPlayerEngine(/*int playerIndex,*/ int nsession);
 
 	void insertPlayerEngine(int EngineIndex, CPlaybackEngine* playerEngine);
 
@@ -37,6 +37,8 @@ public:
 	int startPlayer(int nSession);
 
 	int getPlayerIndex() { return playerIndex_; }
+
+	void setPlayerIndex(int index) { playerIndex_ = index; }
 };
 
 #endif

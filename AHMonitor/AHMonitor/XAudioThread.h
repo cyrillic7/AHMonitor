@@ -9,6 +9,9 @@ struct AVCodecParameters;
 class XAudioPlay;
 class XResample;
 #include "XDecodeThread.h"
+extern "C" {
+#include <libavcodec/avcodec.h>
+}
 class XAudioThread:public XDecodeThread
 {
 public:
@@ -16,6 +19,8 @@ public:
 	long long pts = 0;
 	//打开，不管成功与否都清理
 	virtual bool Open(AVCodecParameters *para,int sampleRate,int channels);
+
+	bool init(AVCodecID codeID, int format, int sampleRate, int channels);
 
 	//停止线程，清理资源
 	virtual void Close();

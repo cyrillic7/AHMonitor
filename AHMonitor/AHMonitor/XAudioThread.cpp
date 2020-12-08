@@ -63,6 +63,40 @@ bool XAudioThread::Open(AVCodecParameters *para,int sampleRate, int channels)
 	return re;
 }
 
+bool XAudioThread::init(AVCodecID codeID, int format,int sampleRate, int channels)
+{
+	Clear();
+
+	amux.lock();
+	pts = 0;
+	bool re = true;
+
+	if (!res->Open(format, sampleRate, channels, false))
+	{
+		cout << "XResample open failed!" << endl;
+		re = false;
+	}
+
+	ap->sampleRate = sampleRate;
+	ap->channels = channels;
+	if (!ap->Open())
+	{
+		re = false;
+		cout << "XAudioPlay open failed!" << endl;
+	}
+
+
+	if (!decode->init(codeID, sampleRate, channels))
+	{
+		cout << "audio XDecode open failed!" << endl;
+		re = false;
+	}
+	amux.unlock();
+	cout << "XAudioThread::Open :" << re << endl;
+
+	return re;
+}
+
 void XAudioThread::SetPause(bool isPause)
 {
 	//amux.lock();

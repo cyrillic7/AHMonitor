@@ -124,6 +124,20 @@ void QServerTreeWidget::updateCamLine(int nSession, bool bOnline)
 	}
 }
 
+void QServerTreeWidget::deleteServerItem(QString server)
+{
+	for (int i = 0; i < this->topLevelItemCount(); ++i)
+	{
+		QTreeWidgetItem *item = this->topLevelItem(i);
+
+		QString strItem = item->text(0);
+		if (strItem == server)
+		{
+			delete item;
+		}
+	}
+}
+
 
 void QServerTreeWidget::TerminalItemDoubleClicked(QTreeWidgetItem* WidgetItem, int column)
 {
@@ -146,8 +160,8 @@ void QServerTreeWidget::TerminalItemDoubleClicked(QTreeWidgetItem* WidgetItem, i
 				int connectServerID = pServerNode->getCamerServerID();
 
 				//°ó¶¨Éè±¸
-				int playerindex = CPlayerManager::getInstance()->getPlayerIndex();
-				if (CPlayerManager::getInstance()->addPlayerEngine(playerindex, nSession) == -1)
+				int playerindex = CPlayerManager::getInstance()->addPlayerEngine(/*playerindex,*/ nSession);// CPlayerManager::getInstance()->getPlayerIndex();
+				if (playerindex == -1)
 					continue;
 
 				pServerNode->m_pCameraMngr->AssignPlayer(playerindex, nSession);
