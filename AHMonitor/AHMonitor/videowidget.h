@@ -131,8 +131,8 @@ public:
 	bool isAInit_ = false;
 	QMutex mutex;
 	QList<MP_DATA_INFO *> HStreamList;
-	bool IsthreadRun_;
-	int _nSession;				//视频标识
+	int _serverID = 0;
+	int _nSession = -1;				//视频标识
     QTimer *timerCheck;             //定时器检查设备是否在线
     QImage image;                   //要显示的图片
     QWidget *flowPanel;             //悬浮条面板
@@ -182,6 +182,7 @@ private:
 public:
 	int getSession() { return _nSession; }
 	void setSession(int nSession) { _nSession = nSession; }
+	void setServerID(int serverid) { _serverID = serverid; }
 
 	void setFullScreen(bool bScreen);
 

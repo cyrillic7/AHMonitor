@@ -212,5 +212,6 @@ XVideoThread::XVideoThread()
 
 XVideoThread::~XVideoThread()
 {
-
+	isExit = true;
+	wait();
 }

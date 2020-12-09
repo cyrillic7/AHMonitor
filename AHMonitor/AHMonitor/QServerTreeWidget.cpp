@@ -166,7 +166,7 @@ void QServerTreeWidget::TerminalItemDoubleClicked(QTreeWidgetItem* WidgetItem, i
 
 				pServerNode->m_pCameraMngr->AssignPlayer(playerindex, nSession);
 
-				CPlayerManager::getInstance()->startPlayer(nSession);
+				CPlayerManager::getInstance()->startPlayer(connectServerID,nSession);
 
 			}
 		}

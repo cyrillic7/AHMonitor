@@ -26,6 +26,7 @@ public:
 
 	std::map<int, CPlaybackEngine*> playerEngineMap_;
 
+	int newPlayerIndex();
 	int playerIndex_;
 public:
 	int addPlayerEngine(/*int playerIndex,*/ int nsession);
@@ -34,7 +35,9 @@ public:
 
 	void erasePlayerEngine(int EngineIndex);
 
-	int startPlayer(int nSession);
+	int startPlayer(int serverid,int nSession);
+
+	int stopPlayer(int nSession);
 
 	int getPlayerIndex() { return playerIndex_; }
 

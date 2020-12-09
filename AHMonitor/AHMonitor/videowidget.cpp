@@ -15,6 +15,9 @@
 #include <QDateTime>
 #include "XDecode.h"
 #include <QApplication>
+#include <QMessageBox>
+#include "PlayerManager.h"
+#include "ServerManager.h"
 extern "C"
 {
 #include "libswscale/swscale.h"
@@ -179,7 +182,6 @@ void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, 
 VideoWidget::VideoWidget(QWidget *parent) : QWidget(parent)
 {
 	pXvideoWidget_ = new GLYuvWidget(this);
-	IsthreadRun_ = false;
 	_nSession = -1;
 	//ÉèÖÃÇ¿½¹µã
 	setFocusPolicy(Qt::StrongFocus);
@@ -344,6 +346,9 @@ VideoWidget::~VideoWidget()
 	}
 
 	close();
+
+	if (!vt->isRunning()) vt->Close();
+	if (!at->isRunning()) at->Close();
 }
 
 void VideoWidget::resizeEvent(QResizeEvent *)
@@ -753,6 +758,25 @@ void VideoWidget::checkVideo()
 void VideoWidget::btnClicked()
 {
 	QPushButton *btn = (QPushButton *)sender();
+	if (btn->objectName() == "btnFlowClose")
+	{
+		/*QMessageBox::information(NULL, "Error", "btnFlowClose",
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+		CPlayerManager::getInstance()->stopPlayer(_nSession);
+		ServerManager::getInstance()->setCameraPlayerOff(_serverID, _nSession);
+		pXvideoWidget_->ResetGL();
+		vt->Clear();
+		at->Clear();
+		isInit_ = false;
+		isAInit_ = false;
+	}
+	if (btn->objectName() == "btnFlowVideo")
+	{
+
+	}
+
+
+
 	emit btnClicked(btn->objectName());
 }
 
@@ -1577,7 +1601,7 @@ bool VideoWidget::initPacket(void * pParam)
 			{
 				int timeStamp = GetFrameDataTimestamp(pParam);
 				//cout << "audio size:" << pMPData->nLen << endl;
-				cout << "timeStamp : " << timeStamp << endl;
+				cout << "timeStamp : " << at->pts << endl;
 
 				atInit(AV_CODEC_ID_AAC, AV_SAMPLE_FMT_FLT, 12200, 1);
 // 				AVPacket *packet = av_packet_alloc();

@@ -63,7 +63,7 @@ void XDecodeThread::Push(AVPacket *pkt)
 			//break;
 		}
 		mux.unlock();
-		msleep(1);
+		//msleep(1);
 	}
 }
 

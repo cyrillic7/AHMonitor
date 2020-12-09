@@ -100,6 +100,20 @@ CServerNode * ServerManager::getServerNode(int index)
 	return m_pVServerNode[index];
 }
 
+void ServerManager::setCameraPlayerOff(int ServerId,int nSession)
+{
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerNode->getCamerServerID() == ServerId)
+		{
+			pServerNode->m_pCameraMngr->AssignPlayer(-1, nSession);
+			return;
+		}
+	}
+}
+
 CServerNode::CServerNode(int serverid, CCameraMngr* pCameraMngr)
 {
 	m_CamServerID = serverid;

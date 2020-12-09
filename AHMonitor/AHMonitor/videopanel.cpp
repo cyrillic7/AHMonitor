@@ -75,7 +75,7 @@ void VideoPanel::Play(const QImage & image)
 	widgets[0]->updateImage(image);
 }
 
-VideoWidget * VideoPanel::getVideoWidget(int nSession)
+VideoWidget * VideoPanel::getVideoWidget(int serverid, int nSession)
 {
 	if (currentVideoIndex_ >= videoCount)
 		currentVideoIndex_ = 0;
@@ -88,7 +88,7 @@ VideoWidget * VideoPanel::getVideoWidget(int nSession)
 			return widgets[i];
 		}
 	}
-
+	widgets[currentVideoIndex_]->setServerID(serverid);
 	widgets[currentVideoIndex_]->setSession(nSession);
 	return widgets[currentVideoIndex_++];
 }

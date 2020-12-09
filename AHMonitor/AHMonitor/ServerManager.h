@@ -69,6 +69,7 @@ public:
 	CServerNode* getServerNode(int index);
 	//CServerNode* getServerNode(int serverId);
 
+	void setCameraPlayerOff(int ServerId,int nSession);
 private:
 	static ServerManager *m_Instance;
 
