@@ -73,7 +73,8 @@ void Widget::showAsQQ()
 	setWindowOpacity(1.0);
     QDesktopWidget *deskTop=QApplication::desktop();
     deskRect=deskTop->availableGeometry();
-
+	beginY = QApplication::desktop()->height();
+	timeCount = 0;
     normalPoint.setX(deskRect.width()-rect().width());
     normalPoint.setY(deskRect.height()-rect().height());
     move(normalPoint.x(),768-1);
@@ -84,10 +85,10 @@ void Widget::showAsQQ()
 //平滑显示出来
 void Widget::myMove()
 {
-    static int beginY=QApplication::desktop()->height();
-    beginY--;
-    move(normalPoint.x(),beginY);
-    if(beginY<=normalPoint.y())
+	//static int beginy = beginY;
+	beginY--;
+    move(normalPoint.x(), beginY);
+    if(beginY <=normalPoint.y())
     {
         timerShow->stop();
         timerStay->start(200);
@@ -96,7 +97,7 @@ void Widget::myMove()
 //停留显示
 void Widget::myStay()
 {
-    static int timeCount=0;
+   // static int timeCount=0;
     timeCount++;
     if(timeCount>=9)
     {
@@ -107,12 +108,10 @@ void Widget::myStay()
 //自动关闭时实现淡出效果
 void Widget::myClose()
 {
-    static double tran=1.0;
+    static double tran=0.0;
     tran-=0.1;
     if(tran<=0.0)
     {
-		normalPoint.setX(0);
-		normalPoint.setY(0);
         timerClose->stop();
         emit close();
 		//hide();

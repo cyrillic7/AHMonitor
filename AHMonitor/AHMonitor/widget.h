@@ -40,6 +40,8 @@ private:
     QTimer *timerStay;//停留时间的定时器 10s
     QTimer *timerClose;//关闭淡出的定时器
 
+	int beginY;
+	int timeCount;
 protected:
     void paintEvent(QPaintEvent *);
 };
