@@ -11,6 +11,9 @@ extern "C" {
 GLYuvWidget::GLYuvWidget(QWidget *parent) :
 	QOpenGLWidget(parent)
 {
+	QSurfaceFormat surfaceFormat;
+	surfaceFormat.setSamples(4);//多重采样
+	setFormat(surfaceFormat); //setFormat是QOpenGLWidget的函数
 }
 
 GLYuvWidget::~GLYuvWidget()
@@ -48,7 +51,19 @@ void GLYuvWidget::Repaint(AVFrame * frame)
 	for (k = 0; k < videoheight / 2; k++) //V
 		memcpy(yuvPtr + videowidth*i + videowidth / 2 * j + videowidth / 2 * k, frame->data[2] + frame->linesize[2] * k, videowidth / 2);
 
-
+	for (int s=0;s<videowidth*videoheight;s++)
+	{
+		if (maxy < yuvPtr[s])
+		{
+			maxy = yuvPtr[s];
+		}
+		if (miny > yuvPtr[s])
+		{
+			miny = yuvPtr[s];
+		}
+	}
+	//setLuminance(20, videowidth, videoheight);
+	//setContrast(255, videowidth, videoheight);
 	videoW = videowidth;
 	videoH = videoheight;
 
@@ -59,24 +74,66 @@ void GLYuvWidget::Repaint(AVFrame * frame)
 	QMetaObject::invokeMethod(this, "update", Qt::QueuedConnection);
 }
 
+void GLYuvWidget::setLuminance(int delta,int width,int height)
+{
+	for (int s = 0; s < width*height; s++)
+	{
+		yuvPtr[s] = yuvPtr[s] > 255 - delta ? 255 : yuvPtr[s] < -delta ? 0 : yuvPtr[s] + delta;
+
+// 		yuvPtr[s] = ((yuvPtr[s] - 16) * 100) + delta + 16;
+// 		if (yuvPtr[s] > 255)
+// 		{
+// 			yuvPtr[s] = 255;
+// 		}
+// 		if (yuvPtr[s] < -255)
+// 		{
+// 			yuvPtr[s] = -255;
+// 		}
+	}
+}
+
+void GLYuvWidget::setContrast(int delta, int width, int height)
+{
+
+	for (int s = 0; s < width*height; s++)
+	{
+		yuvPtr[s] = (yuvPtr[s] - miny)*1.0 / (maxy - miny) * delta;
+		if (yuvPtr[s] > 255)
+		{
+			yuvPtr[s] = 255;
+		}
+		if (yuvPtr[s] < -255)
+		{
+			yuvPtr[s] = -255;
+		}
+	}
+}
+
+void GLYuvWidget::setSaturation(int delta, int width, int height)
+{
+	/*(yuvPtr + videoW * videoH)
+
+		(yuvPtr + videoW*videoH * 5 / 4)*/
+}
+
 void GLYuvWidget::ResetGL()
 {
 	yuvPtr = NULL;
 	QMetaObject::invokeMethod(this, "update", Qt::QueuedConnection);
 }
 
-void GLYuvWidget::resizeGL(int width, int height)
-{
-	mux.lock();
-	qDebug() << "resizeGL " << width << ":" << height;
-	glViewport(0, 0, (GLint)width, (GLint)height);    // 重置当前的视口
-	glMatrixMode(GL_PROJECTION);                // 选择投影矩阵
-	glLoadIdentity();                            // 重置投影矩阵
-												 //gluPerspective(45.0,(GLfloat)width/(GLfloat)height,0.1,100.0); // 建立透视投影矩阵
-	glMatrixMode(GL_MODELVIEW); // 选择模型观察矩阵
-	glLoadIdentity();            // 重置模型观察矩阵
-	mux.unlock();
-}
+//void GLYuvWidget::resizeGL(int width, int height)
+//{
+//	mux.lock();
+//	qDebug() << "resizeGL " << width << ":" << height;
+//	//glViewport(0, 0, (GLint)width, (GLint)height);    // 重置当前的视口
+//	//glMatrixMode(GL_PROJECTION);                // 选择投影矩阵
+//	//glLoadIdentity();                            // 重置投影矩阵
+//	//											 //gluPerspective(45.0,(GLfloat)width/(GLfloat)height,0.1,100.0); // 建立透视投影矩阵
+//	//glMatrixMode(GL_MODELVIEW); // 选择模型观察矩阵
+//	//glLoadIdentity();            // 重置模型观察矩阵
+//	mux.unlock();
+//}
 
 void GLYuvWidget::slotShowYuv(uchar *ptr, uint width, uint height)
 {
@@ -90,7 +147,10 @@ void GLYuvWidget::initializeGL()
 {
 	mux.lock();
 	initializeOpenGLFunctions();
+#ifdef USEGL
 	glEnable(GL_DEPTH_TEST);
+#endif
+	glEnable(GL_TEXTURE_2D);
 
 	static const GLfloat vertices[]{
 		//顶点坐标
@@ -132,7 +192,7 @@ void GLYuvWidget::initializeGL()
     { \
         vec3 yuv; \
         vec3 rgb; \
-        yuv.x = texture2D(tex_y, textureOut).r; \
+        yuv.x = texture2D(tex_y, textureOut).r ; \
         yuv.y = texture2D(tex_u, textureOut).r - 0.5; \
         yuv.z = texture2D(tex_v, textureOut).r - 0.5; \
         rgb = mat3( 1,       1,         1, \

@@ -25,11 +25,26 @@ extern "C"
 
 void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData)
 {
+	TCHAR buffer[256];
+	//_stprintf_s(buffer, 256, _T("UI event raised: event code %d, index %d, param 0x%X, application data 0x%X.\n"),
+	//	event, nIndex, (DWORD)pParam, (DWORD)pAppData);
+	//OutputDebugString(buffer);
+	VideoWidget* pWidget = (VideoWidget*)pAppData;
 	switch (event)
 	{
 	case MP_EVENT_FPS:
+	{
+		//_stprintf_s(buffer, 256, _T("FPS: %.3f"), *(float*)pParam);
+		QString strfps = /*QString::number(*(float*)pParam, 'f', 2); //*/QString("帧率: %1").arg(*(float*)pParam); //QString::fromWCharArray(buffer, sizeof(buffer));
+		pWidget->setfps(strfps);
+	}
 		break;
 	case MP_EVENT_BINDWIDTH:
+	{
+		//_stprintf_s(buffer, 256, _T("Bind width: %.3f bytes/sec"), *(float*)pParam);
+		QString strbindwidth = /*QString::number(*(float*)pParam, 'f', 2); //*/QString("带宽: %1 bytes/sec").arg(*(float*)pParam); //QString::fromWCharArray(buffer, sizeof(buffer));
+		pWidget->setbindwidth(strbindwidth);
+	}
 		break;
 	case MP_EVENT_PLR:
 		break;
@@ -67,114 +82,16 @@ void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, 
 		break;
 	case MP_EVENT_DATA_READY:
 	{
-		VideoWidget* pWidget = (VideoWidget*)pAppData;
 		pWidget->initPacket(pParam);
-		//MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
-		//if (pData->type == MP_DATA_H264)   //视频数据，也可能是h265，
-		//{
-		//	MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pData;
-		//	if (pMPData->type == MP_DATA_H264)   //视频数据，也可能是h265，
-		//	{
-		//		int videoWidth;                 //视频宽度
-		//		int videoHeight;                //视频高度
-		//		int nResolution = ((pMPData->nTimestamp & 0xe000) >> 13);
-		//		pWidget->getVideoResolution(nResolution, &videoWidth, &videoHeight);
-		//		pWidget->vt->init(AV_CODEC_ID_H265, pWidget->pXvideoWidget_, videoWidth, videoHeight);
-
-		//		//AVPacket *packet = av_packet_alloc();
-		//		AVPacket packet = { 0 };
-		//		packet.data = (uint8_t*)pData->pData;	//这里填入一个指向完整H264数据帧的指针 
-		//		packet.size = pData->nLen;		//这个填入H264数据帧的大小  
-		//		//packet.stream_index = AVMEDIA_TYPE_VIDEO;
-		//		pWidget->vt->Push(&packet);
-		//	}
-		//	else if (pData->type == MP_DATA_G723)   //音频数据，对于新设备事实上是AMR_NB格式
-		//	{
-		//		switch (pData->nFlag)  //是 1的话是amr， 是2是aac ， 若是0，可能playback dll是老版本，
-		//		{
-		//		case 1:
-		//		{
-		//		}
-		//		break;
-		//		case 2:
-		//		{
-
-		//		}
-		//		break;
-		//		}
-		//	}
-			//VideoWidget* pWidget = (VideoWidget*)pAppData;
-			//pWidget->setVideoh264Data(pParam);
-		//	//pWidget->startVideoThread();
-		//	//MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pData;
-		//	//if (pMPData->type == MP_DATA_H264)   //视频数据，也可能是h265，
-		//	//{
-		//	//	int videoWidth;                 //视频宽度
-		//	//	int videoHeight;                //视频高度
-		//	//	int nResolution = ((pMPData->nTimestamp & 0xe000) >> 13);
-		//	//	pWidget->getVideoResolution(nResolution, &videoWidth, &videoHeight);
-
-		//	//	if (_h264Handle == 0)
-		//	//	{
-		//	//		_h264Handle = H264_CreateHandle();
-		//	//	}
-
-		//	//	int pRet = H264_PutVideoStream(_h264Handle, (char*)pMPData->pData, pMPData->nLen);
-		//	//	if (pRet != 0)
-		//	//	{
-		//	//		return;
-		//	//	}
-
-		//	//	int picWidth = videoWidth;
-		//	//	int picHeight = videoHeight;
-		//	//	INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, picWidth, picHeight);
-		//	//	if (frameSize == 0)
-		//	//		return;
-
-		//	//	char* buffer = new char[frameSize];
-		//	//	memset(buffer, 0, sizeof(buffer));
-
-		//	//	INT32 ret = H264_GetNextVideoFrame_Rgb2(_h264Handle, buffer, frameSize, picWidth, picHeight);
-		//	//	if (ret != 0) {
-		//	//		delete[] buffer;
-		//	//		return;
-		//	//	}
-
-		//	//	//pMonitor->pVidoePanel_Widget_->widgets[0]->width;
-		//	//	/*int width = pMonitor->pVidoePanel_Widget_->widgets[0]->width();
-		//	//	int height = pMonitor->pVidoePanel_Widget_->widgets[0]->height();*/
-		//	//	//QImage *tmpImg = new QImage((uchar *)buffer, picWidth, picHeight, 3 * picWidth, QImage::Format_RGB888);
-		//	//	QImage* pimage = new QImage(picWidth, picHeight, QImage::Format_RGB888);
-		//	//	int b, g, r;
-		//	//	//设置像素
-		//	//	for (int i = 0; i < picHeight; i++)
-		//	//	{
-		//	//		for (int j = 0; j < picWidth; j++)
-		//	//		{
-		//	//			b = (int)buffer[i];
-		//	//			g = (int)buffer[i + 1];
-		//	//			r = (int)buffer[i + 2];
-		//	//			pimage->setPixel(j, i, qRgb(r, g, b));
-		//	//		}
-		//	//	}
-
-		//	//	pWidget->updateImage(*pimage);
-
-		//	//	delete pimage;
-		//	//	delete[] buffer;
-		//	//}
-		//}
-		//else if (pData->type == MP_DATA_G723)   //音频数据，对于新设备事实上是AMR_NB格式
-		//{
-		//}
-		//else  if (pData->type == MP_DATA_YUV)
-		//{
-		//	VideoWidget* pWidget = (VideoWidget*)pAppData;
-		//	pWidget->setVideoYUVData(pParam);
-		//}
 	}
 	break;
 	default:
+	{
+		_stprintf_s(buffer, 256, _T("UI event raised: event code %d, index %d, param 0x%X, application data 0x%X.\n"),
+			event, nIndex, (DWORD)pParam, (DWORD)pAppData);
+		cout << buffer << endl;
+		//OutputDebugString(buffer);
+	}
 		break;
 	}
 }
@@ -182,6 +99,7 @@ void UIPlayerEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, 
 VideoWidget::VideoWidget(QWidget *parent) : QWidget(parent)
 {
 	pXvideoWidget_ = new GLYuvWidget(this);
+	//pXvideoWidget_->hide();
 	_nSession = -1;
 	//设置强焦点
 	setFocusPolicy(Qt::StrongFocus);
@@ -191,7 +109,7 @@ VideoWidget::VideoWidget(QWidget *parent) : QWidget(parent)
 	//定时器校验视频
 	timerCheck = new QTimer(this);
 	timerCheck->setInterval(10 * 1000);
-	connect(timerCheck, SIGNAL(timeout()), this, SLOT(checkVideo()));
+	//connect(timerCheck, SIGNAL(timeout()), this, SLOT(checkVideo()));
 
 	//pffmpegWidget = new FFmpegWidget;
 	image = QImage();
@@ -256,9 +174,17 @@ void VideoWidget::initFlowPanel()
 	flowPanel->setObjectName("flowPanel");
 	flowPanel->setVisible(false);
 
+	pVideoSession_ = new QLabel;
+	pFPSLable_ = new QLabel;
+	pBindWidth_ = new QLabel;
 	//用布局顶住,左侧弹簧
 	QHBoxLayout *layout = new QHBoxLayout;
 	layout->setSpacing(2);
+	layout->addWidget(pVideoSession_);
+	layout->addSpacing(10);
+	layout->addWidget(pFPSLable_);
+	layout->addSpacing(10);
+	layout->addWidget(pBindWidth_);
 	layout->setMargin(0);
 	layout->addStretch();
 	flowPanel->setLayout(layout);
@@ -330,6 +256,9 @@ void VideoWidget::initFlowPanel()
 
 void VideoWidget::initFlowStyle()
 {
+	pVideoSession_->setStyleSheet("background:rgba(0,0,0,0);font-size:18px;border:0px;border-style:outset;padding:0px;margin:0px");
+	pFPSLable_->setStyleSheet("background:rgba(0,0,0,0);font-size:18px;border:0px;border-style:outset;padding:0px;margin:0px");
+	pBindWidth_->setStyleSheet("background:rgba(0,0,0,0);font-size:18px;border:0px;border-style:outset;padding:0px;margin:0px");
 	//设置样式以便区分,可以自行更改样式,也可以不用样式
 	QStringList qss;
 	QString rgba = QString("rgba(%1,%2,%3,150)").arg(flowBgColor.red()).arg(flowBgColor.green()).arg(flowBgColor.blue());
@@ -337,6 +266,35 @@ void VideoWidget::initFlowStyle()
 	qss.append(QString("QPushButton{border:none;padding:0px;background:rgba(0,0,0,0);}"));
 	qss.append(QString("QPushButton:pressed{color:%1;}").arg(flowPressColor.name()));
 	flowPanel->setStyleSheet(qss.join(""));
+}
+
+void VideoWidget::initFlow()
+{
+	showLabel(false);
+	CPlayerManager::getInstance()->stopPlayer(_nSession);
+	ServerManager::getInstance()->setCameraPlayerOff(_serverID, _nSession);
+	pXvideoWidget_->ResetGL();
+	vt->Clear();
+	at->Clear();
+	isInit_ = false;
+	isAInit_ = false;
+	_nSession = -1;
+}
+
+void VideoWidget::showLabel(bool bshow)
+{
+	if (bshow == true)
+	{
+		pVideoSession_->show();
+		pFPSLable_->show();
+		pBindWidth_->show();
+	}
+	else
+	{
+		pVideoSession_->hide();
+		pFPSLable_->hide();
+		pBindWidth_->hide();
+	}
 }
 
 VideoWidget::~VideoWidget()
@@ -415,153 +373,153 @@ void VideoWidget::dragEnterEvent(QDragEnterEvent *event)
 	}
 }
 
-void VideoWidget::paintEvent(QPaintEvent *)
-{
-	//如果不需要绘制
-	if (!drawImage) {
-		return;
-	}
-
-	//qDebug() << TIMEMS << "paintEvent" << objectName();
-	QPainter painter(this);
-	painter.setRenderHints(QPainter::Antialiasing);
-
-	//绘制边框
-	drawBorder(&painter);
-	if (!image.isNull()) {
-		//绘制背景图片
-		drawImg(&painter, image);
-		//绘制标签
-		drawOSD(&painter, osd1Visible, osd1FontSize, osd1Text, osd1Color, osd1Image, osd1Format, osd1Position);
-		drawOSD(&painter, osd2Visible, osd2FontSize, osd2Text, osd2Color, osd2Image, osd2Format, osd2Position);
-	}
-	else {
-		//绘制背景
-		drawBg(&painter);
-	}
-}
-
-void VideoWidget::drawBorder(QPainter *painter)
-{
-	if (borderWidth == 0) {
-		return;
-	}
-
-	painter->save();
-	QPen pen;
-	pen.setWidth(borderWidth);
-	pen.setColor(hasFocus() ? focusColor : borderColor);
-	painter->setPen(pen);
-	painter->drawRect(rect());
-	painter->restore();
-}
-
-void VideoWidget::drawBg(QPainter *painter)
-{
-	painter->save();
-
-	//背景图片为空则绘制文字,否则绘制背景图片
-	if (bgImage.isNull()) {
-		painter->setFont(this->font());
-		painter->setPen(palette().foreground().color());
-		painter->drawText(rect(), Qt::AlignCenter, bgText);
-	}
-	else {
-		//居中绘制
-		int x = rect().center().x() - bgImage.width() / 2;
-		int y = rect().center().y() - bgImage.height() / 2;
-		QPoint point(x, y);
-		painter->drawImage(point, bgImage);
-	}
-
-	painter->restore();
-}
-
-void VideoWidget::drawImg(QPainter *painter, QImage img)
-{
-	painter->save();
-
-	int offset = borderWidth * 1 + 0;
-	if (fillImage) {
-		QRect rect(offset / 2, offset / 2, width() - offset, height() - offset);
-		painter->drawImage(rect, img);
-	}
-	else {
-		//按照比例自动居中绘制
-		img = img.scaled(width() - offset, height() - offset, Qt::KeepAspectRatio);
-		int x = rect().center().x() - img.width() / 2;
-		int y = rect().center().y() - img.height() / 2;
-		QPoint point(x, y);
-		painter->drawImage(point, img);
-	}
-
-	painter->restore();
-}
-
-void VideoWidget::drawOSD(QPainter *painter,
-	bool osdVisible,
-	int osdFontSize,
-	const QString &osdText,
-	const QColor &osdColor,
-	const QImage &osdImage,
-	const VideoWidget::OSDFormat &osdFormat,
-	const VideoWidget::OSDPosition &osdPosition)
-{
-	if (!osdVisible) {
-		return;
-	}
-
-	painter->save();
-
-	//标签位置尽量偏移多一点避免遮挡
-	QRect osdRect(rect().x() + (borderWidth * 2), rect().y() + (borderWidth * 2), width() - (borderWidth * 5), height() - (borderWidth * 5));
-	int flag = Qt::AlignLeft | Qt::AlignTop;
-	QPoint point = QPoint(osdRect.x(), osdRect.y());
-
-	if (osdPosition == OSDPosition_Left_Top) {
-		flag = Qt::AlignLeft | Qt::AlignTop;
-		point = QPoint(osdRect.x(), osdRect.y());
-	}
-	else if (osdPosition == OSDPosition_Left_Bottom) {
-		flag = Qt::AlignLeft | Qt::AlignBottom;
-		point = QPoint(osdRect.x(), osdRect.height() - osdImage.height());
-	}
-	else if (osdPosition == OSDPosition_Right_Top) {
-		flag = Qt::AlignRight | Qt::AlignTop;
-		point = QPoint(osdRect.width() - osdImage.width(), osdRect.y());
-	}
-	else if (osdPosition == OSDPosition_Right_Bottom) {
-		flag = Qt::AlignRight | Qt::AlignBottom;
-		point = QPoint(osdRect.width() - osdImage.width(), osdRect.height() - osdImage.height());
-	}
-
-	if (osdFormat == OSDFormat_Image) {
-		painter->drawImage(point, osdImage);
-	}
-	else {
-		QDateTime now = QDateTime::currentDateTime();
-		QString text = osdText;
-		if (osdFormat == OSDFormat_Date) {
-			text = now.toString("yyyy-MM-dd");
-		}
-		else if (osdFormat == OSDFormat_Time) {
-			text = now.toString("HH:mm:ss");
-		}
-		else if (osdFormat == OSDFormat_DateTime) {
-			text = now.toString("yyyy-MM-dd HH:mm:ss");
-		}
-
-		//设置颜色及字号
-		QFont font;
-		font.setPixelSize(osdFontSize);
-		painter->setPen(osdColor);
-		painter->setFont(font);
-
-		painter->drawText(osdRect, flag, text);
-	}
-
-	painter->restore();
-}
+//void VideoWidget::paintEvent(QPaintEvent *)
+//{
+//	//如果不需要绘制
+//	if (!drawImage) {
+//		return;
+//	}
+//
+//	//qDebug() << TIMEMS << "paintEvent" << objectName();
+//	QPainter painter(this);
+//	painter.setRenderHints(QPainter::Antialiasing);
+//
+//	//绘制边框
+//	drawBorder(&painter);
+//	if (!image.isNull()) {
+//		//绘制背景图片
+//		drawImg(&painter, image);
+//		//绘制标签
+//		drawOSD(&painter, osd1Visible, osd1FontSize, osd1Text, osd1Color, osd1Image, osd1Format, osd1Position);
+//		drawOSD(&painter, osd2Visible, osd2FontSize, osd2Text, osd2Color, osd2Image, osd2Format, osd2Position);
+//	}
+//	else {
+//		//绘制背景
+//		drawBg(&painter);
+//	}
+//}
+//
+//void VideoWidget::drawBorder(QPainter *painter)
+//{
+//	if (borderWidth == 0) {
+//		return;
+//	}
+//
+//	painter->save();
+//	QPen pen;
+//	pen.setWidth(borderWidth);
+//	pen.setColor(hasFocus() ? focusColor : borderColor);
+//	painter->setPen(pen);
+//	painter->drawRect(rect());
+//	painter->restore();
+//}
+//
+//void VideoWidget::drawBg(QPainter *painter)
+//{
+//	painter->save();
+//
+//	//背景图片为空则绘制文字,否则绘制背景图片
+//	if (bgImage.isNull()) {
+//		painter->setFont(this->font());
+//		painter->setPen(palette().foreground().color());
+//		painter->drawText(rect(), Qt::AlignCenter, bgText);
+//	}
+//	else {
+//		//居中绘制
+//		int x = rect().center().x() - bgImage.width() / 2;
+//		int y = rect().center().y() - bgImage.height() / 2;
+//		QPoint point(x, y);
+//		painter->drawImage(point, bgImage);
+//	}
+//
+//	painter->restore();
+//}
+//
+//void VideoWidget::drawImg(QPainter *painter, QImage img)
+//{
+//	painter->save();
+//
+//	int offset = borderWidth * 1 + 0;
+//	if (fillImage) {
+//		QRect rect(offset / 2, offset / 2, width() - offset, height() - offset);
+//		painter->drawImage(rect, img);
+//	}
+//	else {
+//		//按照比例自动居中绘制
+//		img = img.scaled(width() - offset, height() - offset, Qt::KeepAspectRatio);
+//		int x = rect().center().x() - img.width() / 2;
+//		int y = rect().center().y() - img.height() / 2;
+//		QPoint point(x, y);
+//		painter->drawImage(point, img);
+//	}
+//
+//	painter->restore();
+//}
+//
+//void VideoWidget::drawOSD(QPainter *painter,
+//	bool osdVisible,
+//	int osdFontSize,
+//	const QString &osdText,
+//	const QColor &osdColor,
+//	const QImage &osdImage,
+//	const VideoWidget::OSDFormat &osdFormat,
+//	const VideoWidget::OSDPosition &osdPosition)
+//{
+//	if (!osdVisible) {
+//		return;
+//	}
+//
+//	painter->save();
+//
+//	//标签位置尽量偏移多一点避免遮挡
+//	QRect osdRect(rect().x() + (borderWidth * 2), rect().y() + (borderWidth * 2), width() - (borderWidth * 5), height() - (borderWidth * 5));
+//	int flag = Qt::AlignLeft | Qt::AlignTop;
+//	QPoint point = QPoint(osdRect.x(), osdRect.y());
+//
+//	if (osdPosition == OSDPosition_Left_Top) {
+//		flag = Qt::AlignLeft | Qt::AlignTop;
+//		point = QPoint(osdRect.x(), osdRect.y());
+//	}
+//	else if (osdPosition == OSDPosition_Left_Bottom) {
+//		flag = Qt::AlignLeft | Qt::AlignBottom;
+//		point = QPoint(osdRect.x(), osdRect.height() - osdImage.height());
+//	}
+//	else if (osdPosition == OSDPosition_Right_Top) {
+//		flag = Qt::AlignRight | Qt::AlignTop;
+//		point = QPoint(osdRect.width() - osdImage.width(), osdRect.y());
+//	}
+//	else if (osdPosition == OSDPosition_Right_Bottom) {
+//		flag = Qt::AlignRight | Qt::AlignBottom;
+//		point = QPoint(osdRect.width() - osdImage.width(), osdRect.height() - osdImage.height());
+//	}
+//
+//	if (osdFormat == OSDFormat_Image) {
+//		painter->drawImage(point, osdImage);
+//	}
+//	else {
+//		QDateTime now = QDateTime::currentDateTime();
+//		QString text = osdText;
+//		if (osdFormat == OSDFormat_Date) {
+//			text = now.toString("yyyy-MM-dd");
+//		}
+//		else if (osdFormat == OSDFormat_Time) {
+//			text = now.toString("HH:mm:ss");
+//		}
+//		else if (osdFormat == OSDFormat_DateTime) {
+//			text = now.toString("yyyy-MM-dd HH:mm:ss");
+//		}
+//
+//		//设置颜色及字号
+//		QFont font;
+//		font.setPixelSize(osdFontSize);
+//		painter->setPen(osdColor);
+//		painter->setFont(font);
+//
+//		painter->drawText(osdRect, flag, text);
+//	}
+//
+//	painter->restore();
+//}
 
 void VideoWidget::setFullScreen(bool bScreen)
 {
@@ -575,6 +533,16 @@ void VideoWidget::setFullScreen(bool bScreen)
 		this->setWindowFlags(Qt::SubWindow);
 		this->showNormal();
 	}
+}
+
+void VideoWidget::setfps(QString fps)
+{
+	pFPSLable_->setText(fps);
+}
+
+void VideoWidget::setbindwidth(QString bindwidth)
+{
+	pBindWidth_->setText(bindwidth);
 }
 
 QImage VideoWidget::getImage() const
@@ -762,13 +730,7 @@ void VideoWidget::btnClicked()
 	{
 		/*QMessageBox::information(NULL, "Error", "btnFlowClose",
 			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
-		CPlayerManager::getInstance()->stopPlayer(_nSession);
-		ServerManager::getInstance()->setCameraPlayerOff(_serverID, _nSession);
-		pXvideoWidget_->ResetGL();
-		vt->Clear();
-		at->Clear();
-		isInit_ = false;
-		isAInit_ = false;
+		initFlow();
 	}
 	if (btn->objectName() == "btnFlowVideo")
 	{
@@ -1027,167 +989,6 @@ bool VideoWidget::ish265IFrame(void *pParam)
 		return false;
 }
 
-void VideoWidget::setVideoh264Data(void * pData)
-{
-	////thread_->pushVideoData(pData);
-	////MP_DATA_INFO *spData = (MP_DATA_INFO *)pData;
-	////thread_->pushVideoData(*spData);
-	////emit pushVideoh264Data(*spData);
-	//bool iFrame = isIFrame(pData);
-	//bool b265Frame = ish265IFrame(pData);
-	//MP_DATA_INFO *pMPData = (MP_DATA_INFO *)pData;
-	///*pushHStreamInfo(pMPData);
-
-	//if (_h264Handle == 0)
-	//{
-	//	_h264Handle = H264_CreateHandle();
-	//}
-	//if (thread_->isRunning() == false)
-	//{
-	//	IsthreadRun_ = true;
-	//	thread_->init(_h264Handle, 0, this);
-	//	thread_->play();
-	//	thread_->start();
-	//}*/
-	//if (pMPData->type == MP_DATA_H264)   //视频数据，也可能是h265，
-	//{
-	//	QDateTime current_date_time = QDateTime::currentDateTime();
-	//	QString current_date = current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
-	//	if (b265Frame == false)
-	//	{
-	//		qDebug() << ("b265Frame == false!") << "time:" << current_date;
-	//	}
-	//	else
-	//	{
-	//		qDebug() << ("b265Frame == true!") << "time:" << current_date;;
-	//	}
-
-	//	int videoWidth;                 //视频宽度
-	//	int videoHeight;                //视频高度
-	//	int nResolution = ((pMPData->nTimestamp & 0xe000) >> 13);
-	//	getVideoResolution(nResolution, &videoWidth, &videoHeight);
-
-	//	if (_h264Handle == 0)
-	//	{
-	//		_h264Handle = H264_CreateHandle();
-	//	}
-
-	//	/*int picWidth = videoWidth;
-	//	int picHeight = videoHeight;
-	//	INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, picWidth, picHeight);
-	//	if (frameSize == 0)
-	//	return;
-
-	//	char* buffer = new char[frameSize];
-	//	memset(buffer, 0, sizeof(buffer));*/
-	//	/*while (true)
-	//	{
-	//	if
-	//	}*/
-	//	int pRet = H264_PutVideoStream(_h264Handle, (char*)pMPData->pData, pMPData->nLen/*, buffer, frameSize,picWidth, picHeight*/);
-	//	if (pRet != 0)
-	//	{
-	//		//delete[] buffer;
-	//		return;
-	//	}
-	//	/*if (thread_->isRunning() == false)
-	//	{
-	//	IsthreadRun_ = true;
-	//	thread_->init(_h264Handle, nResolution);
-	//	thread_->play();
-	//	thread_->start();
-	//	}*/
-	//	/*QDateTime current_date_times = QDateTime::currentDateTime();
-	//	QString current_dates = current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
-	//	qDebug() << "H264_PutVideoStreamTIME:" << current_dates;
-	//	QImage image((uchar*)buffer, picWidth, picHeight, QImage::Format_RGB888);
-	//	QImage imgs = image.rgbSwapped();
-
-	//	setFillImage(false);
-	//	this->updateImage(imgs);*/
-	//	int picWidth = videoWidth;
-	//	int picHeight = videoHeight;
-	//	INT32 frameSize = H264_GetVideoFrameSize_Rgb2(_h264Handle, picWidth, picHeight);
-	//	if (frameSize == 0)
-	//		return;
-
-	//	char* buffer = new char[frameSize];
-	//	memset(buffer, 0, sizeof(buffer));
-
-	//	while (true)
-	//	{
-	//		INT32 ret = H264_GetNextVideoFrame_Rgb2(_h264Handle, buffer, frameSize, picWidth, picHeight);
-	//		if (ret != AVERROR(EAGAIN))
-	//		{
-	//			QImage image((uchar*)buffer, picWidth, picHeight, QImage::Format_RGB888);
-	//			QImage imgs = image.rgbSwapped();
-
-	//			setFillImage(false);
-	//			this->updateImage(imgs);
-	//			qDebug() << "receiveError:" << QString::number(ret);
-	//			break;
-	//		}
-	//	}
-	//	/*INT32 ret = H264_GetNextVideoFrame_Rgb2(_h264Handle, buffer, frameSize, picWidth, picHeight);
-	//	if (ret != 0) {
-	//	delete[] buffer;
-	//	return;
-	//	}
-	//	QImage image((uchar*)buffer, picWidth, picHeight, QImage::Format_RGB888);
-	//	QImage imgs = image.rgbSwapped();*/
-	//	//QImage img = imgs.scaled(this->size(), Qt::IgnoreAspectRatio);
-
-	//	//QPixmap pixmap = QPixmap::fromImage(image);
-	//	//QImage* image = new QImage(picWidth, picHeight, QImage::Format_RGB888);
-	//	//	for(int h = 0; h < picHeight; h ++){
-	//	//	// scanLine返回ptr该行的数据的开始
-	//	//	memcpy(image->scanLine(h),(void*)buffer[h], picWidth * 3);
-	//	//}
-	//	//QImage tempImage((uchar*)buffer, picWidth, picHeight, QImage::Format_RGB888);
-	//	//QImage img = tempImage.scaled(this->size(), Qt::IgnoreAspectRatio);
-	//	//QImage* destimage = new QImage(picWidth, picHeight, QImage::Format_RGB888);
-	//	//RGB2Image(buffer, picWidth, picHeight, destimage);
-	//	/*	int  W_24 = (picWidth * 24 + 31) / 32 * 4;
-	//	QByteArray imageByteArray = QByteArray((const char*)buffer, W_24*picHeight);
-
-	//	uchar*  transData = (unsigned char*)imageByteArray.data();
-
-	//	QImage desImage(transData, picWidth, picHeight, QImage::Format_RGB888);*/
-
-	//	//pMonitor->pVidoePanel_Widget_->widgets[0]->width;
-	//	/*int width = pMonitor->pVidoePanel_Widget_->widgets[0]->width();
-	//	int height = pMonitor->pVidoePanel_Widget_->widgets[0]->height();*/
-	//	//QImage *tempImage = new QImage(buffer, width, height, 3 * width, QImage::Format_RGB888);
-	//	//QImage pimage((uchar *)buffer, picWidth, picHeight, 3 * picWidth, QImage::Format_RGB888);
-	//	//QImage image((uchar *)buffer, picWidth, picHeight, 24, 0, 256, QImage::Format_RGB888);
-	//	//QImage img = desImage.scaled(this->size(), Qt::IgnoreAspectRatio);
-	//	//QImage* pimage = new QImage(picWidth, picHeight, QImage::Format_RGB888);
-	//	//QImage desImage = QImage(picWidth, picHeight, QImage::Format_RGB32); //RGB32
-
-	//	//																	 //RGB分量值
-	//	//int b = 0;
-	//	//int g = 0;
-	//	//int r = 0;
-
-	//	////设置像素
-	//	//for (int i = 0; i < picHeight; i++)
-	//	//{
-	//	//	for (int j = 0; j < picWidth; j++)
-	//	//	{
-	//	//		b = (int)*(buffer + i*picWidth + j);
-	//	//		g = b;
-	//	//		r = g;
-	//	//		desImage.setPixel(j, i, qRgb(r, g, b));
-	//	//	}
-	//	//}
-	//	/*setFillImage(false);
-	//	this->updateImage(imgs);*/
-
-	//	//delete pimage;
-	//	delete[] buffer;
-	//}
-}
-
 bool VideoWidget::isIFrame(void *pParam)
 {
 	MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
@@ -1229,7 +1030,10 @@ void VideoWidget::setVideoYUVData(void * pData)
 		QImage pimage((uchar *)rgb24, pYUVInfo->nWidth, pYUVInfo->nHeight, QImage::Format_RGB888);
 		QImage img = pimage.scaled(this->size(), Qt::IgnoreAspectRatio);
 
-		this->updateImage(img);
+	//	this->updateImage(img);
+
+
+
 		//pMonitor->RGB2Image(rgb, pYUVData->nWidth, pYUVData->nHeight, pimage);
 
 		//pMonitor->pVidoePanel_Widget_->Play(*pimage);
@@ -1593,7 +1397,7 @@ bool VideoWidget::initPacket(void * pParam)
 			case 1:
 			{
 				int timeStamp = GetFrameDataTimestamp(pParam);
-				cout << "timeStamp : " << timeStamp << endl;
+				//cout << "timeStamp : " << timeStamp << endl;
 
 			}
 			break;
@@ -1601,7 +1405,7 @@ bool VideoWidget::initPacket(void * pParam)
 			{
 				int timeStamp = GetFrameDataTimestamp(pParam);
 				//cout << "audio size:" << pMPData->nLen << endl;
-				cout << "timeStamp : " << at->pts << endl;
+				//cout << "timeStamp : " << at->pts << endl;
 
 				atInit(AV_CODEC_ID_AAC, AV_SAMPLE_FMT_FLT, 12200, 1);
 // 				AVPacket *packet = av_packet_alloc();
@@ -1684,7 +1488,7 @@ void VideoWidget::patientFrame(AVFrame * frame)
 	QImage image((uchar*)rgb, videowidth, videoheight, QImage::Format_RGB888);
 	QImage imgs = image.rgbSwapped();
 
-	this->updateImage(imgs);
+	//this->updateImage(imgs);
 
 	mutex.unlock();
 	delete datas[0];

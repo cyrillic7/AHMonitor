@@ -24,6 +24,10 @@ public:
 	//不管成功与否都释放frame空间
 	virtual void Repaint(AVFrame *frame);
 
+	void setLuminance(int delta, int width, int height);
+	void setContrast(int delta, int width, int height);
+	void setSaturation(int delta, int width, int height);
+
 	void ResetGL();
 public slots:
 	void slotShowYuv(uchar *ptr, uint width, uint height); //显示一帧Yuv图像
@@ -32,7 +36,7 @@ protected:
 	void initializeGL() Q_DECL_OVERRIDE;
 	void paintGL() Q_DECL_OVERRIDE;
 	// 窗口尺寸变化
-	void resizeGL(int width, int height) Q_DECL_OVERRIDE;
+	//void resizeGL(int width, int height) Q_DECL_OVERRIDE;
 private:
 	std::mutex mux;
 	QOpenGLShaderProgram *program;
@@ -42,6 +46,9 @@ private:
 	GLuint idY, idU, idV; //自己创建的纹理对象ID，创建错误返回0
 	uint videoW, videoH;
 	uchar *yuvPtr = nullptr;
+
+	unsigned char maxy = 0;
+	unsigned char miny = 0;
 };
 
 #endif // GLYUVWIDGET_H

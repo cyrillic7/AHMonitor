@@ -72,7 +72,7 @@ QSize VideoPanel::minimumSizeHint() const
 
 void VideoPanel::Play(const QImage & image)
 {
-	widgets[0]->updateImage(image);
+	//widgets[0]->updateImage(image);
 }
 
 VideoWidget * VideoPanel::getVideoWidget(int serverid, int nSession)
@@ -88,9 +88,19 @@ VideoWidget * VideoPanel::getVideoWidget(int serverid, int nSession)
 			return widgets[i];
 		}
 	}
-	widgets[currentVideoIndex_]->setServerID(serverid);
-	widgets[currentVideoIndex_]->setSession(nSession);
-	return widgets[currentVideoIndex_++];
+
+	for (int i = 0; i < videoCount; i++)
+	{
+		if (widgets[i]->getSession() == -1)
+		{
+			widgets[i]->setServerID(serverid);
+			widgets[i]->setSession(nSession);
+			return widgets[i];
+		}
+	}
+// 	widgets[currentVideoIndex_]->setServerID(serverid);
+// 	widgets[currentVideoIndex_]->setSession(nSession);
+	return NULL;// widgets[currentVideoIndex_++];
 }
 
 void VideoPanel::CloseAllVideo()
@@ -115,9 +125,10 @@ void VideoPanel::setVideoOffLine(int nSession)
 	{
 		if (widgets[i]->getSession() == nSession)
 		{
-			widgets[i]->setSession(-1);
-			widgets[i]->clear();
-			currentVideoIndex_--;
+			widgets[i]->initFlow();
+// 			widgets[i]->setSession(-1);
+// 			widgets[i]->clear();
+			//currentVideoIndex_--;
 		}
 	}
 }

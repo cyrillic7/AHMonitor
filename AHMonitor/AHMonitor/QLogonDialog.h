@@ -17,6 +17,10 @@ public:
 	QLogonDialog(QWidget *parent = 0);
 	virtual ~QLogonDialog();
 
+	QString szAccounts;
+	QString szPassword;
+	QString szAddress;
+	QString szPort;
 protected:
 	QLineEdit* pAccountEdit_;
 	QLineEdit* pPasswordEdit_;

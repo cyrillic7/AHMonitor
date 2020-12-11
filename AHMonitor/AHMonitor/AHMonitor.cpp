@@ -3,12 +3,12 @@
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QSplitter>
 extern "C"
 {
 #include "libavformat/avformat.h"
 };
 #pragma execution_character_set("utf-8")
-
 //INT64 _h264Handle = 0;
 void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData)
 {
@@ -27,13 +27,14 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	case MP_EVENT_CAMJOIN:
 	{
 		AHMonitor* pMonitor = (AHMonitor*)pAppData;
-		pMonitor->updateCamOnLine(nIndex,true);
+		pMonitor->updateCamOnLine(nIndex, true);
 	}
 	break;
 	case MP_EVENT_CAMEXIT:
 	{
 		AHMonitor* pMonitor = (AHMonitor*)pAppData;
 		pMonitor->updateCamOnLine(nIndex, false);
+
 	}
 		break;
 	case MP_EVENT_WATERMARK_LOW:
@@ -41,10 +42,22 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	case MP_EVENT_WATERMARK_HIGH:
 		break;
 	case MP_EVENT_USER_LOGIN:
+	{
+		/*QMessageBox::information(NULL, "Error", "MP_EVENT_USER_LOGIN",
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+	}
 		break;
 	case MP_EVENT_USER_LOGOUT:
+	{
+		/*QMessageBox::information(NULL, "Error", "MP_EVENT_USER_LOGOUT",
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+	}
 		break;
 	case MP_EVENT_USER_PWD_ERROR:
+	{
+		/*QMessageBox::information(NULL, "Error", "MP_EVENT_USER_PWD_ERROR",
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+	}
 		break;
 	case MP_EVENT_SERVER_DISCONNECT:
 		break;
@@ -74,13 +87,14 @@ AHMonitor::AHMonitor(QWidget *parent)
 	: QMainWindow(parent)
 {
 	//ui.setupUi(this);
-
 	pSDisConWidget_ = new QSDisConWidget(this);
 	pSDisConWidget_->hide();
 	connect(pSDisConWidget_, SIGNAL(serverConnect()), this, SLOT(onServerConnect()));
 	connect(pSDisConWidget_, SIGNAL(serverDisConnect(const QString&)), this, SLOT(serverDisCon(const QString&)));
 
 	pLogonDialog_ = new QLogonDialog(this);
+	MsgShowWidget_ = new Widget;
+	connect(this, SIGNAL(showMsg(QString, QString, QString)), MsgShowWidget_,SLOT(setMsg(QString, QString, QString)));
 	//pLogonDialog_->move((qApp->desktop()->availableGeometry().width() - width()) / 2 + qApp->desktop()->availableGeometry().x(),
 	//	(qApp->desktop()->availableGeometry().height() - height()) / 2 + qApp->desktop()->availableGeometry().y());
 
@@ -93,24 +107,36 @@ AHMonitor::AHMonitor(QWidget *parent)
 	m_pPlayerManager = new CPlayerManager;
 	m_pPlayerManager->setPanelWidget(pVidoePanel_Widget_);
 
+	QSplitter *splitterMain = new QSplitter(Qt::Horizontal, this);
+	splitterMain->setOpaqueResize(true);
+	splitterMain->setChildrenCollapsible(false);
+
+
 	QMainWidget = new QWidget;
 	this->setCentralWidget(QMainWidget);
 
 	pTreeWidget_ = new QServerTreeWidget(this);
-	pTreeWidget_->setMaximumWidth(280);
+	pTreeWidget_->setMinimumWidth(250);
+	pTreeWidget_->setMaximumWidth(350);
 
 	QGridLayout* pMainLayout = new QGridLayout;
 	QVBoxLayout* pControlLayout = new QVBoxLayout;
-	pControlLayout->addWidget(pTreeWidget_);
+	/*pControlLayout->addWidget(pTreeWidget_);
+
 	pMainLayout->addLayout(pControlLayout, 0, 0);
 
 	pMainLayout->addWidget(pVidoePanel_Widget_, 0, 1);
 
-	pMainLayout->addWidget(pToolsSplit_, 0, 2);
+	pMainLayout->addWidget(pToolsSplit_, 0, 2);*/
 
+	splitterMain->addWidget(pTreeWidget_);
+	splitterMain->addWidget(pVidoePanel_Widget_);
+	splitterMain->addWidget(pToolsSplit_);
+
+	pMainLayout->addWidget(splitterMain);
 	QMainWidget->setLayout(pMainLayout);
 
-
+	//updateCamOnLine(1, true);
 	//创建动作、菜单、工具栏
 	createActions();
 	createMenus();
@@ -156,6 +182,51 @@ void AHMonitor::updateCamOnLine(int nSession, bool bOnline)
 {
 	pTreeWidget_->updateCamLine(nSession, bOnline);
 	pVidoePanel_Widget_->setVideoOffLine(nSession);
+
+	QString strTitle;
+	if (bOnline == true)
+	{
+		strTitle = "视频加入";
+	}
+	else
+	{
+		strTitle = "视频离线";
+	}
+	emit showMsg(strTitle, QString::number(nSession),NULL);
+	/*QMessageBox::information(NULL, "Error", "视频",
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+	//Widget w;
+
+	/*if (bOnline == true)
+	{
+		QString strInfo = "视频ID:" + QString::number(nSession);
+		MsgShowWidget_->setMsg("视频加入", strInfo, NULL);
+	}
+	else
+	{
+		QString strInfo = "视频ID:" + QString::number(nSession);
+		MsgShowWidget_->setMsg("视频离线", strInfo, NULL);
+	}
+	MsgShowWidget_->showAsQQ();*/
+}
+
+int AHMonitor::serverConnection(QString szAccounts, QString szPassword, QString szAddress, QString szPort)
+{
+	CCameraMngr* cameraManager = CCameraMngr::getInstance();
+	cameraManager->SetCallbackFunc(UIEventCallBackHandler, this);
+
+	CAM_SERVER_INFO serverInfo;
+	if (cameraManager->ConnectServer(szAddress.toStdString().c_str(), szPort.toInt(), szAccounts.toStdString().c_str(), szPassword.toStdString().c_str(), &serverInfo) != MP_ENG_OK)
+	{
+		QMessageBox::information(NULL, "Error", "链接失败",
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		return -1;
+	}
+
+	ServerManager* pServerManger = ServerManager::getInstance();
+	pServerManger->addServerNode(serverInfo.nCamServerID, cameraManager, &serverInfo);
+
+	return 0;
 }
 
 void AHMonitor::createActions()
@@ -190,6 +261,9 @@ void AHMonitor::onServerConnect()
 {
 	if (pLogonDialog_->exec() == QDialog::Accepted)
 	{
+		if (serverConnection(pLogonDialog_->szAccounts, pLogonDialog_->szPassword, pLogonDialog_->szAddress, pLogonDialog_->szPort) == -1)
+			return;
+
 		updateDisConWidget();
 		//updateDisConWidget();
 		pTreeWidget_->updateServerTreeItem();

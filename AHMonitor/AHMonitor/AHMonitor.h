@@ -13,6 +13,7 @@
 #include "QLogonDialog.h"
 #include "QToolsSplit.h"
 #include "QSDisConWidget.h"
+#include "widget.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -26,11 +27,15 @@ public:
 	QServerTreeWidget* pTreeWidget_;
 	VideoPanel* pVidoePanel_Widget_;
 	QSDisConWidget* pSDisConWidget_;
+
 private:
 	Ui::AHMonitorClass ui;
 
 	bool av_register = false;
+
+	//CCameraMngr* cameraManager;
 private:
+	Widget*		MsgShowWidget_;
 	QWidget*	QMainWidget;
 
 	QMenu *  LinkMenu_;
@@ -52,13 +57,16 @@ private:
 	struct AVFrame *pAVFrame_decoder = NULL;
 	struct SwsContext* pImageConvertCtx_decoder = NULL;
 	struct AVFrame *pFrameYUV_decoder = NULL;*/
-
+signals:
+	void showMsg(QString title, QString content, QString url);
 public:
 	void updateTreeWidget();
 
 	void updateDisConWidget();
 
 	void updateCamOnLine(int nSession, bool bOnline);
+
+	int serverConnection(QString szAccounts, QString szPassword, QString szAddress, QString szPort);
 
 private:
 	void createActions();

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	format.setProfile(QSurfaceFormat::CoreProfile);
 	QSurfaceFormat::setDefaultFormat(format);*/
 	//QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
-
+	qRegisterMetaType<QVector<int>>("QVector<int>");
 	QApplication a(argc, argv);
 
 	//QSurfaceFormat format;
@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
 	/*QLogonDialog logonDlg;*/
 	if (w.pLogonDialog_->exec() == QDialog::Accepted)
 	{
+		if (w.serverConnection(w.pLogonDialog_->szAccounts, w.pLogonDialog_->szPassword, w.pLogonDialog_->szAddress, w.pLogonDialog_->szPort) == -1)
+			return -1;
+
 		w.showMaximized();
 		w.updateTreeWidget();
 		w.updateDisConWidget();

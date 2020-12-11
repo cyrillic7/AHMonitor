@@ -3,6 +3,7 @@
 #include <QGridLayout>
 #include <QDesktopWidget>
 #include <QApplication>
+#include "AHMonitor.h"
 #pragma execution_character_set("utf-8")
 QLogonDialog::QLogonDialog(QWidget *parent):QDialog(parent)
 {
@@ -60,14 +61,14 @@ QLogonDialog::~QLogonDialog()
 
 void QLogonDialog::onLogonClicked()
 {
-	QString szAccounts = pAccountEdit_->text();
-	QString szPassword = pPasswordEdit_->text();
-	QString szAddress = pAddressEdit_->text();
-	QString szPort = pPortEdit_->text();
+	 szAccounts = pAccountEdit_->text();
+	 szPassword = pPasswordEdit_->text();
+	 szAddress = pAddressEdit_->text();
+	 szPort = pPortEdit_->text();
 
 
-	CCameraMngr* cameraManager = CCameraMngr::getInstance();
-	cameraManager->SetCallbackFunc(UIEventCallBackHandler,this->parent());
+	/*CCameraMngr* cameraManager = CCameraMngr::getInstance();
+	cameraManager->SetCallbackFunc(UIEventCallBackHandler,AHMonitor::getInstance());
 
 	CAM_SERVER_INFO serverInfo;
 	if (cameraManager->ConnectServer(szAddress.toStdString().c_str(), szPort.toInt(), szAccounts.toStdString().c_str(), szPassword.toStdString().c_str(), &serverInfo) != MP_ENG_OK)
@@ -78,7 +79,7 @@ void QLogonDialog::onLogonClicked()
 	}
 
 	ServerManager* pServerManger = ServerManager::getInstance();
-	pServerManger->addServerNode(serverInfo.nCamServerID, cameraManager, &serverInfo);
+	pServerManger->addServerNode(serverInfo.nCamServerID, cameraManager, &serverInfo);*/
 
 	//int connectedServerID = serverInfo.nCamServerID;
 

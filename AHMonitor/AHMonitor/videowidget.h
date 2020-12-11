@@ -21,6 +21,7 @@
 #include <QList>
 #include <iostream>
 #include <QThread>
+#include <QLabel>
 #include "GLYuvWidget.h"
 #include "XAudioThread.h"
 #include "XVideoThread.h"
@@ -28,6 +29,7 @@
 extern "C" {
 #include <libavcodec/avcodec.h>
 }
+
 using namespace std;
 class QTimer;
 class VideoWidget;
@@ -111,18 +113,18 @@ protected:
 	void leaveEvent(QEvent *);
 	void dropEvent(QDropEvent *event);
 	void dragEnterEvent(QDragEnterEvent *event);
-	void paintEvent(QPaintEvent *);
-	void drawBorder(QPainter *painter);
-	void drawBg(QPainter *painter);
-	void drawImg(QPainter *painter, QImage img);
-	void drawOSD(QPainter *painter,
-		bool osdVisible,
-		int osdFontSize,
-		const QString &osdText,
-		const QColor &osdColor,
-		const QImage &osdImage,
-		const OSDFormat &osdFormat,
-		const OSDPosition &osdPosition);
+// 	void paintEvent(QPaintEvent *);
+// 	void drawBorder(QPainter *painter);
+// 	void drawBg(QPainter *painter);
+// 	void drawImg(QPainter *painter, QImage img);
+// 	void drawOSD(QPainter *painter,
+// 		bool osdVisible,
+// 		int osdFontSize,
+// 		const QString &osdText,
+// 		const QColor &osdColor,
+// 		const QImage &osdImage,
+// 		const OSDFormat &osdFormat,
+// 		const OSDPosition &osdPosition);
 
 public:
 	XAudioThread* at = 0;
@@ -136,7 +138,10 @@ public:
     QTimer *timerCheck;             //定时器检查设备是否在线
     QImage image;                   //要显示的图片
     QWidget *flowPanel;             //悬浮条面板
-//	QLabel* pImageLable_;
+	
+	QLabel* pVideoSession_;
+	QLabel* pFPSLable_;
+	QLabel* pBindWidth_;
 	GLYuvWidget* pXvideoWidget_;	//
 
     bool copyImage;                 //是否拷贝图片
@@ -179,12 +184,21 @@ private:
     //初始化悬浮条样式
     void initFlowStyle();
 
+	void showLabel(bool bshow);
 public:
+	void initFlow();
 	int getSession() { return _nSession; }
-	void setSession(int nSession) { _nSession = nSession; }
+	void setSession(int nSession) { 
+		showLabel(true);
+		_nSession = nSession;
+		pVideoSession_->setText(QString::number(_nSession));
+	}
 	void setServerID(int serverid) { _serverID = serverid; }
 
 	void setFullScreen(bool bScreen);
+
+	void setfps(QString fps);
+	void setbindwidth(QString bindwidth);
 
     QImage getImage()               const;
     QDateTime getLastTime()         const;
@@ -352,8 +366,6 @@ public slots:
     void setOSD2Position(const OSDPosition &osdPosition);
 
 	bool ish265IFrame(void * pParam);
-
-	void setVideoh264Data(void * pData);
 
 	bool isIFrame(void * pParam);
 
