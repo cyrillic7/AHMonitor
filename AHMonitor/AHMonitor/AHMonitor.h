@@ -14,6 +14,9 @@
 #include "QToolsSplit.h"
 #include "QSDisConWidget.h"
 #include "widget.h"
+#include <QTabWidget>
+#include "QTerminalControl.h"
+#include "QPTZControl.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -27,7 +30,9 @@ public:
 	QServerTreeWidget* pTreeWidget_;
 	VideoPanel* pVidoePanel_Widget_;
 	QSDisConWidget* pSDisConWidget_;
-
+	QTabWidget*		pTabWidget_;
+	QTerminalControl* pTerminalCtl_;
+	QPTZControl* pPTZControl_;
 private:
 	Ui::AHMonitorClass ui;
 

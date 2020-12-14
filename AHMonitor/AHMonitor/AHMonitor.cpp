@@ -115,9 +115,28 @@ AHMonitor::AHMonitor(QWidget *parent)
 	QMainWidget = new QWidget;
 	this->setCentralWidget(QMainWidget);
 
+	QSplitter *splitterL = new QSplitter(Qt::Vertical, this);
+	//splitterL->setMinimumHeight(300);
+	splitterL->setMinimumWidth(280);
+	splitterL->setMaximumWidth(350);
+
+	pTabWidget_ = new QTabWidget(this);
+	pTabWidget_->setMaximumHeight(350);
+	pTabWidget_->setMinimumWidth(280);
+	pTabWidget_->setMaximumWidth(350);
+
+	pPTZControl_ = new QPTZControl(this);
+	pTabWidget_->addTab(pPTZControl_, "PTZ¿ØÖÆ");
+
+	pTerminalCtl_ = new QTerminalControl(this);
+	pTabWidget_->addTab(pTerminalCtl_, "ÖÕ¶Ë¿ØÖÆ");
+
 	pTreeWidget_ = new QServerTreeWidget(this);
 	pTreeWidget_->setMinimumWidth(250);
 	pTreeWidget_->setMaximumWidth(350);
+
+	splitterL->addWidget(pTabWidget_);
+	splitterL->addWidget(pTreeWidget_);
 
 	QGridLayout* pMainLayout = new QGridLayout;
 	QVBoxLayout* pControlLayout = new QVBoxLayout;
@@ -129,7 +148,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 
 	pMainLayout->addWidget(pToolsSplit_, 0, 2);*/
 
-	splitterMain->addWidget(pTreeWidget_);
+	splitterMain->addWidget(splitterL);
 	splitterMain->addWidget(pVidoePanel_Widget_);
 	splitterMain->addWidget(pToolsSplit_);
 
