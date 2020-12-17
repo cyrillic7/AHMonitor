@@ -8,7 +8,7 @@
 
 #include <QWidget>
 #include "videowidget.h"
-
+#include "QMapWidget.h"
 class QMenu;
 class QLabel;
 class QGridLayout;
@@ -60,6 +60,7 @@ public:
 
 	void setVideoOffLine(int nSession);
 
+	//QMapWidget* mapWidget;
 private slots:
     void initControl();
     void initForm();
@@ -94,6 +95,7 @@ public slots:
     void change_video_25(int index);
     void change_video_36(int index);
     void change_video_64(int index);
+	void change_video_map(int index);
 
 public slots:
 	void hide_video_all();

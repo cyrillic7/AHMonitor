@@ -8,6 +8,7 @@
 #include <QSlider>
 #include "QPTZCameraControl.h"
 #include "QPTZPosition.h"
+#include "QPTZAction.h"
 
 class QPTZControl :
 	public QWidget
@@ -20,7 +21,7 @@ public:
 	GaugeCloud* pGauCloude_;
 	QPTZCameraControl* pCameraCtl_;
 	QPTZPosition* pPositionCtl_;
-
+	QPTZAction* pActionCtl_;
 public slots:
 	void mouseClick(int position);
 };

@@ -23,6 +23,27 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	case MP_EVENT_ERROR:
 		break;
 	case MP_EVENT_ACK:
+	{
+		AHMonitor* pMonitor = (AHMonitor*)pAppData;
+		//TRACE1("return: %s", (char*)pParam);
+		QString ReturnStr = QString(QLatin1String((char*)pParam));
+		cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
+
+		pMonitor->decodeACKString(ReturnStr);
+
+		ControlCommandHelper helper;
+		Return buffer[20];
+		int len = helper.ParseReturnString((char*)pParam, buffer, sizeof(buffer));
+		/*QString str = QString::fromStdString(pParam);*/
+		//cout << "ParseReturnString :" << pParam << endl;
+		for (int i = 0; i < len; i++)
+		{
+			TCHAR info[50];
+			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
+			/*AfxMessageBox(info);*/
+			cout << "MP_EVENT_ACK info:" << info << endl;
+		}
+	}
 		break;
 	case MP_EVENT_CAMJOIN:
 	{
@@ -121,7 +142,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 	splitterL->setMaximumWidth(350);
 
 	pTabWidget_ = new QTabWidget(this);
-	pTabWidget_->setMaximumHeight(350);
+	pTabWidget_->setMaximumHeight(330);
 	pTabWidget_->setMinimumWidth(280);
 	pTabWidget_->setMaximumWidth(350);
 
@@ -129,11 +150,19 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pTabWidget_->addTab(pPTZControl_, "PTZ控制");
 
 	pTerminalCtl_ = new QTerminalControl(this);
+	pTerminalCtl_->setEnabled(false);
 	pTabWidget_->addTab(pTerminalCtl_, "终端控制");
+	connect(pTerminalCtl_->pDefault_, SIGNAL(clicked()), this, SLOT(clickTerDefault()));
+	connect(pTerminalCtl_->pSet_, SIGNAL(clicked()), this, SLOT(clickTerSet()));
+	connect(pTerminalCtl_->pRestart_, SIGNAL(clicked()), this, SLOT(clickTerRestart()));
+
+	pAlarmWidget_ = new QAlarmWidget(this);
+	pTabWidget_->addTab(pAlarmWidget_, "报警输出");
 
 	pTreeWidget_ = new QServerTreeWidget(this);
 	pTreeWidget_->setMinimumWidth(250);
 	pTreeWidget_->setMaximumWidth(350);
+	connect(pTreeWidget_, SIGNAL(recItemSession(int,int)), this, SLOT(setItemSession(int,int)));
 
 	splitterL->addWidget(pTabWidget_);
 	splitterL->addWidget(pTreeWidget_);
@@ -276,6 +305,21 @@ void AHMonitor::createToolBars()
 	LinkTool_->addAction(LinkAction_);
 }
 
+void AHMonitor::decodeACKString(QString AckString)
+{
+	QStringList rtString;
+	rtString = AckString.split(" ");
+	for (int i=0;i<rtString.count();i++)
+	{
+		cout << rtString[i].toStdString() << endl;
+	}
+
+	if (rtString[2].toInt() == pTerminalCtl_->getSession())
+	{
+		pTerminalCtl_->setVideoParam(rtString[4].toInt(), rtString[5].toInt(), rtString[6].toInt(), rtString[7].toInt(), rtString[8].toInt(), rtString[9].toInt(), rtString[10].toInt());
+	}
+}
+
 void AHMonitor::onServerConnect()
 {
 	if (pLogonDialog_->exec() == QDialog::Accepted)
@@ -327,3 +371,80 @@ void AHMonitor::serverDisCon(const QString & servername)
 
 	}
 }
+
+void AHMonitor::clickTerDefault()
+{
+
+}
+
+void AHMonitor::clickTerSet()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+	/*ControlCommandHelper helper;
+	char command[100];
+	helper.GenerateAutoScanCommand(session, true, command);
+	TRACE1("command: %s", command);
+	CCameraMngr::getInstance()->SendControlCmd(session, command);*/
+	ControlCommandHelper helper;
+	char command[100];
+	//int res = helper.GenerateSetVideoParamCommand(session, Big, 15,5, command);
+	SetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), pTerminalCtl_->getKeySpacing(), pTerminalCtl_->getmaxFPS(), pTerminalCtl_->getCodeMode(), pTerminalCtl_->getquality(), command);
+	TRACE1("command: %s", command);
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerNode->getCamerServerID() == serverid)
+		{
+			int ret = pServerNode->m_pCameraMngr->SendControlCmd(session, command);
+
+			cout << "SendControlCmdRET :" << ret << endl;
+		}
+	}
+
+	//CCameraMngr::getInstance()->SendControlCmd(session, command);
+
+}
+
+void AHMonitor::clickTerRestart()
+{
+
+}
+
+void AHMonitor::SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel, char* command)
+{
+	int randnum = rand();
+	sprintf(command, "TCONFIG %d,%d VideoParam %d %d %d %d %d 10 1000 55 55 50 50 1 0 0 0\r\n", randnum, camChannel, (int)size, KeySpacing, KeyFrame, CodeMode, CodeLevel);
+}
+
+void AHMonitor::setItemSession(int serverID,int session)
+{
+	pTerminalCtl_->setSession(session);
+	pTerminalCtl_->setServer(serverID);
+	if (session == -1)
+	{
+		pTerminalCtl_->setEnabled(false);
+		return;
+	}
+
+	pTerminalCtl_->setEnabled(true);
+
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerNode->getCamerServerID() == serverID)
+		{
+			int randn = rand();
+			char cmd[100];
+			sprintf(cmd, "TREADCONFIG %d,%d VideoParam\r\n", randn, session);
+			cout << "send: " << cmd << endl;
+			pServerNode->m_pCameraMngr->SendControlCmd(session, cmd);
+		}
+	}
+}
+

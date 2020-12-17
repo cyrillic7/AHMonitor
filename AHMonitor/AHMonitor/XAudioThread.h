@@ -36,6 +36,7 @@ public:
 	virtual ~XAudioThread();
 	void SetPause(bool isPause);
 	bool isPause = false;
+	unsigned char *pcm;// = new unsigned char[1024 * 1024 * 10];
 protected:
 	double volumeValue = 1.00;
 	std::mutex amux;

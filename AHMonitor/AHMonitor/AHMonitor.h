@@ -17,6 +17,7 @@
 #include <QTabWidget>
 #include "QTerminalControl.h"
 #include "QPTZControl.h"
+#include "QAlarmWidget.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -33,6 +34,7 @@ public:
 	QTabWidget*		pTabWidget_;
 	QTerminalControl* pTerminalCtl_;
 	QPTZControl* pPTZControl_;
+	QAlarmWidget* pAlarmWidget_;
 private:
 	Ui::AHMonitorClass ui;
 
@@ -73,6 +75,7 @@ public:
 
 	int serverConnection(QString szAccounts, QString szPassword, QString szAddress, QString szPort);
 
+	void decodeACKString(QString AckString);
 private:
 	void createActions();
 	void createMenus();
@@ -82,4 +85,12 @@ public slots:
 	void onServerConnect();
 	void onServerDisConnect();
 	void serverDisCon(const QString & servername);
+
+	void clickTerDefault();
+	void clickTerSet();
+	void clickTerRestart();
+
+	void SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel, char * command);
+
+	void setItemSession(int serverID,int session);
 };

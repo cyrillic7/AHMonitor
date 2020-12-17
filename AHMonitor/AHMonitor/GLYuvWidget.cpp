@@ -246,6 +246,8 @@ void GLYuvWidget::paintGL()
 	glBindTexture(GL_TEXTURE_2D, idY); //绑定y分量纹理对象id到激活的纹理单元
 									   //使用内存中的数据创建真正的y分量纹理数据
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, videoW, videoH, 0, GL_RED, GL_UNSIGNED_BYTE, yuvPtr);
+
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, videoW, videoH, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, (char*)yuvPtr);
 	//https://blog.csdn.net/xipiaoyouzi/article/details/53584798 纹理参数解析
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -256,6 +258,8 @@ void GLYuvWidget::paintGL()
 	glBindTexture(GL_TEXTURE_2D, idU);
 	//使用内存中的数据创建真正的u分量纹理数据
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, videoW >> 1, videoH >> 1, 0, GL_RED, GL_UNSIGNED_BYTE, yuvPtr + videoW * videoH);
+
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, videoW / 2, videoH / 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, (char*)yuvPtr + videoW*videoH);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -265,6 +269,8 @@ void GLYuvWidget::paintGL()
 	glBindTexture(GL_TEXTURE_2D, idV);
 	//使用内存中的数据创建真正的v分量纹理数据
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, videoW >> 1, videoH >> 1, 0, GL_RED, GL_UNSIGNED_BYTE, yuvPtr + videoW*videoH * 5 / 4);
+
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, videoW / 2, videoH / 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, (char*)yuvPtr + videoW*videoH * 5 / 4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

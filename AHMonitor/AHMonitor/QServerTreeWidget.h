@@ -20,8 +20,13 @@ public:
 
 	void deleteServerItem(QString server);
 
+signals:
+	void recItemSession(int serverId,int session);
+
 public slots:
 	void TerminalItemDoubleClicked(QTreeWidgetItem* WidgetItem, int column);
+
+	void TerminalItemClicked(QTreeWidgetItem* WidgetItem, int column);
 };
 
 #endif

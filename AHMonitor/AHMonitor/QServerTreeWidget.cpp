@@ -6,6 +6,7 @@ QServerTreeWidget::QServerTreeWidget(QWidget *parent) : QTreeWidget(parent)
 {
 
 	connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(TerminalItemDoubleClicked(QTreeWidgetItem*, int)));
+	connect(this, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(TerminalItemClicked(QTreeWidgetItem*, int)));
 }
 
 
@@ -134,6 +135,33 @@ void QServerTreeWidget::deleteServerItem(QString server)
 		if (strItem == server)
 		{
 			delete item;
+		}
+	}
+}
+
+void QServerTreeWidget::TerminalItemClicked(QTreeWidgetItem * WidgetItem, int column)
+{
+	if (WidgetItem->parent()->parent())
+	{
+		QString strParentItem = WidgetItem->parent()->parent()->text(column);
+		int connectServerID;
+		ServerManager* pServerMng = ServerManager::getInstance();
+		if (pServerMng == NULL)
+			return;
+		for (int i = 0; i < pServerMng->getServerCount(); i++)
+		{
+			CServerNode* pServerNode = pServerMng->getServerNode(i);
+			QString strItem = WidgetItem->text(column);
+			int nSession = pServerNode->getSessionID(strItem);
+			if (nSession == -1)
+				continue;
+			if (strParentItem == GlobalFun::charToqstirng(pServerNode->m_pCamServerInfo->szCamServerName))
+			{
+				connectServerID = pServerNode->getCamerServerID();
+			}
+
+			emit recItemSession(connectServerID,nSession);
+			return;
 		}
 	}
 }

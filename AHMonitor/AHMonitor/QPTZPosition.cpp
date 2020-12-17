@@ -33,12 +33,12 @@ QPTZPosition::QPTZPosition(QWidget *parent) : QWidget(parent)
 		connect(btn, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
 		//设置标识,用来区别按钮
 		btn->setObjectName(btns.at(i));
-		//
+		//设置文字内容
 		btn->setText(btns.at(i));
 		//设置固定宽度
-		btn->setFixedWidth(35);
+		btn->setFixedWidth(30);
 		//设置固定宽度
-		btn->setFixedHeight(35);
+		btn->setFixedHeight(30);
 		//设置焦点策略为无焦点,避免单击后焦点跑到按钮上
 		btn->setFocusPolicy(Qt::NoFocus);
 

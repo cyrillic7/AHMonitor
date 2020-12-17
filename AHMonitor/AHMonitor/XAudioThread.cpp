@@ -91,6 +91,7 @@ bool XAudioThread::init(AVCodecID codeID, int format,int sampleRate, int channel
 		cout << "audio XDecode open failed!" << endl;
 		re = false;
 	}
+	/*unsigned char **/pcm = new unsigned char[1024 * 1024 * 10];
 	amux.unlock();
 	cout << "XAudioThread::Open :" << re << endl;
 
@@ -108,7 +109,7 @@ void XAudioThread::SetPause(bool isPause)
 
 void XAudioThread::run()
 {
-	unsigned char *pcm = new unsigned char[1024 * 1024 * 10];
+	//unsigned char *pcm = new unsigned char[1024 * 1024 * 10];
 	while (!isExit)
 	{
 		amux.lock();

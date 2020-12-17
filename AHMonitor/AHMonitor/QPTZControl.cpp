@@ -14,10 +14,13 @@ QPTZControl::QPTZControl(QWidget *parent) : QWidget(parent)
 	pCameraCtl_ = new QPTZCameraControl(this);
 
 	pPositionCtl_ = new QPTZPosition(this);
-
+	pPositionCtl_->setMinimumSize(100, 100);
+	pActionCtl_ = new QPTZAction(this);
+	pActionCtl_->setMinimumSize(100, 100);
 	mainlayout->addWidget(pGauCloude_,0,0,2,1);
 	mainlayout->addWidget(pCameraCtl_, 0, 1,2,1);
 	mainlayout->addWidget(pPositionCtl_, 3, 0);
+	mainlayout->addWidget(pActionCtl_, 3, 1);
 
 	this->setLayout(mainlayout);
 }

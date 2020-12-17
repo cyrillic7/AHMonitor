@@ -100,7 +100,8 @@ void QToolsSplit::GroupbuttonClick(int btTag)
 	break;
 	case 7:
 	{
-		pVideoPanel_->change_video_4(0);
+		//pVideoPanel_->change_video_4(0);
+		pVideoPanel_->change_video_map(0);
 	}
 	break;
 	case 8:

@@ -152,7 +152,7 @@ void VideoPanel::initForm()
     this->setStyleSheet(qss.join(""));
 
     videoMax = false;
-    videoCount = 64;
+    videoCount = 65;
     videoType = "1";
 
     for (int i = 0; i < videoCount; i++) {
@@ -168,6 +168,8 @@ void VideoPanel::initForm()
         //widget->setPixmap(QPixmap(":/bg_novideo.png"));
         widgets.append(widget);
     }
+
+	//mapWidget = new QMapWidget(this);
 }
 
 void VideoPanel::initMenu()
@@ -518,6 +520,8 @@ void VideoPanel::hide_video_all()
         gridLayout->removeWidget(widgets.at(i));
         widgets.at(i)->setVisible(false);
     }
+	//gridLayout->removeWidget(mapWidget);
+	//mapWidget->setVisible(false);
 }
 
 void VideoPanel::change_video(int index, int flag)
@@ -698,5 +702,24 @@ void VideoPanel::change_video_64(int index)
 {
     hide_video_all();
     change_video(index, 8);
+}
+
+void VideoPanel::change_video_map(int index)
+{
+	hide_video_all();
+	//mapWidget->loadMap();
+	if (index == 0) {
+		//gridLayout->addWidget(mapWidget, 0, 0, 3, 3);
+		//gridLayout->addWidget(widgets.at(0), 0, 0, 2, 2);
+		gridLayout->addWidget(widgets.at(0), 0, 3, 1, 1);
+		gridLayout->addWidget(widgets.at(1), 1, 3, 1, 1);
+		gridLayout->addWidget(widgets.at(2), 2, 3, 1, 1);
+
+		for (int i = 0; i < 3; i++) {
+			widgets.at(i)->setVisible(true);
+		}
+
+		//mapWidget->setVisible(true);
+	}
 }
 
