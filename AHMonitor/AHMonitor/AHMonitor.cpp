@@ -12,6 +12,10 @@ extern "C"
 //INT64 _h264Handle = 0;
 void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *pAppData)
 {
+	TCHAR buffer[256];
+	_stprintf_s(buffer, 256, _T("UI event raised: event code %d, index %d, param 0x%X, application data 0x%X.\n"),
+		event, nIndex, (DWORD)pParam, (DWORD)pAppData);
+	OutputDebugString(buffer);
 	switch (event)
 	{
 	case MP_EVENT_FPS:
@@ -29,10 +33,8 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 		QString ReturnStr = QString(QLatin1String((char*)pParam));
 		cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
 
-		pMonitor->decodeACKString(ReturnStr);
-
 		ControlCommandHelper helper;
-		Return buffer[20];
+		Return buffer[10];
 		int len = helper.ParseReturnString((char*)pParam, buffer, sizeof(buffer));
 		/*QString str = QString::fromStdString(pParam);*/
 		//cout << "ParseReturnString :" << pParam << endl;
@@ -40,9 +42,11 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 		{
 			TCHAR info[50];
 			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
-			/*AfxMessageBox(info);*/
-			cout << "MP_EVENT_ACK info:" << info << endl;
+			QString s = QString(QLatin1String((char*)info));
+			cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
 		}
+		if(len == 0)
+			pMonitor->decodeACKString(ReturnStr);
 	}
 		break;
 	case MP_EVENT_CAMJOIN:
@@ -89,6 +93,23 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	case MP_EVENT_MOVE_STOP:
 		break;
 	case MP_EVENT_ALARM:
+	{
+		QString ReturnStr = QString(QLatin1String((char*)pParam));
+		cout << "MP_EVENT_ALARM return :" << ReturnStr.toStdString() << endl;
+
+		ControlCommandHelper helper;
+		Return buffer[10];
+		int len = helper.ParseReturnString((char*)pParam, buffer, sizeof(buffer));
+		/*QString str = QString::fromStdString(pParam);*/
+		//cout << "ParseReturnString :" << pParam << endl;
+		for (int i = 0; i < len; i++)
+		{
+			TCHAR info[50];
+			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
+			/*AfxMessageBox(info);*/
+			cout << "MP_EVENT_ACK info:" << info << endl;
+		}
+	}
 		break;
 	case MP_EVENT_DISK_LOW:
 		break;
@@ -98,7 +119,6 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	{
 	
 	}
-
 	break;
 	}
 }
@@ -148,6 +168,8 @@ AHMonitor::AHMonitor(QWidget *parent)
 
 	pPTZControl_ = new QPTZControl(this);
 	pTabWidget_->addTab(pPTZControl_, "PTZ控制");
+	pPTZControl_->setEnabled(false);
+	connect(pPTZControl_, SIGNAL(gauCloudClicked(int)), this, SLOT(cloudCicked(int)));
 
 	pTerminalCtl_ = new QTerminalControl(this);
 	pTerminalCtl_->setEnabled(false);
@@ -158,6 +180,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 
 	pAlarmWidget_ = new QAlarmWidget(this);
 	pTabWidget_->addTab(pAlarmWidget_, "报警输出");
+	pAlarmWidget_->setEnabled(false);
 
 	pTreeWidget_ = new QServerTreeWidget(this);
 	pTreeWidget_->setMinimumWidth(250);
@@ -240,7 +263,7 @@ void AHMonitor::updateCamOnLine(int nSession, bool bOnline)
 	{
 		strTitle = "视频离线";
 	}
-	emit showMsg(strTitle, QString::number(nSession),NULL);
+	emit showMsg(strTitle, "视频ID:"+QString::number(nSession),NULL);
 	/*QMessageBox::information(NULL, "Error", "视频",
 		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
 	//Widget w;
@@ -307,7 +330,8 @@ void AHMonitor::createToolBars()
 
 void AHMonitor::decodeACKString(QString AckString)
 {
-	QStringList rtString;
+	/*QStringList rtString;*/
+	rtString.clear();
 	rtString = AckString.split(" ");
 	for (int i=0;i<rtString.count();i++)
 	{
@@ -391,18 +415,26 @@ void AHMonitor::clickTerSet()
 	CCameraMngr::getInstance()->SendControlCmd(session, command);*/
 	ControlCommandHelper helper;
 	char command[100];
-	//int res = helper.GenerateSetVideoParamCommand(session, Big, 15,5, command);
-	SetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), pTerminalCtl_->getKeySpacing(), pTerminalCtl_->getmaxFPS(), pTerminalCtl_->getCodeMode(), pTerminalCtl_->getquality(), command);
-	TRACE1("command: %s", command);
+	//int res = helper.GenerateSetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), 15,pTerminalCtl_->getquality(), command);
+	SetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), pTerminalCtl_->getKeySpacing(), pTerminalCtl_->getmaxFPS(), pTerminalCtl_->getCodeMode(), pTerminalCtl_->getquality(), pTerminalCtl_->getQuaStep(), pTerminalCtl_->getCodeRate(), command);
+	TRACE1("command: %s", QString::fromStdString(command));
+	QString str = QString::fromStdString(command);
+	cout << "command:" << str.toStdString() << endl;
 	ServerManager* pServerMng = ServerManager::getInstance();
 	for (int i = 0; i < pServerMng->getServerCount(); i++)
 	{
 		CServerNode* pServerNode = pServerMng->getServerNode(i);
 		if (pServerNode->getCamerServerID() == serverid)
 		{
-			int ret = pServerNode->m_pCameraMngr->SendControlCmd(session, command);
+			int ret = pServerNode->m_pCameraMngr->SendControlCmd(session, str.toStdString().c_str());
 
-			cout << "SendControlCmdRET :" << ret << endl;
+			//cout << "SendControlCmdRET :" << ret << endl;
+			if (ret == 0)
+			{
+				emit showMsg("命令发送成功", "命令:设置视频参数", NULL);
+			}else
+				emit showMsg("命令发送失败", "命令:设置视频参数", NULL);
+			
 		}
 	}
 
@@ -412,13 +444,43 @@ void AHMonitor::clickTerSet()
 
 void AHMonitor::clickTerRestart()
 {
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
 
+	ControlCommandHelper helper;
+	char command[100];
+	int res = helper.GenerateRebootCommand(session, command);
+	QString strCmd = QString::fromStdString(command);
+	if (res != -1)
+	{
+		ServerManager* pServerMng = ServerManager::getInstance();
+		for (int i = 0; i < pServerMng->getServerCount(); i++)
+		{
+			CServerNode* pServerNode = pServerMng->getServerNode(i);
+			if (pServerNode->getCamerServerID() == serverid)
+			{
+				int ret = pServerNode->m_pCameraMngr->SendControlCmd(session, strCmd.toStdString().c_str());
+
+				//cout << "SendControlCmdRET :" << ret << endl;
+				if (ret == 0)
+				{
+					emit showMsg("命令发送成功", "命令:设备重启", NULL);
+				}
+				else
+					emit showMsg("命令发送失败", "命令:设备重启", NULL);
+			}
+		}
+	}
 }
 
-void AHMonitor::SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel, char* command)
+void AHMonitor::SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel, int QuaStep, int CodeRate, char* command)
 {
 	int randnum = rand();
-	sprintf(command, "TCONFIG %d,%d VideoParam %d %d %d %d %d 10 1000 55 55 50 50 1 0 0 0\r\n", randnum, camChannel, (int)size, KeySpacing, KeyFrame, CodeMode, CodeLevel);
+
+	sprintf(command, "TCONFIG %d,%d VideoParam %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\r\n", randnum, camChannel, (int)size, KeySpacing, KeyFrame, CodeMode, CodeLevel, QuaStep, CodeRate
+		,rtString[11].toInt(), rtString[12].toInt(),rtString[13].toInt(), rtString[14].toInt(), rtString[15].toInt(), rtString[16].toInt(), rtString[17].toInt(), rtString[18].toInt());
 }
 
 void AHMonitor::setItemSession(int serverID,int session)
@@ -431,6 +493,8 @@ void AHMonitor::setItemSession(int serverID,int session)
 		return;
 	}
 
+	pAlarmWidget_->setEnabled(true);
+	pPTZControl_->setEnabled(true);
 	pTerminalCtl_->setEnabled(true);
 
 	ServerManager* pServerMng = ServerManager::getInstance();
@@ -446,5 +510,90 @@ void AHMonitor::setItemSession(int serverID,int session)
 			pServerNode->m_pCameraMngr->SendControlCmd(session, cmd);
 		}
 	}
+}
+
+void AHMonitor::cloudCicked(int nPosition)
+{
+	/*QMessageBox::information(NULL, "Error", QString::number(nPosition),
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = 33;// pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerNode->getCamerServerID() == serverid)
+		{
+			pCamGr = pServerNode->m_pCameraMngr;
+		}
+	}
+	int ret = -1;
+	switch (nPosition)
+	{
+	case 0://下
+	{
+		ControlCommandHelper helper;
+		char command[100];
+		int res = helper.GenerateGoDownCommand(session, speeds, command);
+		//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+		QString strCmd = QString::fromStdString(command);
+		ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+		if (ret == 0)
+		{
+			emit showMsg("命令发送成功", "命令:向下移动", NULL);
+		}else
+			emit showMsg("命令发送失败", "命令:向下移动", NULL);
+	}
+	break;
+	case 2://左
+	{
+		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Left", speeds);
+		ret = pCamGr->SendControlCmd(session, command);
+		if (ret == 0)
+		{
+			emit showMsg("命令发送成功", "命令:向左移动", NULL);
+		}
+		else
+			emit showMsg("命令发送失败", "命令:向左移动", NULL);
+	}
+	break;
+	case 4://上
+	{
+		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Up", speeds);
+		ret = pCamGr->SendControlCmd(session, command);
+		if(ret == 0)
+		{
+			emit showMsg("命令发送成功", "命令:向上移动", NULL);
+		}
+		else
+			emit showMsg("命令发送失败", "命令:向上移动", NULL);
+	}
+	break;
+	case 6://右
+	{
+		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Right", speeds);
+		ret = pCamGr->SendControlCmd(session, command);
+		if (ret == 0)
+		{
+			emit showMsg("命令发送成功", "命令:向右移动", NULL);
+		}
+		else
+			emit showMsg("命令发送失败", "命令:向右移动", NULL);
+	}
+	break;
+	default:
+		break;
+	}
+
 }
 

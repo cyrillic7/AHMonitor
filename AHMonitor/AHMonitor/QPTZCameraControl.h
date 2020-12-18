@@ -13,6 +13,7 @@ public:
 	QPTZCameraControl(QWidget *parent);
 	virtual ~QPTZCameraControl();
 
+	int getSpeed();
 private:
 	QPushButton* zoomPlus;
 	QPushButton* zoomReduce;

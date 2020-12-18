@@ -15,6 +15,10 @@ QPTZCameraControl::QPTZCameraControl(QWidget *parent) : QWidget(parent)
 
 	pSpeedSlider = new QSlider(this);
 	pSpeedSlider->setOrientation(Qt::Horizontal);  // 水平方向
+	pSpeedSlider->setMinimum(0);  // 最小值
+	pSpeedSlider->setMaximum(100);  // 最大值
+	pSpeedSlider->setSingleStep(1);
+	pSpeedSlider->setValue(33);
 
 	QGridLayout* lLayout = new QGridLayout;
 
@@ -39,4 +43,9 @@ QPTZCameraControl::QPTZCameraControl(QWidget *parent) : QWidget(parent)
 
 QPTZCameraControl::~QPTZCameraControl()
 {
+}
+
+int QPTZCameraControl::getSpeed()
+{
+	return pSpeedSlider->value();
 }

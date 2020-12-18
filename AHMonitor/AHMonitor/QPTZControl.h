@@ -22,6 +22,11 @@ public:
 	QPTZCameraControl* pCameraCtl_;
 	QPTZPosition* pPositionCtl_;
 	QPTZAction* pActionCtl_;
+
+	int getSpeed();
+signals:
+	void gauCloudClicked(int nPosition);
+
 public slots:
 	void mouseClick(int position);
 };

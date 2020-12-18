@@ -29,6 +29,8 @@ public:
 	int getquality();
 	int getKeySpacing();
 	int getCodeMode();
+	int getQuaStep();
+	int getCodeRate();
 private:
 	int nSession_ = 0;
 	int nServer_ = 0;

@@ -90,7 +90,7 @@ QTerminalControl::~QTerminalControl()
 
 void QTerminalControl::setVideoParam(int size, int keyspace, int keyfps, int cmode, int clevel, int qstep, int crate)
 {
-	pCombResolution_->setCurrentIndex(size);
+	pCombResolution_->setCurrentIndex(size-1);
 	pKeySpacing_->setValue(keyspace);
 	pKeyFrame_->setValue(keyfps);
 	pCombCodeMode_->setCurrentIndex(cmode);
@@ -101,7 +101,7 @@ void QTerminalControl::setVideoParam(int size, int keyspace, int keyfps, int cmo
 
 int QTerminalControl::getVideoSize()
 {
-	int size = pCombResolution_->currentIndex();
+	int size = pCombResolution_->currentIndex()+1;
 	return size;
 }
 
@@ -127,4 +127,16 @@ int QTerminalControl::getCodeMode()
 {
 	int modeIndex = pCombCodeMode_->currentIndex();
 	return modeIndex;
+}
+
+int QTerminalControl::getQuaStep()
+{
+	int quaStep = pQuaStep_->text().toInt();
+	return quaStep;
+}
+
+int QTerminalControl::getCodeRate()
+{
+	int codeRate = pCodeRate_->text().toInt();
+	return codeRate;
 }

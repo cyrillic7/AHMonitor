@@ -8,7 +8,7 @@
 
 #include <QWidget>
 #include "videowidget.h"
-#include "QMapWidget.h"
+//#include "QMapWidget.h"
 class QMenu;
 class QLabel;
 class QGridLayout;

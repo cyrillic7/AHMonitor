@@ -42,6 +42,7 @@ private:
 
 	//CCameraMngr* cameraManager;
 private:
+	QStringList rtString;
 	Widget*		MsgShowWidget_;
 	QWidget*	QMainWidget;
 
@@ -90,7 +91,9 @@ public slots:
 	void clickTerSet();
 	void clickTerRestart();
 
-	void SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel, char * command);
+	void SetVideoParamCommand(int camChannel, VideoSize size, int KeySpacing, int KeyFrame, int CodeMode, int CodeLevel,int QuaStep,int CodeRate, char * command);
 
 	void setItemSession(int serverID,int session);
+
+	void cloudCicked(int nPosition);
 };

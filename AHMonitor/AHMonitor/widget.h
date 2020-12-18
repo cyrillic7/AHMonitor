@@ -29,6 +29,7 @@ private slots:
     
 private:
     titleWidget *titleW;
+	QLabel *msgTime;
     QLabel *content;
     myPushButton *btnLook;
     QString url;

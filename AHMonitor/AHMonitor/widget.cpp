@@ -11,6 +11,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <iostream>
+#include <QDateTime>
 using namespace std;
 #pragma execution_character_set("utf-8")
 Widget::Widget(QWidget *parent) :
@@ -21,19 +22,26 @@ Widget::Widget(QWidget *parent) :
     titleW=new titleWidget;
     connect(titleW,SIGNAL(myClose()),this,SLOT(close()));
 
+	msgTime = new QLabel;
+	msgTime->setWordWrap(true);
+	msgTime->setAlignment(Qt::AlignTop);
+	msgTime->setFixedSize(300, 50);
+
     content=new QLabel;
     content->setWordWrap(true);
     content->setAlignment(Qt::AlignTop);
-    content->setFixedSize(300,100);
-    btnLook=new myPushButton("look.png");
-    connect(btnLook,SIGNAL(clicked()),this,SLOT(openWeb()));
+    content->setFixedSize(300,50);
+   /* btnLook=new myPushButton("look.png");
+    connect(btnLook,SIGNAL(clicked()),this,SLOT(openWeb()));*/
 
     QVBoxLayout*mainLayout=new QVBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->addWidget(titleW);
+	mainLayout->addWidget(msgTime);
     mainLayout->addWidget(content);
-    content->setMargin(5);
-    mainLayout->addWidget(btnLook,0,Qt::AlignRight);
+	mainLayout->addStretch();
+   // content->setMargin(5);
+   // mainLayout->addWidget(btnLook,0,Qt::AlignRight);
     setLayout(mainLayout);
 
     setFixedSize(sizeHint().width(),sizeHint().height());
@@ -52,8 +60,11 @@ Widget::~Widget()
 
 void Widget::setMsg(QString title, QString content, QString url)
 {
+	QDateTime current_date_time = QDateTime::currentDateTime();
+	QString current_date = current_date_time.toString("yyyy-MM-dd hh:mm::ss.zzz");
+	msgTime->setText(current_date);
     titleW->setTitleText("  "+title);
-    this->content->setText(" ÊÓÆµID£º  "+content);
+    this->content->setText(content);
     this->url=url;
 	showAsQQ();
 }

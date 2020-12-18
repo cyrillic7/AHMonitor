@@ -30,9 +30,16 @@ QPTZControl::~QPTZControl()
 {
 }
 
+int QPTZControl::getSpeed()
+{
+	return pCameraCtl_->getSpeed();
+}
+
 
 void QPTZControl::mouseClick(int position)
 {
-	QMessageBox::information(NULL, "Error", QString::number(position),
-		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+	/*QMessageBox::information(NULL, "Error", QString::number(position),
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+
+	emit gauCloudClicked(position);
 }
