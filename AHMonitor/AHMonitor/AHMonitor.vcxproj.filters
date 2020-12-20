@@ -241,6 +241,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QAlarmWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QMapsWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QMapsWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QMapsWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AHMonitor.h">
@@ -307,6 +316,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="QAlarmWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QMapsWidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

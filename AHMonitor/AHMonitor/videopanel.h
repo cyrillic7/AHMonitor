@@ -8,7 +8,9 @@
 
 #include <QWidget>
 #include "videowidget.h"
+#include "QMapsWidget.h"
 //#include "QMapWidget.h"
+//#include <QWebEngineView>
 class QMenu;
 class QLabel;
 class QGridLayout;
@@ -60,7 +62,7 @@ public:
 
 	void setVideoOffLine(int nSession);
 
-	//QMapWidget* mapWidget;
+	QMapsWidget* pMapWidget;
 private slots:
     void initControl();
     void initForm();

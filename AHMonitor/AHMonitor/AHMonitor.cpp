@@ -30,7 +30,8 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	{
 		AHMonitor* pMonitor = (AHMonitor*)pAppData;
 		//TRACE1("return: %s", (char*)pParam);
-		QString ReturnStr = QString(QLatin1String((char*)pParam));
+
+		QString ReturnStr = QString::fromLocal8Bit((char*)pParam);
 		cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
 
 		ControlCommandHelper helper;
@@ -42,7 +43,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 		{
 			TCHAR info[50];
 			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
-			QString s = QString(QLatin1String((char*)info));
+			QString s = QString::fromLocal8Bit((char*)info);
 			cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
 		}
 		if(len == 0)
