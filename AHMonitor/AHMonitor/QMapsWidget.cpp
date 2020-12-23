@@ -5,9 +5,9 @@
 QMapsWidget::QMapsWidget(QWidget *parent) : QWidget(parent)
 {
 	//qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--single-process");
-	//pWebView = new QWebEngineView(this);
+	pWebView = new QWebEngineView(this);
 	QGridLayout* glayout = new QGridLayout;
-	//glayout->addWidget(pWebView, 0, 0);
+	glayout->addWidget(pWebView, 0, 0);
 
 	this->setLayout(glayout);
 }
@@ -23,5 +23,5 @@ void QMapsWidget::loadMap()
 	QString absDir = temDir.absolutePath();
 	QString filePath = "file:///" + absDir;
 //	qDebug() << filePath;
-	//pWebView->load(QUrl(filePath));
+	pWebView->load(QUrl(filePath));
 }

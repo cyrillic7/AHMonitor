@@ -1389,7 +1389,7 @@ bool VideoWidget::initPacket(void * pParam)
 		}
 		else if(isPFrame(pParam) == true)
 		{
-			packet->flags |= AV_PKT_FLAG_CORRUPT;
+			//packet->flags |= AV_PKT_FLAG_CORRUPT;
 			//packet->flags |= AV_PKT_FLAG_DISPOSABLE;
 			//cout << "packet->flags:" << packet->flags << endl;
 		}
@@ -1407,7 +1407,7 @@ bool VideoWidget::initPacket(void * pParam)
 			int timeStamp = GetFrameDataTimestamp(pParam);
 			if (vt && at)
 			{
-				packet->dts = timeStamp;
+				//packet->dts = timeStamp;
 				packet->pts = timeStamp;
 				//pts = at->pts;
 				vt->synpts = at->pts;

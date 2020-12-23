@@ -204,12 +204,12 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec = avcodec_alloc_context3(NULL);
 
 		codec->codec_id = AV_CODEC_ID_AAC;
-		codec->flags |= AV_CODEC_FLAG_LOW_DELAY;
+		codec->flags |= AV_CODEC_FLAG_PASS2 | AV_CODEC_FLAG_LOW_DELAY;
 		codec->time_base.num = 1;
 		codec->time_base.den = 25;//帧率
 		//codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_AUDIO;
-		codec->bit_rate = 80000;
+		codec->bit_rate = 800000;
 
 		codec->sample_rate = 44100;
 		codec->sample_fmt = AV_SAMPLE_FMT_S16;
@@ -232,7 +232,7 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		AVDictionary *param = 0;
 		//av_dict_set(&param, "fflags", "nobuffer", 0);
 		av_dict_set(&param, "preset", "ultrafast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
-		av_dict_set(&param, "tune", "zero-latency", 0);
+		av_dict_set(&param, "tune", "zerolatency", 0);
 		//av_dict_set(&param, "probesize", "4096", 0);
 		//av_dict_set(&param, "buffer_size", "8192000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
 		//av_dict_set(&param, "max_delay", "300", 0);
