@@ -17,7 +17,7 @@ extern "C" {
 }
 class XVideoThread:public XDecodeThread
 {
-	//Q_OBJECT
+	Q_OBJECT
 public:
 
 	//解码pts，如果接收到的解码数据pts >= seekpts return true 并且显示画面
@@ -47,9 +47,9 @@ protected:
 	AVStream *o_video_stream = NULL;
 
 
-// signals:
-// 	//收到图片信号
-// 	void RepatintImage(AVFrame *frame);
+ signals:
+ 	//收到图片信号
+ 	void RepatintImage(AVFrame *frame);
 };
 
 #endif

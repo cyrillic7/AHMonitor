@@ -1,7 +1,7 @@
 #include "AHMonitor.h"
 #include "QLogonDialog.h"
 #include <QtWidgets/QApplication>
-#include <QtWebEngine>
+//#include <QtWebEngine>
 int main(int argc, char *argv[])
 {
 //#ifdef USED3D
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	//format.setVersion(3, 2);
 	//format.setProfile(QSurfaceFormat::CoreProfile);
 	//QSurfaceFormat::setDefaultFormat(format);
-	QtWebEngine::initialize();
+//	QtWebEngine::initialize();
 	AHMonitor w;
 	/*w.show();*/
 

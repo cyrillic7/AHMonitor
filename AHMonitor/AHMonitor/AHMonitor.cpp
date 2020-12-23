@@ -171,6 +171,14 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pTabWidget_->addTab(pPTZControl_, "PTZ¿ØÖÆ");
 	pPTZControl_->setEnabled(false);
 	connect(pPTZControl_, SIGNAL(gauCloudClicked(int)), this, SLOT(cloudCicked(int)));
+	connect(pPTZControl_, SIGNAL(CloudzoomPlus()), this, SLOT(zoomPlus()));
+	connect(pPTZControl_, SIGNAL(CloudzoomReduce()), this, SLOT(zoomReduce()));
+	connect(pPTZControl_, SIGNAL(CloudapertureBig()), this, SLOT(apertureBig()));
+	connect(pPTZControl_, SIGNAL(CloudapertureSmall()), this, SLOT(apertureSmall()));
+	connect(pPTZControl_, SIGNAL(CloudfocusingNear()), this, SLOT(focusingNear()));
+	connect(pPTZControl_, SIGNAL(CloudfocusingFar()), this, SLOT(focusingFar()));
+	connect(pPTZControl_, SIGNAL(CloudFerPosition(int)), this, SLOT(FerPosition(int)));
+	connect(pPTZControl_, SIGNAL(CloudAction(QString &)), this, SLOT(CAction(QString &)));
 
 	pTerminalCtl_ = new QTerminalControl(this);
 	pTerminalCtl_->setEnabled(false);
@@ -229,6 +237,32 @@ AHMonitor::AHMonitor(QWidget *parent)
 AHMonitor::~AHMonitor()
 {
 	
+}
+
+CCameraMngr * AHMonitor::getCamMnr()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return NULL;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = 33;// pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	ServerManager* pServerMng = ServerManager::getInstance();
+	for (int i = 0; i < pServerMng->getServerCount(); i++)
+	{
+		CServerNode* pServerNode = pServerMng->getServerNode(i);
+		if (pServerNode->getCamerServerID() == serverid)
+		{
+			return pServerNode->m_pCameraMngr;
+		}
+	}
+
+	return NULL;
 }
 
 void AHMonitor::updateTreeWidget()
@@ -549,52 +583,239 @@ void AHMonitor::cloudCicked(int nPosition)
 		//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
 		QString strCmd = QString::fromStdString(command);
 		ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
-		if (ret == 0)
+		/*if (ret == 0)
 		{
 			emit showMsg("ÃüÁî·¢ËÍ³É¹¦", "ÃüÁî:ÏòÏÂÒÆ¶¯", NULL);
 		}else
-			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÏÂÒÆ¶¯", NULL);
+			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÏÂÒÆ¶¯", NULL);*/
 	}
 	break;
 	case 2://×ó
 	{
 		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Left", speeds);
 		ret = pCamGr->SendControlCmd(session, command);
-		if (ret == 0)
+		/*if (ret == 0)
 		{
 			emit showMsg("ÃüÁî·¢ËÍ³É¹¦", "ÃüÁî:Ïò×óÒÆ¶¯", NULL);
 		}
 		else
-			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:Ïò×óÒÆ¶¯", NULL);
+			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:Ïò×óÒÆ¶¯", NULL);*/
 	}
 	break;
 	case 4://ÉÏ
 	{
 		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Up", speeds);
 		ret = pCamGr->SendControlCmd(session, command);
-		if(ret == 0)
+		/*if(ret == 0)
 		{
 			emit showMsg("ÃüÁî·¢ËÍ³É¹¦", "ÃüÁî:ÏòÉÏÒÆ¶¯", NULL);
 		}
 		else
-			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÉÏÒÆ¶¯", NULL);
+			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÉÏÒÆ¶¯", NULL);*/
 	}
 	break;
 	case 6://ÓÒ
 	{
 		sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Right", speeds);
 		ret = pCamGr->SendControlCmd(session, command);
-		if (ret == 0)
+		/*if (ret == 0)
 		{
 			emit showMsg("ÃüÁî·¢ËÍ³É¹¦", "ÃüÁî:ÏòÓÒÒÆ¶¯", NULL);
 		}
 		else
-			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÓÒÒÆ¶¯", NULL);
+			emit showMsg("ÃüÁî·¢ËÍÊ§°Ü", "ÃüÁî:ÏòÓÒÒÆ¶¯", NULL);*/
 	}
 	break;
 	default:
 		break;
 	}
+
+}
+
+void AHMonitor::zoomPlus()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = 33;// pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateZoomTeleCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::zoomReduce()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateZoomWideCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::apertureBig()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateIrisOpenCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::apertureSmall()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateIrisCloseCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::focusingNear()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateFocusNearCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::focusingFar()
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GenerateFocusFarCommand(session, speeds, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::FerPosition(int position)
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	int ret = -1;
+
+	ControlCommandHelper helper;
+	int re = helper.GeneratePresetCommand(session, position, command);
+	//sprintf(command, "TCAMC %d,%d %s %d 0\r\n", randnum, session, "Down", speeds);
+	QString strCmd = QString::fromStdString(command);
+	ret = pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+}
+
+void AHMonitor::CAction(QString & action)
+{
 
 }
 

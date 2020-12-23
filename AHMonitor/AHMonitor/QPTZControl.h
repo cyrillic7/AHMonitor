@@ -27,8 +27,29 @@ public:
 signals:
 	void gauCloudClicked(int nPosition);
 
+	void CloudzoomPlus();
+	void CloudzoomReduce();
+
+	void CloudapertureBig();
+	void CloudapertureSmall();
+
+	void CloudfocusingNear();
+	void CloudfocusingFar();
+
+	void CloudFerPosition(int position);
+	void CloudAction(QString & action);
 public slots:
 	void mouseClick(int position);
+
+	void zoomPlusClick();
+	void zoomReduceClick();
+	void apertureBigClick();
+	void apertureSmallClick();
+	void focusingNearClick();
+	void focusingFarClick();
+
+	void positionClick(QString & objectName);
+	void actionClick(QString & objectName);
 };
 
 #endif

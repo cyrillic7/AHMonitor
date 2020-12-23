@@ -58,6 +58,8 @@ private:
 
 	ServerManager* m_pServerManager;
 	CPlayerManager* m_pPlayerManager;
+
+	CCameraMngr* getCamMnr();
 	//FrameStreamManager* m_pFrameStreamManager;
 	/*struct AVCodecContext *pAVCodecCtx_decoder = NULL;
 	struct AVCodec *pAVCodec_decoder;
@@ -96,4 +98,14 @@ public slots:
 	void setItemSession(int serverID,int session);
 
 	void cloudCicked(int nPosition);
+
+	void zoomPlus();
+	void zoomReduce();
+	void apertureBig();
+	void apertureSmall();
+	void focusingNear();
+	void focusingFar();
+
+	void FerPosition(int position);
+	void CAction(QString & action);
 };

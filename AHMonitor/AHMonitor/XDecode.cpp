@@ -112,42 +112,67 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		mux.lock();
 		codec = avcodec_alloc_context3(NULL);
 
+		//codec->global_quality = 2;
+		// VBR
+		//codec->flags |= CODEC_FLAG_QSCALE;
+		//codec->rc_min_rate = 850000 - 400000;
+		//codec->rc_max_rate = 850000 + 400000;
+		codec->bit_rate = 800000;
+		codec->bit_rate_tolerance = 400000;
+		codec->rc_buffer_size = 800000;
+		//codec->rc_initial_buffer_occupancy = codec->rc_buffer_size * 3 / 4;
+		//codec->rc_buffer_aggressivity = (float)1.0;
+		//codec->rc_initial_cplx = 0.5;
+		//codec->spatial_cplx_masking = 1.0;
+		//codec->rc_buffer_aggressivity = 1.0
+
 		codec->codec_id = AV_CODEC_ID_H265;
-		codec->flags |= AV_CODEC_FLAG_LOW_DELAY;
+		codec->flags |= AV_CODEC_FLAG_PASS2 | AV_CODEC_FLAG_LOW_DELAY;
 		codec->time_base.num = 1;
 		codec->time_base.den = 25;//帧率
 		codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_VIDEO;
-		codec->bit_rate = 400000;
-		//_pCodecContext->bit_rate_tolerance = 4000000;  
-		codec->gop_size = 25;
-
+		//codec->bit_rate = 800000;
+		codec->gop_size = 1;
+		codec->refs = 5;
+		//codec->slices = 5;
+		//codec->pre_me = 2;
 		codec->width = 0;//视频宽  
 		codec->height = 0;//视频高 
 		codec->pix_fmt = AV_PIX_FMT_YUV420P;
 		codec->color_range = AVCOL_RANGE_MPEG;
 		codec->max_b_frames = 0;
-		codec->has_b_frames = 0;
+		//codec->has_b_frames = 0;
+		codec->keyint_min = 1;
+		codec->scenechange_threshold = 0;
 		codec->thread_count = 8;		//八线程解码
 		codec->lowres = vcodec->max_lowres;
-		codec->flags2 |= AV_CODEC_FLAG_GLOBAL_HEADER | AV_CODEC_FLAG2_FAST ;
+		codec->flags2 |=  AV_CODEC_FLAG2_FAST ;
 		codec->sample_aspect_ratio.num = 4;
 		codec->sample_aspect_ratio.den = 3;
 
 		codec->profile = FF_PROFILE_HEVC_MAIN;
-		codec->qmin = 10;
+		codec->qmin = 2;
 		codec->qmax = 51;
+		//codec->qcompress = 0.5;
 
 		AVDictionary *param = 0;
+		av_dict_set(&param, "x265-params", "qp=20", 0);
+		av_dict_set(&param, "preset", "ultrafast", 0);
+		av_dict_set(&param, "tune", "zerolatency", 0);
+		//av_dict_set(&param, "qmin", "0", 0);
+		//av_dict_set(&param, "qmax", "69", 0);
+		//av_dict_set(&param, "qdiff", "4", 0);
+		av_dict_set(&param, "rtsp_transport", "tcp", 0); //以tcp的方式传送
 		av_dict_set(&param, "fflags", "nobuffer", 0);
-		av_dict_set(&param, "preset", "ultrafast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
-		av_dict_set(&param, "tune", "zero-latency", 0);
+		//av_dict_set(&param, "preset", "fast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
+		//av_dict_set(&param, "tune", "zerolatency", 0);
 		av_dict_set(&param, "probesize", "4096", 0);
-		//av_dict_set(&param, "buffer_size", "8192000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
+		av_dict_set(&param, "buffer_size", "1024000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
 		av_dict_set(&param, "max_delay", "300", 0);
 							 //av_dict_set(&param, "max_delay", "5000000", 0);
 		//av_dict_set(&param, "profile", "main", 0);
-		av_dict_set_int(&param, "qscale", 15, 0);
+		//av_dict_set_int(&param, "qscale", 15, 0);
 		av_dict_set_int(&param, "threads", 8, 0);
 		///打开解码器上下文
 		int re = avcodec_open2(codec, vcodec, &param);

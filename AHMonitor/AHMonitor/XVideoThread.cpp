@@ -165,6 +165,26 @@ void XVideoThread::run()
 		{
 			AVFrame * frame = decode->Recv();
 			if (!frame)break;
+// 			if (frame->pict_type == AV_PICTURE_TYPE_I)
+// 			{
+// 				//cout << "frame->pict_type:" << frame->pict_type << endl;
+// 				//break;
+// 			}
+// 			if (frame->pict_type == AV_PICTURE_TYPE_P)
+// 			{
+// 				//cout << "frame->pict_type:" << frame->pict_type << endl;
+// 				//break;
+// 			}
+// 			if (frame->pict_type != AV_PICTURE_TYPE_I && frame->pict_type != AV_PICTURE_TYPE_P)
+// 			{
+// 				
+// 				cout << "frame->pict_type:" << frame->pict_type << endl;
+// 				//break;
+// 			}
+// 			if (frame->pict_type == AV_PICTURE_TYPE_B)
+// 			{
+// 				cout << "frame->pict_type:" << frame->pict_type << endl;
+// 			}
 			//显示视频
 			if (call)
 			{
@@ -175,6 +195,7 @@ void XVideoThread::run()
 
 		}
 		vmux.unlock();
+		//msleep(10);
 	}
 }
 //解码pts，如果接收到的解码数据pts >= seekpts return true 并且显示画面

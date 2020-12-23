@@ -44,26 +44,48 @@ AVPacket *XDecodeThread::Pop()
 	AVPacket *pkt = packs.front();
 	packs.pop_front();
 	mux.unlock();
+	//msleep(1);
 	return pkt;
 }
 void XDecodeThread::Push(AVPacket *pkt)
 {
 	if (!pkt)return;
 	//×èÈû
-	//while (!isExit)
+	while (!isExit)
 	{
 		//cout << "packs.size:" << packs.size() << endl;
 		mux.lock();
-		//if (packs.size() < maxList)
+		if (packs.size() < maxList)
 		{
+			if (packs.size() > 0)
+			{
+				//cout << "packs.size:" << packs.size() << endl;
+			}
 			packs.push_back(pkt);
-		//	mux.unlock();
-		//	break;
-			//mux.unlock();
-			//break;
+			mux.unlock();
+			break;
 		}
+		
+		if (pkt->flags != AV_PKT_FLAG_KEY /*&& pkt->flags != AV_PKT_FLAG_CORRUPT*/)
+		{
+			//packs.pop_front();
+			//packs.push_back(pkt);
+			cout << "packs.size:" << packs.size() << endl;
+			AVPacket *pkts = packs.front();
+			if (pkts->flags != AV_PKT_FLAG_KEY/* && pkt->flags != AV_PKT_FLAG_CORRUPT*/)
+			{
+				packs.pop_front();
+				//mux.unlock();
+				//break;
+			}
+			mux.unlock();
+			break;
+		}
+		/*AVPacket *pkt = packs.front();
+		packs.pop_front();*/
+
 		mux.unlock();
-		//msleep(1);
+		msleep(1);
 	}
 }
 

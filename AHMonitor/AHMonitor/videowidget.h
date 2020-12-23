@@ -369,6 +369,8 @@ public slots:
 
 	bool isIFrame(void * pParam);
 
+	bool isPFrame(void * pParam);
+
 	void setVideoYUVData(void * pData);
 
 	bool YV12ToBGR24_FFmpeg(/*unsigned char * pBufy, unsigned char * pBufu, unsigned char * pBufv,*/unsigned char * pYUV, unsigned char * pBGR24, int width, int height);

@@ -141,6 +141,9 @@ void QServerTreeWidget::deleteServerItem(QString server)
 
 void QServerTreeWidget::TerminalItemClicked(QTreeWidgetItem * WidgetItem, int column)
 {
+	if (!WidgetItem->parent())
+		return;
+
 	if (WidgetItem->parent()->parent())
 	{
 		QString strParentItem = WidgetItem->parent()->parent()->text(column);

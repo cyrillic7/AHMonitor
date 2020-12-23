@@ -43,7 +43,7 @@ QTerminalControl::QTerminalControl(QWidget *parent) : QWidget(parent)
 	pCombCodeLevel_->addItem("8");
 	pCombCodeLevel_->setCurrentIndex(2);
 
-	pKeySpacing_->setRange(1,1500);
+	pKeySpacing_->setRange(1,5000);
 	pKeySpacing_->setValue(25);
 
 	pKeyFrame_->setRange(1, 25);
@@ -51,7 +51,7 @@ QTerminalControl::QTerminalControl(QWidget *parent) : QWidget(parent)
 
 	pQuaStep_->setRange(2, 31);
 	pQuaStep_->setValue(10);
-	pCodeRate_->setRange(1, 1500);
+	pCodeRate_->setRange(1, 10000);
 	pCodeRate_->setValue(300);
 
 	MainLayout->addWidget(new QLabel("·Ö±æÂÊ:"), 0, 0);

@@ -3,7 +3,7 @@
 
 #pragma once
 #include "qwidget.h"
-#include <QWebEngineView>
+//#include <QWebEngineView>
 class QMapsWidget :
 	public QWidget
 {
@@ -15,7 +15,7 @@ public:
 public:
 	void loadMap();
 private:
-	QWebEngineView* pWebView;
+	//QWebEngineView* pWebView;
 };
 
 #endif

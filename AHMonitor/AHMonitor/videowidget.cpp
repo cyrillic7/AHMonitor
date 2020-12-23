@@ -151,6 +151,8 @@ VideoWidget::VideoWidget(QWidget *parent) : QWidget(parent)
 	this->initFlowPanel();
 	//初始化悬浮条样式
 	this->initFlowStyle();
+
+	//connect(vt, SIGNAL(RepatintImage(AVFrame*)), this, SLOT(patientFrame(AVFrame*)));
 }
 
 void VideoWidget::initThread()
@@ -993,7 +995,22 @@ bool VideoWidget::isIFrame(void *pParam)
 {
 	MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
 
-	char itmp[5] = { 0x00,0x00,0x00,0x01,0x67 };
+	char itmp[5] = { 0x00,0x00,0x00,0x01,0x40 };
+
+	if (pData->nLen < 10)
+		return false;
+
+	if (memcmp(pData->pData, itmp, 5) == 0)
+		return true;
+	else
+		return false;
+}
+
+bool VideoWidget::isPFrame(void *pParam)
+{
+	MP_DATA_INFO *pData = (MP_DATA_INFO *)pParam;
+
+	char itmp[5] = { 0x00,0x00,0x00,0x01,0x02 };
 
 	if (pData->nLen < 10)
 		return false;
@@ -1354,6 +1371,23 @@ bool VideoWidget::initPacket(void * pParam)
 		av_init_packet(packet);
 		av_new_packet(packet, pMPData->nLen);
 
+		if (isIFrame(pParam) == true)
+		{
+			packet->flags |= AV_PKT_FLAG_KEY;
+			//cout << "packet->flags:" << packet->flags << endl;
+		}
+		else if(isPFrame(pParam) == true)
+		{
+			packet->flags |= AV_PKT_FLAG_CORRUPT;
+			//packet->flags |= AV_PKT_FLAG_DISPOSABLE;
+			//cout << "packet->flags:" << packet->flags << endl;
+		}
+		else
+		{
+			//packet->flags |= AV_PKT_FLAG_DISCARD;
+			//cout << "packet->flags:" << packet->flags << endl;
+		}
+
 		memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
 		packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
 
@@ -1442,6 +1476,8 @@ int VideoWidget::GetFrameDataTimestamp(void *pParam)
 
 void VideoWidget::patientFrame(AVFrame * frame)
 {
+	pXvideoWidget_->Repaint(frame);
+	return;
 	if (!frame)return;
 	mutex.lock();
 	//qDebug() << "frame->width:" << frame->width << "frame->height:" << frame->height;

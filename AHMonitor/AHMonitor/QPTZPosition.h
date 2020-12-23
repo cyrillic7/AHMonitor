@@ -20,6 +20,9 @@ private:
 	QPushButton* btRight;
 	QPushButton* btLeft;
 	int currentPage = 0;
+
+signals:
+	void QPositionClicked(QString & objectName);
 public slots:
 	//处理按钮单击
 	void btnClicked();

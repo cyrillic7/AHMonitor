@@ -19,6 +19,9 @@ private:
 	QLabel* pInfraredlabel_;
 	QLabel* pWiperlabel_;
 
+signals:
+	void QActionClicked(QString & objectName);
+
 public slots:
 	//处理按钮单击
 	void btnClicked();

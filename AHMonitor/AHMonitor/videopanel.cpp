@@ -169,7 +169,7 @@ void VideoPanel::initForm()
         //widget->setPixmap(QPixmap(":/bg_novideo.png"));
         widgets.append(widget);
     }
-	pMapWidget = new QMapsWidget(this);
+	//pMapWidget = new QMapsWidget(this);
 
 }
 
@@ -521,7 +521,8 @@ void VideoPanel::hide_video_all()
         gridLayout->removeWidget(widgets.at(i));
         widgets.at(i)->setVisible(false);
     }
-	pMapWidget->setVisible(false);
+	//gridLayout->removeWidget(pMapWidget);
+	//pMapWidget->setVisible(false);
 	//gridLayout->removeWidget(mapWidget);
 	//mapWidget->setVisible(false);
 }
@@ -709,9 +710,9 @@ void VideoPanel::change_video_64(int index)
 void VideoPanel::change_video_map(int index)
 {
 	hide_video_all();
-	pMapWidget->loadMap();
+	//pMapWidget->loadMap();
 	if (index == 0) {
-		gridLayout->addWidget(pMapWidget, 0, 0, 3, 3);
+		//gridLayout->addWidget(pMapWidget, 0, 0, 3, 3);
 		//gridLayout->addWidget(widgets.at(0), 0, 0, 2, 2);
 		gridLayout->addWidget(widgets.at(0), 0, 3, 1, 1);
 		gridLayout->addWidget(widgets.at(1), 1, 3, 1, 1);
@@ -720,7 +721,7 @@ void VideoPanel::change_video_map(int index)
 		for (int i = 0; i < 3; i++) {
 			widgets.at(i)->setVisible(true);
 		}
-		pMapWidget->setVisible(true);
+		//pMapWidget->setVisible(true);
 		//mapWidget->setVisible(true);
 	}
 }
