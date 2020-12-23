@@ -1,7 +1,7 @@
 #include "QMapsWidget.h"
 #include <QDir>
 #include <QGridLayout>
-
+#include <QCoreApplication>
 QMapsWidget::QMapsWidget(QWidget *parent) : QWidget(parent)
 {
 	//qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--single-process");
@@ -19,8 +19,10 @@ QMapsWidget::~QMapsWidget()
 
 void QMapsWidget::loadMap()
 {
-	QDir temDir("D:/Map/mapabc/lmap.html");
-	QString absDir = temDir.absolutePath();
+	//QDir dir;
+	//qDebug() << "currentPath : " + dir.currentPath();
+	QDir temDir;// ("D:/AHMonitor/offmap/lmap.html");
+	QString absDir = QCoreApplication::applicationDirPath() + "/lmap.html";
 	QString filePath = "file:///" + absDir;
 //	qDebug() << filePath;
 	pWebView->load(QUrl(filePath));

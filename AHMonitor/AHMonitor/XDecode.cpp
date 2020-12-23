@@ -133,7 +133,7 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_VIDEO;
 		//codec->bit_rate = 800000;
-		codec->gop_size = 1000;
+		//codec->gop_size = 250;
 		//codec->refs = 5;
 		//codec->slices = 5;
 		//codec->pre_me = 2;
@@ -164,10 +164,10 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		//av_dict_set(&param, "qmax", "69", 0);
 		//av_dict_set(&param, "qdiff", "4", 0);
 		av_dict_set(&param, "rtsp_transport", "tcp", 0); //以tcp的方式传送
-		av_dict_set(&param, "fflags", "nobuffer", 0);
+		//av_dict_set(&param, "fflags", "nobuffer", 0);
 		//av_dict_set(&param, "preset", "fast", 0); // av_opt_set(pCodecCtx->priv_data,"preset","fast",0);
 		//av_dict_set(&param, "tune", "zerolatency", 0);
-		av_dict_set(&param, "probesize", "4096", 0);
+		//av_dict_set(&param, "probesize", "4096", 0);
 		av_dict_set(&param, "buffer_size", "1024000", 0);//设置缓存大小，1080p可将值调大，比如1MB; 524288=512KB  1048576=1MB
 		av_dict_set(&param, "max_delay", "300", 0);
 							 //av_dict_set(&param, "max_delay", "5000000", 0);

@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
 	//QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
 	qRegisterMetaType<QVector<int>>("QVector<int>");
 	//QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
+	QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+	QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
 	QApplication a(argc, argv);
 	//QSurfaceFormat format;
 	//format.setDepthBufferSize(24);
