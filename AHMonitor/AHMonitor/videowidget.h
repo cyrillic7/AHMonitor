@@ -129,6 +129,7 @@ protected:
 public:
 	XAudioThread* at = 0;
 	XVideoThread* vt = 0;
+	bool isVolSilent = false;
 	bool isInit_ = false;
 	bool isAInit_ = false;
 	QMutex mutex;

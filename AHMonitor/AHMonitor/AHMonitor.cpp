@@ -190,6 +190,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pAlarmWidget_ = new QAlarmWidget(this);
 	pTabWidget_->addTab(pAlarmWidget_, "±¨¾¯Êä³ö");
 	pAlarmWidget_->setEnabled(false);
+	connect(pAlarmWidget_, SIGNAL(AlarmClicked(QString &)), this, SLOT(clickAlarm(QString &)));
 
 	pTreeWidget_ = new QServerTreeWidget(this);
 	pTreeWidget_->setMinimumWidth(250);
@@ -365,17 +366,31 @@ void AHMonitor::createToolBars()
 
 void AHMonitor::decodeACKString(QString AckString)
 {
-	/*QStringList rtString;*/
-	rtString.clear();
-	rtString = AckString.split(" ");
-	for (int i=0;i<rtString.count();i++)
+	QStringList rtStrings;
+	rtStrings = AckString.split(" ");
+	for (int i=0;i<rtStrings.count();i++)
 	{
-		cout << rtString[i].toStdString() << endl;
+		cout << rtStrings[i].toStdString() << endl;
 	}
 
-	if (rtString[2].toInt() == pTerminalCtl_->getSession())
+	if (rtStrings[3] == "GPSINFO")
 	{
-		pTerminalCtl_->setVideoParam(rtString[4].toInt(), rtString[5].toInt(), rtString[6].toInt(), rtString[7].toInt(), rtString[8].toInt(), rtString[9].toInt(), rtString[10].toInt());
+		return;
+	}
+
+	if (rtStrings[3] == "VideoParam")
+	{
+		rtString.clear();
+		rtString = AckString.split(" ");
+		for (int i = 0; i < rtString.count(); i++)
+		{
+			cout << rtString[i].toStdString() << endl;
+		}
+
+		if (rtString[2].toInt() == pTerminalCtl_->getSession() && rtString[3] == "VideoParam")
+		{
+			pTerminalCtl_->setVideoParam(rtString[4].toInt(), rtString[5].toInt(), rtString[6].toInt(), rtString[7].toInt(), rtString[8].toInt(), rtString[9].toInt(), rtString[10].toInt());
+		}
 	}
 }
 
@@ -452,7 +467,7 @@ void AHMonitor::clickTerSet()
 	char command[100];
 	//int res = helper.GenerateSetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), 15,pTerminalCtl_->getquality(), command);
 	SetVideoParamCommand(session, (VideoSize)pTerminalCtl_->getVideoSize(), pTerminalCtl_->getKeySpacing(), pTerminalCtl_->getmaxFPS(), pTerminalCtl_->getCodeMode(), pTerminalCtl_->getquality(), pTerminalCtl_->getQuaStep(), pTerminalCtl_->getCodeRate(), command);
-	TRACE1("command: %s", QString::fromStdString(command));
+	//TRACE1("command: %s", QString::fromStdString(command));
 	QString str = QString::fromStdString(command);
 	cout << "command:" << str.toStdString() << endl;
 	ServerManager* pServerMng = ServerManager::getInstance();
@@ -816,6 +831,151 @@ void AHMonitor::FerPosition(int position)
 
 void AHMonitor::CAction(QString & action)
 {
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
 
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	/*QMessageBox::information(NULL, "Error", action,
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+
+	if ("ss" == action)//Æô¶¯É¨Ãè
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateAutoScanCommand(session, true, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("sp" == action)//¹Ø±ÕÉ¨Ãè
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateAutoScanCommand(session, false, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("xs" == action)//Æô¶¯Ñ²º½
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateCruiseCommand(session, true, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("xp" == action)//¹Ø±ÕÑ²º½
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateCruiseCommand(session, false, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("hs" == action)//Æô¶¯ºìÍâ
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateInfraredCommand(session, true, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("hp" == action)//¹Ø±ÕºìÍâ
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateInfraredCommand(session, false, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("ys" == action)//Æô¶¯ÓêË¢
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateRainStripCommand(session, true, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+	else if ("yp" == action)//¹Ø±ÕÓêË¢
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateRainStripCommand(session, false, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
+
+}
+
+void AHMonitor::clickAlarm(QString & action)
+{
+	int session = pTerminalCtl_->getSession();
+	int serverid = pTerminalCtl_->getServerId();
+	if (session == -1 || serverid == -1)
+		return;
+
+
+	char command[100];
+	int randnum = rand();
+	int speeds = pPTZControl_->getSpeed();
+
+	CCameraMngr* pCamGr;
+	pCamGr = getCamMnr();
+	if (pCamGr == NULL)
+		return;
+
+	QMessageBox::information(NULL, "Error", action,
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
+	int ports = 0;
+	bool bAlarm = false;
+	if ("t1" == action)
+	{
+		ports = 1;
+		bAlarm = true;
+	}else if ("d1" == action)
+	{
+		ports = 1;
+		bAlarm = false;
+	}
+	else if ("t2" == action)
+	{
+		ports = 2;
+		bAlarm = true;
+	}
+	else if ("d2" == action)
+	{
+		ports = 2;
+		bAlarm = false;
+	}
+	else if ("t3" == action)
+	{
+		ports = 3;
+		bAlarm = true;
+	}
+	else if ("d3" == action)
+	{
+		ports = 3;
+		bAlarm = false;
+	}
+	else if ("t4" == action)
+	{
+		ports = 4;
+		bAlarm = true;
+	}
+	else if ("d4" == action)
+	{
+		ports = 4;
+		bAlarm = false;
+	}
+
+	if (ports > 0 && ports < 5)
+	{
+		ControlCommandHelper helper;
+		int re = helper.GenerateWarningOutputCommand(session, ports, bAlarm, command);
+		QString strCmd = QString::fromStdString(command);
+		pCamGr->SendControlCmd(session, strCmd.toStdString().c_str());
+	}
 }
 

@@ -108,4 +108,6 @@ public slots:
 
 	void FerPosition(int position);
 	void CAction(QString & action);
+	
+	void clickAlarm(QString & action);
 };

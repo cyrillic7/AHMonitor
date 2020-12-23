@@ -193,7 +193,7 @@ void VideoWidget::initFlowPanel()
 
 	//按钮集合名称,如果需要新增按钮则在这里增加即可
 	QList<QString> btns;
-	btns << "btnFlowVideo" << "btnFlowSnap" << "btnFlowSound" << "btnFlowAlarm" << "btnFlowClose";
+	btns << "btnFlowSound" << "btnFlowSnap" << "btnFlowVideo" << "btnFlowAlarm" << "btnFlowClose";
 
 	//有多种办法来设置图片,qt内置的图标+自定义的图标+图形字体
 	//既可以设置图标形式,也可以直接图形字体设置文本
@@ -734,9 +734,20 @@ void VideoWidget::btnClicked()
 			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
 		initFlow();
 	}
-	if (btn->objectName() == "btnFlowVideo")
+	if (btn->objectName() == "btnFlowSound")
 	{
-
+// 		QMessageBox::information(NULL, "Error", "btnFlowSound",
+// 			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		if (isVolSilent == false)
+		{
+			at->setVolume(0.0);
+			isVolSilent = true;
+		}
+		else
+		{
+			at->setVolume(1.0);
+			isVolSilent = false;
+		}
 	}
 
 
@@ -1441,7 +1452,7 @@ bool VideoWidget::initPacket(void * pParam)
 				//cout << "audio size:" << pMPData->nLen << endl;
 				//cout << "timeStamp : " << at->pts << endl;
 
-				atInit(AV_CODEC_ID_AAC, AV_SAMPLE_FMT_FLT, 12200, 1);
+				atInit(AV_CODEC_ID_AAC, AV_SAMPLE_FMT_FLT, 48000, 1);
 // 				AVPacket *packet = av_packet_alloc();
 // 				av_init_packet(packet);
 // 				av_new_packet(packet, pMPData->nLen);

@@ -17,6 +17,9 @@ public:
 
 private:
 	QTableWidget* pTableWidget_;
+
+signals:
+	void AlarmClicked(QString & action);
 public slots:
 	//处理按钮单击
 	void btnClicked();

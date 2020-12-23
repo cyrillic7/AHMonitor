@@ -133,8 +133,8 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_VIDEO;
 		//codec->bit_rate = 800000;
-		codec->gop_size = 1;
-		codec->refs = 5;
+		codec->gop_size = 1000;
+		//codec->refs = 5;
 		//codec->slices = 5;
 		//codec->pre_me = 2;
 		codec->width = 0;//视频宽  
@@ -207,21 +207,27 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->flags |= AV_CODEC_FLAG_LOW_DELAY;
 		codec->time_base.num = 1;
 		codec->time_base.den = 25;//帧率
-		codec->frame_number = 1; //每包一个视频帧  
+		//codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_AUDIO;
-		codec->bit_rate = 400000;
+		codec->bit_rate = 80000;
+
+		codec->sample_rate = 44100;
+		codec->sample_fmt = AV_SAMPLE_FMT_S16;
+		codec->sample_rate = sampleRate;
+		codec->channels = channels;		  
+		codec->channel_layout = AV_CH_LAYOUT_STEREO;		//输入音频的channel layout
 
 		codec->thread_count = 8;		//八线程解码
-		codec->lowres = vcodec->max_lowres;
+		/*codec->lowres = vcodec->max_lowres;
 		codec->flags2 |= AV_CODEC_FLAG2_FAST;
 		codec->sample_aspect_ratio.num = 4;
 		codec->sample_aspect_ratio.den = 3;
 		codec->sample_rate = sampleRate;
-		codec->channels = channels;
+		codec->channels = channels;*/
 
 		codec->profile = FF_PROFILE_AAC_MAIN;
-		codec->qmin = 10;
-		codec->qmax = 51;
+		/*codec->qmin = 10;
+		codec->qmax = 51;*/
 
 		AVDictionary *param = 0;
 		//av_dict_set(&param, "fflags", "nobuffer", 0);
@@ -232,7 +238,7 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		//av_dict_set(&param, "max_delay", "300", 0);
 		//av_dict_set(&param, "max_delay", "5000000", 0);
 		//av_dict_set(&param, "profile", "main", 0);
-		av_dict_set_int(&param, "qscale", 15, 0);
+		//av_dict_set_int(&param, "qscale", 15, 0);
 		av_dict_set_int(&param, "threads", 8, 0);
 		///打开解码器上下文
 		int re = avcodec_open2(codec, vcodec, &param);

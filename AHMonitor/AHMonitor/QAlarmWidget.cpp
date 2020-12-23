@@ -78,7 +78,8 @@ void QAlarmWidget::btnClicked()
 {
 	QPushButton *btn = (QPushButton *)sender();
 
-	QMessageBox::information(NULL, "Error", btn->objectName(),
-		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+	/*QMessageBox::information(NULL, "Error", btn->objectName(),
+		QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
 
+	emit AlarmClicked(btn->objectName());
 }

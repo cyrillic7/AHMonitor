@@ -82,7 +82,7 @@ void QPTZControl::positionClick(QString & objectName)
 
 void QPTZControl::actionClick(QString & objectName)
 {
-
+	emit CloudAction(objectName);
 }
 
 
