@@ -1419,12 +1419,12 @@ bool VideoWidget::initPacket(void * pParam)
 		memcpy(packet->data, (uint8_t*)pMPData->pData, pMPData->nLen);
 		packet->size = pMPData->nLen;		//这个填入H264数据帧的大小  
 
-		if (pMPData->type == MP_DATA_G723)
+		//if (pMPData->type == MP_DATA_G723)
 		{
 			int timeStamp = GetFrameDataTimestamp(pParam);
 			if (vt && at)
 			{
-				//packet->dts = timeStamp;
+				packet->dts = timeStamp;
 				packet->pts = timeStamp;
 				//pts = at->pts;
 				vt->synpts = at->pts;

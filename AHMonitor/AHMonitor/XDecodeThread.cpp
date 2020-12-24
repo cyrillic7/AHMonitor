@@ -59,7 +59,7 @@ void XDecodeThread::Push(AVPacket *pkt)
 		{
 			if (packs.size() > 0)
 			{
-				cout << "packs.size:" << packs.size() << endl;
+				//cout << "packs.size:" << packs.size() << endl;
 			}
 			packs.push_back(pkt);
 			mux.unlock();
@@ -67,26 +67,26 @@ void XDecodeThread::Push(AVPacket *pkt)
 			break;
 		}
 		
-		//if (pkt->flags == AV_PKT_FLAG_KEY /*&& pkt->flags != AV_PKT_FLAG_CORRUPT*/)
+		//if (pkt->flags != AV_PKT_FLAG_KEY /*&& pkt->flags != AV_PKT_FLAG_CORRUPT*/)
 		//{
 		//	//packs.pop_front();
 		//	//packs.push_back(pkt);
-		//	cout << "packs.sizesssssssssssssssssssssssss:" << packs.size() << endl;
-		//	AVPacket *pkts = packs.front();
-		//	if (pkts->flags != AV_PKT_FLAG_KEY/* && pkt->flags != AV_PKT_FLAG_CORRUPT*/)
-		//	{
-		//		packs.pop_front();
-		//		packs.push_back(pkt);
-		//		//mux.unlock();
-		//		//break;
-		//	}
-		//	else
-		//	{
-		//		packs.pop_back();
-		//		packs.push_back(pkt);
-		//	}
-		//	mux.unlock();
-		//	break;
+		//	//cout << "packs.sizesssssssssssssssssssssssss:" << packs.size() << endl;
+		//	//AVPacket *pkts = packs.front();
+		//	//if (pkts->flags != AV_PKT_FLAG_KEY/* && pkt->flags != AV_PKT_FLAG_CORRUPT*/)
+		//	//{
+		//	//	packs.pop_front();
+		//	//	packs.push_back(pkt);
+		//	//	//mux.unlock();
+		//	//	//break;
+		//	//}
+		//	//else
+		//	//{
+		//	//	//packs.pop_back();
+		//	//	//packs.push_back(pkt);
+		//	//}
+		//	//mux.unlock();
+		//	//break;
 		//}
 		/*AVPacket *pkt = packs.front();
 		packs.pop_front();*/

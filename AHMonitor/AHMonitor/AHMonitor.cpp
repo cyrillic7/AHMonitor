@@ -15,7 +15,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	TCHAR buffer[256];
 	_stprintf_s(buffer, 256, _T("UI event raised: event code %d, index %d, param 0x%X, application data 0x%X.\n"),
 		event, nIndex, (DWORD)pParam, (DWORD)pAppData);
-	OutputDebugString(buffer);
+	//OutputDebugString(buffer);
 	switch (event)
 	{
 	case MP_EVENT_FPS:
@@ -32,7 +32,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 		//TRACE1("return: %s", (char*)pParam);
 
 		QString ReturnStr = QString::fromLocal8Bit((char*)pParam);
-		cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
+		//cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
 
 		ControlCommandHelper helper;
 		Return buffer[10];
@@ -44,7 +44,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 			TCHAR info[50];
 			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
 			QString s = QString::fromLocal8Bit((char*)info);
-			cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
+			//cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
 		}
 		if(len == 0)
 			pMonitor->decodeACKString(ReturnStr);
@@ -370,7 +370,7 @@ void AHMonitor::decodeACKString(QString AckString)
 	rtStrings = AckString.split(" ");
 	for (int i=0;i<rtStrings.count();i++)
 	{
-		cout << rtStrings[i].toStdString() << endl;
+		//cout << rtStrings[i].toStdString() << endl;
 	}
 
 	if (rtStrings[3] == "GPSINFO")
