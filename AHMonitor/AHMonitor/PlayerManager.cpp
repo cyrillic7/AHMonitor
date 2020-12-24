@@ -110,3 +110,31 @@ int CPlayerManager::stopPlayer(int nSession)
 
 	}
 }
+
+void CPlayerManager::setMicmute(int session,bool mute)
+{
+	if (session == -1)
+		return;
+
+	for (std::map<int, CPlaybackEngine*>::iterator it = playerEngineMap_.begin(); it != playerEngineMap_.end(); /*i++*/)
+	{
+		if (it->second->GetCameraSession() == session)
+		{
+			if (mute == false)
+			{
+				it->second->Mic_UnMute();
+				return;
+			}
+			else
+			{
+				it->second->Mic_Mute();
+				return;
+			}
+		}
+		else
+		{
+			it++;
+		}
+
+	}
+}

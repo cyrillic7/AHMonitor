@@ -193,14 +193,14 @@ void VideoWidget::initFlowPanel()
 
 	//按钮集合名称,如果需要新增按钮则在这里增加即可
 	QList<QString> btns;
-	btns << "btnFlowSound" << "btnFlowSnap" << "btnFlowVideo" << "btnFlowAlarm" << "btnFlowClose";
+	btns << "btnFlowSound" << "btnFlowMic" << "btnFlowVideo" << "btnFlowAlarm" << "btnFlowClose";
 
 	//有多种办法来设置图片,qt内置的图标+自定义的图标+图形字体
 	//既可以设置图标形式,也可以直接图形字体设置文本
 #if 1
 	QList<QIcon> icons;
 	icons << QApplication::style()->standardIcon(QStyle::SP_MediaVolume);
-	icons << QApplication::style()->standardIcon(QStyle::SP_FileIcon);
+	icons << QApplication::style()->standardIcon(QStyle::SP_BrowserReload);
 	icons << QApplication::style()->standardIcon(QStyle::SP_DirIcon);
 	icons << QApplication::style()->standardIcon(QStyle::SP_DialogOkButton);
 	icons << QApplication::style()->standardIcon(QStyle::SP_DialogCancelButton);
@@ -742,17 +742,34 @@ void VideoWidget::btnClicked()
 		{
 			at->setVolume(0.0);
 			isVolSilent = true;
+			btn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolumeMuted));
 		}
 		else
 		{
+			btn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaVolume));
 			at->setVolume(1.0);
 			isVolSilent = false;
 		}
 	}
 
 
+	if ("btnFlowMic" == btn->objectName())
+	{
+		if (isMicMute == false)
+		{
+			CPlayerManager::getInstance()->setMicmute(_nSession, false);
+			btn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaPlay));
+			isMicMute = true;
+		}
+		else
+		{
+			CPlayerManager::getInstance()->setMicmute(_nSession, true);
+			btn->setIcon(QApplication::style()->standardIcon(QStyle::SP_MediaStop));
+			isMicMute = false;
+		}
+	}
 
-	emit btnClicked(btn->objectName());
+	//emit btnClicked(btn->objectName());
 }
 
 uint VideoWidget::getLength()

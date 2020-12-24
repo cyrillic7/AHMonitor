@@ -42,6 +42,8 @@ public:
 	int getPlayerIndex() { return playerIndex_; }
 
 	void setPlayerIndex(int index) { playerIndex_ = index; }
+
+	void setMicmute(int session, bool mute);
 };
 
 #endif

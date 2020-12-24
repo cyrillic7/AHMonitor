@@ -130,6 +130,7 @@ public:
 	XAudioThread* at = 0;
 	XVideoThread* vt = 0;
 	bool isVolSilent = false;
+	bool isMicMute = true;
 	bool isInit_ = false;
 	bool isAInit_ = false;
 	QMutex mutex;

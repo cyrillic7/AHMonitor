@@ -108,7 +108,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 			TCHAR info[50];
 			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
 			/*AfxMessageBox(info);*/
-			cout << "MP_EVENT_ACK info:" << info << endl;
+			cout << "MP_EVENT_ALARM info:" << info << endl;
 		}
 	}
 		break;
