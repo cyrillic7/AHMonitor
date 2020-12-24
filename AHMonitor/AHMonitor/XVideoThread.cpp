@@ -136,14 +136,15 @@ void XVideoThread::run()
 			msleep(5);
 			continue;
 		}
-		//cout << "synpts = " << synpts << " dpts =" << decode->pts << endl;
+		//cout << "synpts = " << synpts << " pts =" << decode->pts << endl;
 		//ÒôÊÓÆµÍ¬²½
-		/*if (synpts > 0 && synpts < decode->pts)
+		if (synpts > 0 && synpts < decode->pts)
 		{
 			vmux.unlock();
+			//cout << "synpts = " << synpts << " pts =" << decode->pts << endl;
 			msleep(1);
 			continue;
-		}*/
+		}
 		AVPacket *pkt = Pop();
 		/*	AVPacket *Recordpkt = av_packet_alloc();
 			av_init_packet(Recordpkt);
