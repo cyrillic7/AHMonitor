@@ -15,7 +15,7 @@ public:
 
 public:
 	void loadMap();
-private:
+public:
 	QWebEngineView* pWebView;
 };
 

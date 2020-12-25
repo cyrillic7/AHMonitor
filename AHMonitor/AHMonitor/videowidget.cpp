@@ -1427,7 +1427,10 @@ bool VideoWidget::initPacket(void * pParam)
 				packet->dts = timeStamp;
 				packet->pts = timeStamp;
 				//pts = at->pts;
-				vt->synpts = at->pts;
+				if (pMPData->type == MP_DATA_G723)
+				{
+					vt->synpts = at->pts;
+				}
 			}
 		}
 

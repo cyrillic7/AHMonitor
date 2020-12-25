@@ -119,7 +119,8 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->height = 0;
 		////gop
 		codec->gop_size = 60;//i帧间隔
-		codec->keyint_min = 25;//设置最小自动插入i帧的间隔.OPTION
+		codec->keyint_min = 4;//设置最小自动插入i帧的间隔.OPTION
+		codec->scenechange_threshold = 0;
 		//							//B帧
 		codec->max_b_frames = 0;//不要B帧
 		codec->has_b_frames = 0;//
@@ -130,7 +131,7 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		//// VBR
 		////codec->flags |= CODEC_FLAG_QSCALE;
 		codec->rc_min_rate = 400000;
-		codec->rc_max_rate = 1000000;
+		codec->rc_max_rate = 1200000;
 		codec->bit_rate = 800000;
 		//codec->bit_rate_tolerance = 400000;
 
@@ -143,7 +144,6 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_VIDEO;
 		codec->color_range = AVCOL_RANGE_MPEG;
-		codec->scenechange_threshold = 0;
 		codec->thread_count = 8;		//八线程解码
 		codec->lowres = vcodec->max_lowres;
 		codec->flags2 |=  AV_CODEC_FLAG2_FAST ;
@@ -202,6 +202,8 @@ bool XDecode::init(AVCodecID codeID, int sampleRate, int channels)
 		codec->time_base.den = 25;//帧率
 		//codec->frame_number = 1; //每包一个视频帧  
 		codec->codec_type = AVMEDIA_TYPE_AUDIO;
+		codec->rc_min_rate = 400000;
+		codec->rc_max_rate = 1200000;
 		codec->bit_rate = 800000;
 
 		codec->sample_rate = 44100;
