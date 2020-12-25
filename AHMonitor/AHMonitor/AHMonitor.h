@@ -84,6 +84,8 @@ private:
 	void createMenus();
 	void createToolBars();
 
+	void gpsParse(QByteArray GPSBuffer);
+
 public slots:
 	void onServerConnect();
 	void onServerDisConnect();

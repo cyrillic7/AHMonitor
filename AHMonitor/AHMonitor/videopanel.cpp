@@ -710,7 +710,7 @@ void VideoPanel::change_video_64(int index)
 void VideoPanel::change_video_map(int index)
 {
 	hide_video_all();
-	pMapWidget->loadMap();
+	//pMapWidget->loadMap();
 	if (index == 0) {
 		gridLayout->addWidget(pMapWidget, 0, 0, 3, 3);
 		//gridLayout->addWidget(widgets.at(0), 0, 0, 2, 2);

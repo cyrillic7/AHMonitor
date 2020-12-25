@@ -3,6 +3,7 @@
 
 #pragma once
 #include "qwidget.h"
+#include "bridge.h"
 #include <QWebEngineView>
 class QMapsWidget :
 	public QWidget

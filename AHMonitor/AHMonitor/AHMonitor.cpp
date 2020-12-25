@@ -15,7 +15,7 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	TCHAR buffer[256];
 	_stprintf_s(buffer, 256, _T("UI event raised: event code %d, index %d, param 0x%X, application data 0x%X.\n"),
 		event, nIndex, (DWORD)pParam, (DWORD)pAppData);
-	//OutputDebugString(buffer);
+	OutputDebugString(buffer);
 	switch (event)
 	{
 	case MP_EVENT_FPS:
@@ -31,20 +31,20 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 		AHMonitor* pMonitor = (AHMonitor*)pAppData;
 		//TRACE1("return: %s", (char*)pParam);
 
-		QString ReturnStr = QString::fromLocal8Bit((char*)pParam);
-		//cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
+		QString ReturnStr = QString(QLatin1String((char*)pParam));//QString::fromLocal8Bit((char*)pParam);
+		cout << "MP_EVENT_ACK return :" << ReturnStr.toStdString() << endl;
 
 		ControlCommandHelper helper;
 		Return buffer[10];
 		int len = helper.ParseReturnString((char*)pParam, buffer, sizeof(buffer));
-		/*QString str = QString::fromStdString(pParam);*/
-		//cout << "ParseReturnString :" << pParam << endl;
+		//QString str = QString::fromStdString((char*)pParam);
+		//cout << "ParseReturnString :" << str.toStdString().c_str() << endl;
 		for (int i = 0; i < len; i++)
 		{
 			TCHAR info[50];
 			_stprintf_s(info, 50, _T("seq %d, val %d\n"), buffer[i].sequence, buffer[i].value);
 			QString s = QString::fromLocal8Bit((char*)info);
-			//cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
+			cout << "MP_EVENT_ACK info:" << s.toStdString() << endl;
 		}
 		if(len == 0)
 			pMonitor->decodeACKString(ReturnStr);
@@ -364,6 +364,35 @@ void AHMonitor::createToolBars()
 	LinkTool_->addAction(LinkAction_);
 }
 
+void AHMonitor::gpsParse(QByteArray GPSBuffer)
+{
+  //    qDebug()<<GPSBuffer.size();
+
+     if (GPSBuffer.contains("$GNRMC"))
+     {
+
+         QList<QByteArray> gpsByteArrays = GPSBuffer.split(',');
+         int count = gpsByteArrays.count();
+
+     int  gpsLat_1 = static_cast<int>(gpsByteArrays.at(3).toDouble() / 100);
+     double gpsLat_2 = (gpsByteArrays.at(3).toDouble() - gpsLat_1 * 100) / 60;
+     double gpslat = gpsLat_1 + gpsLat_2;
+
+     int gpsLong_1 = static_cast<int>(gpsByteArrays.at(5).toDouble() / 100);
+     double gpsLong_2 = (gpsByteArrays.at(5).toDouble() - gpsLong_1 * 100) / 60;
+     double gpsLong = gpsLong_1 + gpsLong_2;
+
+	 /*ui->timelineEdit->setText(gpsByteArrays.at(1));
+	 ui->latlineEdit->setText(QString::number(gpslat, 'g', 9));
+	 ui->longlineEdit->setText(QString::number(gpsLong, 'g', 10));
+
+	 if (!gpsByteArrays.at(8).isEmpty())
+		 ui->headlineEdit->setText(gpsByteArrays.at(8));*/
+
+
+    }
+}
+
 void AHMonitor::decodeACKString(QString AckString)
 {
 	QStringList rtStrings;
@@ -375,6 +404,7 @@ void AHMonitor::decodeACKString(QString AckString)
 
 	if (rtStrings[3] == "GPSINFO")
 	{
+		gpsParse(rtStrings[4].toUtf8());
 		return;
 	}
 

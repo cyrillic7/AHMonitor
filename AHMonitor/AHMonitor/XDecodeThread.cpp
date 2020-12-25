@@ -59,7 +59,7 @@ void XDecodeThread::Push(AVPacket *pkt)
 		{
 			if (packs.size() > 0)
 			{
-				//cout << "packs.size:" << packs.size() << endl;
+				cout << "packs.size:" << packs.size() << endl;
 			}
 			packs.push_back(pkt);
 			mux.unlock();
