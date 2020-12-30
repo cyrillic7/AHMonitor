@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QSplitter>
+#include "INI_File.h"
 extern "C"
 {
 #include "libavformat/avformat.h"
@@ -346,6 +347,13 @@ void AHMonitor::createActions()
 
 	ExitAction_ = new QAction(tr("退出"), this);
 	connect(ExitAction_, SIGNAL(triggered()), this, SLOT(close()));
+
+	SaveVideoAction_ = new QAction(tr("保存视频"),this);
+	//SaveVideoAction_->setEnabled(false);
+	connect(SaveVideoAction_, SIGNAL(triggered()), this, SLOT(saveVideo()));
+
+	ScreenFull_ = new QAction(tr("全屏模式"), this);
+	//connect(ScreenFull_, SIGNAL(triggered()), this, SLOT(screenfull()));
 }
 
 void AHMonitor::createMenus()
@@ -362,6 +370,10 @@ void AHMonitor::createToolBars()
 {
 	LinkTool_ = addToolBar("链接站点");
 	LinkTool_->addAction(LinkAction_);
+
+	LinkTool_->addAction(SaveVideoAction_);
+
+//	LinkTool_->addAction(ScreenFull_);
 }
 
 void AHMonitor::gpsParse(QByteArray GPSBuffer)
@@ -474,6 +486,38 @@ void AHMonitor::serverDisCon(const QString & servername)
 		}
 
 	}
+}
+
+void AHMonitor::saveVideo()
+{
+	INI_File inifile;
+	inifile.OpenFile(NULL, "saveVideo.ini");
+	QString videoPath = inifile.readString("SavePath", "videoPath");
+
+	if (!videoPath.isNull())
+	{
+		videoPath = inifile.GetDefaultSavePath() + "video";
+	}
+
+	qDebug() << "videoPath: " << videoPath;
+
+
+}
+
+void AHMonitor::screenfull()
+{
+	pVidoePanel_Widget_->full();
+	/*if (bPanelFull == false)
+	{
+		pVidoePanel_Widget_->full();
+		bPanelFull = true;
+	}
+	else
+	{
+		pVidoePanel_Widget_->setWindowFlags(Qt::SubWindow);
+		pVidoePanel_Widget_->showNormal();
+		bPanelFull = false;
+	}*/
 }
 
 void AHMonitor::clickTerDefault()

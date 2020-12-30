@@ -265,6 +265,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_bridge.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="INI_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AHMonitor.h">
@@ -378,6 +381,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XResample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INI_File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

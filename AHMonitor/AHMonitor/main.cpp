@@ -23,12 +23,19 @@ int main(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
 	QNetworkProxyFactory::setUseSystemConfiguration(false);
 	QApplication a(argc, argv);
-	//QSurfaceFormat format;
-	//format.setDepthBufferSize(24);
-	//format.setStencilBufferSize(8);
-	//format.setVersion(3, 2);
-	//format.setProfile(QSurfaceFormat::CoreProfile);
-	//QSurfaceFormat::setDefaultFormat(format);
+	QFile qss("Resources/qss/stylesheet.qss");
+
+	if (qss.open(QFile::ReadOnly))
+	{
+		qDebug("open success");
+		QString style = QLatin1String(qss.readAll());
+		a.setStyleSheet(style);
+		qss.close();
+	}
+	else
+	{
+		qDebug("Open failed");
+	}
 	QtWebEngine::initialize();
 	AHMonitor w;
 	/*w.show();*/

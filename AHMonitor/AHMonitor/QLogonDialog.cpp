@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include "AHMonitor.h"
+#include "INI_File.h"
 #pragma execution_character_set("utf-8")
 QLogonDialog::QLogonDialog(QWidget *parent):QDialog(parent)
 {
@@ -17,10 +18,12 @@ QLogonDialog::QLogonDialog(QWidget *parent):QDialog(parent)
 	pAddressEdit_ = new QLineEdit;
 	pPortEdit_ = new QLineEdit;
 
-	pAccountEdit_->setText("admin");
-	pPasswordEdit_->setText("adminadmin");
-	pAddressEdit_->setText("112.13.94.125");
-	pPortEdit_->setText("8310");
+	INI_File inifile;
+	inifile.OpenFile(NULL, "config.ini");
+	pAccountEdit_->setText(inifile.GetUsername());
+	pPasswordEdit_->setText(inifile.GetPassword());
+	pAddressEdit_->setText(inifile.GetIp());
+	pPortEdit_->setText(inifile.GetPort());
 
 	QHBoxLayout* pBtnLayout = new QHBoxLayout;
 	pBtnLogon_ = new QPushButton("µÇÂ¼");
@@ -66,7 +69,12 @@ void QLogonDialog::onLogonClicked()
 	 szAddress = pAddressEdit_->text();
 	 szPort = pPortEdit_->text();
 
-
+	 INI_File inifile;
+	 inifile.OpenFile(NULL, "config.ini");
+	 inifile.SetIp(szAddress);
+	 inifile.SetUserName(szAccounts);
+	 inifile.SetPassword(szPassword);
+	 inifile.SetPort(szPort);
 	/*CCameraMngr* cameraManager = CCameraMngr::getInstance();
 	cameraManager->SetCallbackFunc(UIEventCallBackHandler,AHMonitor::getInstance());
 

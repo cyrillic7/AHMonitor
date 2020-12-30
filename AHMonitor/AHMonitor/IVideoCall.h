@@ -1,7 +1,7 @@
 #ifndef IVIDEOCALL
 #define IVIDEOCALL
 struct AVFrame;
-class IVideoCall
+class IVideoCall//ÏÔÊ¾»Øµ÷
 {
 public:
 	virtual void Init(int width, int height) = 0;

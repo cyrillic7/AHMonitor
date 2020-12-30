@@ -63,7 +63,7 @@ public:
 	void setVideoOffLine(int nSession);
 
 	QMapsWidget* pMapWidget;
-private slots:
+public slots :
     void initControl();
     void initForm();
     void initMenu();

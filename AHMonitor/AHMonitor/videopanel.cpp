@@ -8,6 +8,10 @@
 #include "qtimer.h"
 #include "qdebug.h"
 #include <QDir>
+#include <QGuiApplication>
+#include <QDesktopWidget>
+#include <QApplication>
+#include <QMessageBox>
 
 VideoPanel::VideoPanel(QWidget *parent) : QWidget(parent)
 {
@@ -45,6 +49,18 @@ bool VideoPanel::eventFilter(QObject *watched, QEvent *event)
         if (mouseEvent->button() == Qt::RightButton) {
             videoMenu->exec(QCursor::pos());
         }
+    }else if (event->type() == QEvent::MouseButtonRelease)
+    {
+		VideoWidget *widget = (VideoWidget *)watched;
+		/*QMessageBox::information(NULL, "Error", QString::number(widget->_nSession),
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);*/
+
+		if (widget->_nSession != -1)
+		{
+
+		}
+
+
     }
 
     return QWidget::eventFilter(watched, event);
@@ -162,7 +178,7 @@ void VideoPanel::initForm()
         widget->installEventFilter(this);
         widget->setFocusPolicy(Qt::StrongFocus);
 		widget->setFlowEnable(true);
-       // widget->setAlignment(Qt::AlignCenter);
+        //widget->setAlignment(Qt::AlignCenter);
 
         //二选一可以选择显示文字,也可以选择显示背景图片
         //widget->setText(QString("通道 %1").arg(i + 1));
@@ -227,13 +243,14 @@ void VideoPanel::initMenu()
 
 void VideoPanel::full()
 {
+
     if (actionFull->text() == "切换全屏模式") {
-        emit fullScreen(true);
+       // emit fullScreen(true);
 		this->setWindowFlags(Qt::Window);
 		this->showFullScreen();
         actionFull->setText("切换正常模式");
     } else {
-        emit fullScreen(false);
+       // emit fullScreen(false);
 		this->setWindowFlags(Qt::SubWindow);
 		this->showNormal();
         actionFull->setText("切换全屏模式");
