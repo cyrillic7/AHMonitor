@@ -41,6 +41,9 @@
     <Filter Include="WBSDK">
       <UniqueIdentifier>{7ce11bf7-5bfd-44e1-b244-a4851d4f0754}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ZX_OCX">
+      <UniqueIdentifier>{b4285899-6e3e-4e82-a2f1-a866d43544ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -268,6 +271,30 @@
     <ClCompile Include="INI_File.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ZX_OCX\cmtvideoplayerlib.cpp">
+      <Filter>ZX_OCX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ZX_OCX\multimediascheduleocxlib.cpp">
+      <Filter>ZX_OCX</Filter>
+    </ClCompile>
+    <ClCompile Include="ZXCmtPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZXCmtPlayer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZXCmtPlayer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QMultimediascheduleocx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QMultimediascheduleocx.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QMultimediascheduleocx.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AHMonitor.h">
@@ -342,6 +369,12 @@
     <CustomBuild Include="bridge.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="ZXCmtPlayer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QMultimediascheduleocx.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AHMonitor.h">
@@ -385,6 +418,12 @@
     </ClInclude>
     <ClInclude Include="INI_File.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ZX_OCX\cmtvideoplayerlib.h">
+      <Filter>ZX_OCX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ZX_OCX\multimediascheduleocxlib.h">
+      <Filter>ZX_OCX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -125,7 +125,6 @@ void UIEventCallBackHandler(MP_ENG_EVENT event, int nIndex, void *pParam, void *
 	}
 }
 
-
 AHMonitor::AHMonitor(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -144,7 +143,11 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pVidoePanel_Widget_ = new VideoPanel(this);
 	pToolsSplit_ = new QToolsSplit(this);
 	pToolsSplit_->setVideoPanelWidget(pVidoePanel_Widget_);
-	
+
+	pZXCmtPlayer_ = new ZXCmtPlayer();
+	/*pZXCmtPlayer_->hide();
+	pZXCmtPlayer_->setWindowFlags(Qt::WindowStaysOnTopHint);
+	pZXCmtPlayer_->show();*/
 	//m_pFrameStreamManager = new FrameStreamManager;
 	m_pServerManager = new ServerManager;
 	m_pPlayerManager = new CPlayerManager;
@@ -210,9 +213,12 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pMainLayout->addWidget(pVidoePanel_Widget_, 0, 1);
 
 	pMainLayout->addWidget(pToolsSplit_, 0, 2);*/
+	pPanelTab_ = new QTabWidget(this);
+	pPanelTab_->addTab(pVidoePanel_Widget_,"Panel");
+	pPanelTab_->addTab(pZXCmtPlayer_, "zxPlayer");
 
 	splitterMain->addWidget(splitterL);
-	splitterMain->addWidget(pVidoePanel_Widget_);
+	splitterMain->addWidget(pPanelTab_);
 	splitterMain->addWidget(pToolsSplit_);
 
 	pMainLayout->addWidget(splitterMain);
@@ -223,6 +229,9 @@ AHMonitor::AHMonitor(QWidget *parent)
 	createActions();
 	createMenus();
 	createToolBars();
+
+	mul = new QMultimediascheduleocx;
+	mul->LogonSip("5032000", "5032000", "60.205.208.38", "6050");
 
 	CPlaybackEngine::Initialize("{D79399DA-2F36-4f7d-846A-292C90BA9E8D}");
 
@@ -240,6 +249,7 @@ AHMonitor::~AHMonitor()
 {
 	
 }
+
 
 CCameraMngr * AHMonitor::getCamMnr()
 {
@@ -354,6 +364,12 @@ void AHMonitor::createActions()
 
 	ScreenFull_ = new QAction(tr("È«ÆÁÄ£Ê½"), this);
 	//connect(ScreenFull_, SIGNAL(triggered()), this, SLOT(screenfull()));
+
+	makeVideoTest_ = new QAction(tr("ÊÓÆÁ²âÊÔ"), this);
+	connect(makeVideoTest_, SIGNAL(triggered()), this, SLOT(makeVideo()));
+
+	makeAudioText_ = new QAction(tr("ÓïÒô²âÊÔ"), this);
+	connect(makeAudioText_, SIGNAL(triggered()), this, SLOT(makeAudio()));
 }
 
 void AHMonitor::createMenus()
@@ -374,6 +390,10 @@ void AHMonitor::createToolBars()
 	LinkTool_->addAction(SaveVideoAction_);
 
 //	LinkTool_->addAction(ScreenFull_);
+
+	LinkTool_->addAction(makeVideoTest_);
+	LinkTool_->addAction(makeAudioText_);
+
 }
 
 void AHMonitor::gpsParse(QByteArray GPSBuffer)
@@ -434,6 +454,12 @@ void AHMonitor::decodeACKString(QString AckString)
 			pTerminalCtl_->setVideoParam(rtString[4].toInt(), rtString[5].toInt(), rtString[6].toInt(), rtString[7].toInt(), rtString[8].toInt(), rtString[9].toInt(), rtString[10].toInt());
 		}
 	}
+}
+
+void AHMonitor::makeAudio()
+{
+	long nhand = mul->getPhysicsHandCount();
+	mul->makeAudioCall("5032002", 0);
 }
 
 void AHMonitor::onServerConnect()
@@ -502,6 +528,15 @@ void AHMonitor::saveVideo()
 	qDebug() << "videoPath: " << videoPath;
 
 
+}
+
+void AHMonitor::makeVideo()
+{
+	//mul->sendSMS("5032001", "¹þ¹þ¹þ");
+	//HWND hhwnd = (HWND)pZXCmtPlayer_->winId();
+	//long nhand = mul->getPhysicsHandCount();
+	pZXCmtPlayer_->setVideoIndex(1);
+	mul->makeVideoCall("5032002", pZXCmtPlayer_->getHwnd(), 0);
 }
 
 void AHMonitor::screenfull()

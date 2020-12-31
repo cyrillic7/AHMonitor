@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<link rel="stylesheet" href="./leaflet.css"/>
+<script src="./leaflet.js"></script>
+<script src="./qwebchannel.js"></script>
+<style>
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}
+#my-offline-leaf-map{width:100%;height:100%;}
+</style>
+</head>
+<body>
+<div id="my-offline-leaf-map"></div>
+<script>
+var url = 'http://172.16.51.134/mapabc/roadmap/{z}/{x}/{y}.png';
+var mymap = L.map("my-offline-leaf-map",{
+          center: [30.228742, 120.11787], // Moscow
+          zoom: 8,
+          maxZoom: 18,
+          minZoom: 1
+        }); 
+	
+L.tileLayer(url,{minZoom:1,maxZoom:18,}).addTo(mymap);
+
+	new QWebChannel(qt.webChannelTransport, function(channel) {
+			window.bridge = channel.objects.bridge;	
+			
+			window.bridge.GetLightData(function(returnValue){
+		initMarker(returnValue);
+		});	
+	});
+	
+	 function initMarker(markerArr) {
+	
+    for (var i = 0; i < markerArr.length; i++) {
+        var p = markerArr[i].point.split(",");
+        var p0 = p[0];
+        var p1 = p[1];
+		var Mname = markerArr[i].name;
+        L.marker([p0, p1]).addTo(mymap).bindPopup(Mname);
+    }
+	}
+</script>
+</body>
+</html>

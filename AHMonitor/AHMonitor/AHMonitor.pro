@@ -20,3 +20,4 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 QT       += webengine webenginewidgets
+QT+= axcontainer

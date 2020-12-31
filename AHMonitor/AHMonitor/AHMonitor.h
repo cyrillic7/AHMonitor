@@ -18,6 +18,8 @@
 #include "QTerminalControl.h"
 #include "QPTZControl.h"
 #include "QAlarmWidget.h"
+#include "ZXCmtPlayer.h"
+#include "QMultimediascheduleocx.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -32,6 +34,7 @@ public:
 	QServerTreeWidget* pTreeWidget_;
 	//播放控件
 	VideoPanel* pVidoePanel_Widget_;
+	ZXCmtPlayer* pZXCmtPlayer_;
 	//断开连接窗口
 	QSDisConWidget* pSDisConWidget_;
 	//控制tab
@@ -42,6 +45,8 @@ public:
 	QPTZControl* pPTZControl_;
 	//报警控件
 	QAlarmWidget* pAlarmWidget_;
+
+	QMultimediascheduleocx* mul;
 private:
 	Ui::AHMonitorClass ui;
 	//注册dll
@@ -49,6 +54,8 @@ private:
 
 	//CCameraMngr* cameraManager;
 private:
+	//QAxWidget* pAxWidgetPlayer_;
+	QTabWidget* pPanelTab_;
 	bool bPanelFull = false;
 	//字符串
 	QStringList rtString;
@@ -64,6 +71,8 @@ private:
 	QAction* ExitAction_;
 	QAction* SaveVideoAction_;
 	QAction* ScreenFull_;
+	QAction* makeVideoTest_;
+	QAction* makeAudioText_;
 
 	QToolBar* LinkTool_; //工具栏
 	//拖动条
@@ -103,6 +112,8 @@ private:
 	void gpsParse(QByteArray GPSBuffer);
 
 public slots:
+void makeVideo();
+void makeAudio();
 	//连接服务器
 	void onServerConnect();
 	//断开服务器窗口

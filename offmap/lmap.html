@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<link rel="stylesheet" href="./leaflet.css"/>
+<script src="./leaflet.js"></script>
+<script src="./qwebchannel.js"></script>
+<style>
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}
+#my-offline-leaf-map{width:100%;height:100%;}
+</style>
+</head>
+<body>
+<div id="my-offline-leaf-map"></div>
+<script>
+var url = 'http://172.16.51.134/mapabc/roadmap/{z}/{x}/{y}.png';
+var mymap = L.map('my-offline-leaf-map').setView([29.5, 110.5], 10);     
+L.tileLayer(url,{minZoom:1,maxZoom:18,}).addTo(mymap);
+</script>
+</body>
+</html>
