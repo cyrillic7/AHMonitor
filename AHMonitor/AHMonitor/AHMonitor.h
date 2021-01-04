@@ -20,6 +20,8 @@
 #include "QAlarmWidget.h"
 #include "ZXCmtPlayer.h"
 #include "QMultimediascheduleocx.h"
+#include "videoinsertocxlib.h"
+#include "cmtvideoplayerlib.h"
 
 class AHMonitor : public QMainWindow
 {
@@ -35,6 +37,8 @@ public:
 	//播放控件
 	VideoPanel* pVidoePanel_Widget_;
 	ZXCmtPlayer* pZXCmtPlayer_;
+	VideoInsertOcxLib::VideoInsertOcx* pVideoInsertOcx_;
+//	QLabel* pvideolabel_;
 	//断开连接窗口
 	QSDisConWidget* pSDisConWidget_;
 	//控制tab

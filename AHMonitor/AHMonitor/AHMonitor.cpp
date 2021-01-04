@@ -144,6 +144,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 	pToolsSplit_ = new QToolsSplit(this);
 	pToolsSplit_->setVideoPanelWidget(pVidoePanel_Widget_);
 
+	//pVideoInsertOcx_ = new VideoInsertOcxLib::VideoInsertOcx(this);
 	pZXCmtPlayer_ = new ZXCmtPlayer();
 	/*pZXCmtPlayer_->hide();
 	pZXCmtPlayer_->setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -231,7 +232,7 @@ AHMonitor::AHMonitor(QWidget *parent)
 	createToolBars();
 
 	mul = new QMultimediascheduleocx;
-	mul->LogonSip("5032000", "5032000", "60.205.208.38", "6050");
+	//mul->LogonSip("5032000", "5032000", "60.205.208.38", "6050");
 
 	CPlaybackEngine::Initialize("{D79399DA-2F36-4f7d-846A-292C90BA9E8D}");
 
@@ -535,7 +536,7 @@ void AHMonitor::makeVideo()
 	//mul->sendSMS("5032001", "¹þ¹þ¹þ");
 	//HWND hhwnd = (HWND)pZXCmtPlayer_->winId();
 	//long nhand = mul->getPhysicsHandCount();
-	pZXCmtPlayer_->setVideoIndex(1);
+	//pZXCmtPlayer_->setVideoIndex(1);
 	mul->makeVideoCall("5032002", pZXCmtPlayer_->getHwnd(), 0);
 }
 

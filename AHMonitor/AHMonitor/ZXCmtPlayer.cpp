@@ -4,7 +4,7 @@
 
 ZXCmtPlayer::ZXCmtPlayer(QWidget *parent)
 {
-	this->setControl(QString::fromUtf8("{790B714B-552A-4C40-AA78-4FC72C8F7AF8}"));
+	this->setControl(QString::fromUtf8("{a7eac80d-9d73-4db9-9bff-68c8be0b6371}"));
 	//this->dynamicCall("setVpIndex(long)", 0);
 	//QString sUrl = "www.baidu.com";
 	//this->dynamicCall("Navigate(const QString&)", sUrl);

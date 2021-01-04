@@ -124,6 +124,7 @@
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\ZX_OCX\cmtvideoplayerlib.cpp" />
     <ClCompile Include="..\..\ZX_OCX\multimediascheduleocxlib.cpp" />
+    <ClCompile Include="..\..\ZX_OCX\videoinsertocxlib.cpp" />
     <ClCompile Include="AHMonitor.cpp" />
     <ClCompile Include="bridge.cpp" />
     <ClCompile Include="FrameStreamManager.cpp" />
@@ -472,6 +474,7 @@
     </CustomBuild>
     <ClInclude Include="..\..\ZX_OCX\cmtvideoplayerlib.h" />
     <ClInclude Include="..\..\ZX_OCX\multimediascheduleocxlib.h" />
+    <ClInclude Include="..\..\ZX_OCX\videoinsertocxlib.h" />
     <ClInclude Include="INI_File.h" />
     <ClInclude Include="IVideoCall.h" />
     <CustomBuild Include="QSDisConWidget.h">

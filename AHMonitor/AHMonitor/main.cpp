@@ -110,6 +110,7 @@ int main(int argc, char *argv[])
 		if (w.serverConnection(w.pLogonDialog_->szAccounts, w.pLogonDialog_->szPassword, w.pLogonDialog_->szAddress, w.pLogonDialog_->szPort) == -1)
 			return -1;
 
+		w.mul->LogonSip("5032000", "5032000", "60.205.208.38", "6050");
 		w.showMaximized();
 		w.updateTreeWidget();
 		w.updateDisConWidget();

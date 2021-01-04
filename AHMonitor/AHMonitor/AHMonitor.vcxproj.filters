@@ -295,6 +295,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QMultimediascheduleocx.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ZX_OCX\videoinsertocxlib.cpp">
+      <Filter>ZX_OCX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AHMonitor.h">
@@ -423,6 +426,9 @@
       <Filter>ZX_OCX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ZX_OCX\multimediascheduleocxlib.h">
+      <Filter>ZX_OCX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ZX_OCX\videoinsertocxlib.h">
       <Filter>ZX_OCX</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,7 +53,7 @@ public:
     QSize minimumSizeHint()     const;
 
 	void Play(const QImage& image);
-	QList<VideoWidget *> widgets;    //视频标签集合
+	QList<QWidget *> widgets;    //视频标签集合
 	int currentVideoIndex_;			//当前通道
 
 	VideoWidget* getVideoWidget(int serverid,int nSession);

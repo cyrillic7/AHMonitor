@@ -20,9 +20,11 @@ public:
 	//拨打语音
 	int makeAudioCall(QString dsNumber, long nHand);
 	//拨打视频
-	int makeVideoCall(QString dsNumber, long Hwnd, long nHand);
+	int makeVideoCall(QString dsNumber, int Hwnd, int nHand);
 	//终止会话
 	int hangUpCall(long callid);
+
+	long setVideoWnd(int callId, int hWnd);
 
 private:
 	QAxWidget* pMulAxWidget_;

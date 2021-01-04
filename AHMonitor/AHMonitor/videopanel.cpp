@@ -99,20 +99,20 @@ VideoWidget * VideoPanel::getVideoWidget(int serverid, int nSession)
 
 	for (int i = 0; i < videoCount; i++)
 	{
-		if (widgets[i]->getSession() == nSession)
+		if (((VideoWidget*)widgets[i])->getSession() == nSession)
 		{
 
-			return widgets[i];
+			return (VideoWidget*)widgets[i];
 		}
 	}
 
 	for (int i = 0; i < videoCount; i++)
 	{
-		if (widgets[i]->getSession() == -1)
+		if (((VideoWidget*)widgets[i])->getSession() == -1)
 		{
-			widgets[i]->setServerID(serverid);
-			widgets[i]->setSession(nSession);
-			return widgets[i];
+			((VideoWidget*)widgets[i])->setServerID(serverid);
+			((VideoWidget*)widgets[i])->setSession(nSession);
+			return (VideoWidget*)widgets[i];
 		}
 	}
 // 	widgets[currentVideoIndex_]->setServerID(serverid);
@@ -124,10 +124,10 @@ void VideoPanel::CloseAllVideo()
 {
 	for (int i = 0; i < videoCount; i++)
 	{
-		if (widgets[i]->getSession() != -1)
+		if (((VideoWidget*)widgets[i])->getSession() != -1)
 		{
-			widgets[i]->setSession(-1);
-			widgets[i]->clear();
+			((VideoWidget*)widgets[i])->setSession(-1);
+			((VideoWidget*)widgets[i])->clear();
 		}
 	}
 	currentVideoIndex_ = 0;
@@ -140,9 +140,9 @@ void VideoPanel::setVideoOffLine(int nSession)
 	
 	for (int i = 0; i < videoCount; i++)
 	{
-		if (widgets[i]->getSession() == nSession)
+		if (((VideoWidget*)widgets[i])->getSession() == nSession)
 		{
-			widgets[i]->initFlow();
+			((VideoWidget*)widgets[i])->initFlow();
 // 			widgets[i]->setSession(-1);
 // 			widgets[i]->clear();
 			//currentVideoIndex_--;
