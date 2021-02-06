@@ -399,31 +399,39 @@ void AHMonitor::createToolBars()
 
 void AHMonitor::gpsParse(QByteArray GPSBuffer)
 {
-  //    qDebug()<<GPSBuffer.size();
+	//QStringList rtStrings;
+	//rtStrings = AckString.split(" ");
+	//for (int i = 0; i < rtStrings.count(); i++)
+	//{
+	//	//cout << rtStrings[i].toStdString() << endl;
+	//}
 
-     if (GPSBuffer.contains("$GNRMC"))
-     {
+	//if (rtStrings[3] == "GPSINFO")
+	//{
+	//	float flng = 0.00;
+	//	float flat = 0.00;
+	//	gpsParse(rtStrings[4].toUtf8(), flng, flat);
+	//	if (flng != 0.00 || flat != 0.00)
+	//	{
+	//		//pMapWidget_->addGps(rtStrings[2], rtStrings[2], flng, flat, 0);
+	//	}
+	//	return;
+	//}
 
-         QList<QByteArray> gpsByteArrays = GPSBuffer.split(',');
-         int count = gpsByteArrays.count();
+	//if (rtStrings[3] == "VideoParam")
+	//{
+	//	rtString.clear();
+	//	rtString = AckString.split(" ");
+	//	for (int i = 0; i < rtString.count(); i++)
+	//	{
+	//		cout << rtString[i].toStdString() << endl;
+	//	}
 
-     int  gpsLat_1 = static_cast<int>(gpsByteArrays.at(3).toDouble() / 100);
-     double gpsLat_2 = (gpsByteArrays.at(3).toDouble() - gpsLat_1 * 100) / 60;
-     double gpslat = gpsLat_1 + gpsLat_2;
-
-     int gpsLong_1 = static_cast<int>(gpsByteArrays.at(5).toDouble() / 100);
-     double gpsLong_2 = (gpsByteArrays.at(5).toDouble() - gpsLong_1 * 100) / 60;
-     double gpsLong = gpsLong_1 + gpsLong_2;
-
-	 /*ui->timelineEdit->setText(gpsByteArrays.at(1));
-	 ui->latlineEdit->setText(QString::number(gpslat, 'g', 9));
-	 ui->longlineEdit->setText(QString::number(gpsLong, 'g', 10));
-
-	 if (!gpsByteArrays.at(8).isEmpty())
-		 ui->headlineEdit->setText(gpsByteArrays.at(8));*/
-
-
-    }
+	//	if (rtString[2].toInt() == pTerminalCtl_->getSession() && rtString[3] == "VideoParam")
+	//	{
+	//		pTerminalCtl_->setVideoParam(rtString[4].toInt(), rtString[5].toInt(), rtString[6].toInt(), rtString[7].toInt(), rtString[8].toInt(), rtString[9].toInt(), rtString[10].toInt());
+	//	}
+	//}
 }
 
 void AHMonitor::decodeACKString(QString AckString)
